@@ -1,4 +1,4 @@
-/* DS-geofreitas.com — variables.css v1.2.1 — GENERATED from tokens/tokens.json by scripts/build-variables.py. Do not edit by hand.
+/* DS-geofreitas.com — variables.css v1.2.2 — GENERATED from tokens/tokens.json by scripts/build-variables.py. Do not edit by hand.
    Theme: light by default; follows the OS dark setting; force with data-theme="light" | "dark" (or .dark).
    Density: data-density="compact". Contrast: follows prefers-contrast: more. */
 
@@ -307,12 +307,12 @@
   --gf-bg-canvas: #141414;
   --gf-bg-layer-1: #1d1d1d;
   --gf-bg-layer-2: #272727;
-  --gf-bg-elevated: #272727;
+  --gf-bg-elevated: #333333;
   --gf-text-primary: #ffffff;
   --gf-text-secondary: #adadad;
   --gf-text-tertiary: #999999;
   --gf-border-subtle: #303030;
-  --gf-border-strong: #3e3e3e;
+  --gf-border-strong: #525252;
   --gf-border-control: #6f6f6f;
   --gf-primary-bg: #fefa54;
   --gf-primary-fg: #161616;
@@ -379,12 +379,12 @@
     --gf-bg-canvas: #141414;
     --gf-bg-layer-1: #1d1d1d;
     --gf-bg-layer-2: #272727;
-    --gf-bg-elevated: #272727;
+    --gf-bg-elevated: #333333;
     --gf-text-primary: #ffffff;
     --gf-text-secondary: #adadad;
     --gf-text-tertiary: #999999;
     --gf-border-subtle: #303030;
-    --gf-border-strong: #3e3e3e;
+    --gf-border-strong: #525252;
     --gf-border-control: #6f6f6f;
     --gf-primary-bg: #fefa54;
     --gf-primary-fg: #161616;
