@@ -6,6 +6,7 @@ geO freitas's personal design system: Carbon structure, Apple clarity, Material 
 - Build with the `gf-` classes in markup; there is no React bundle. Every component, its classes and its states are in the Components section.
 - `components/bundle.css` imports the Phosphor icon fonts from `icons/phosphor/`. Copy that folder too, so icons render on a canvas.
 - Add `data-density="compact"` to a container for product screens and dashboards.
+- For decks, build 16:9 slides with `.gf-slide` (see Presentations). For charts, use the `gf-dv-*` colours and `.gf-chart` classes.
 - Theme with `data-theme="light"` or `data-theme="dark"` on the root or any container. Every component reads the same tokens in both themes.
 - Interactive state is markup: `aria-selected` on tabs, `aria-checked` on a switch, `aria-busy="true"` on a loading button, `aria-invalid="true"` on a field, `aria-current="page"` on the current nav link, and `open` on `<details>` and `<dialog>`. On a canvas, drive these from component state.
 
@@ -18,6 +19,19 @@ These five carry the brand. Never restyle them, override them with `!important`,
 3. **Three-tier radius.** `gf-radius-pill` for buttons, icon buttons and avatars; `gf-radius-control` (8px) for inputs and cards; `gf-radius-tag` (4px) for tags. `gf-radius-panel` (12px) for panels and hero media only.
 4. **Poppins** at 400, 500, 600 and 700 for everything: one family, and weight does the work.
 5. **Volt letter avatars.** `.gf-avatar` is a `gf-volt` circle with `gf-on-volt` initials at 600.
+
+## Data visualisation
+
+- Use the categorical colours `gf-dv-1` to `gf-dv-6` in order (blue, orange, teal, violet, ink, magenta). Each is at least 3:1 on the canvas in both themes. Label every series, and never rely on colour alone.
+- Use the sequential ramp `gf-dv-seq-1` to `-5` for ranges and heatmaps. Give the two lightest steps a border or a label.
+- Use `gf-dv-grid` for gridlines and `gf-dv-axis` for axis text. Volt is never a data colour on light grounds.
+
+## Presentations
+
+- Slides are 16:9 at a 1920 × 1080 design size, built with `.gf-slide` (`--layer`, `--accent`) and a 12-column `.gf-slide__inner` (96px margins, 32px gutters). They scale with their container.
+- Type at 1920 wide: `__display` 120, `__title` 72, `__h2` 48, `__body` 28, `__caption` 20.
+- Use the accent ground (`gf-slide-accent-bg`, white titles) for the cover, statements and the ask, with one volt highlight at most.
+- One idea per slide. Numbers are sourced or bracketed placeholders.
 
 ## Content fundamentals
 

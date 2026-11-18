@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DS v1.2 — prototype dashboard</title>
+<link rel="icon" href="../assets/logos/favicon.svg">
+<link rel="stylesheet" href="../tokens/variables.css">
+<link rel="stylesheet" href="../components/components.css">
+<script src="../components/components.js" defer></script>
+</head>
+<body>
+<main class="gf-container gf-stack" style="padding-block: var(--gf-space-48); gap: var(--gf-space-32)">
+  <div class="gf-cluster" style="justify-content: space-between">
+    <div class="gf-stack" style="gap: var(--gf-space-8)"><span class="gf-eyebrow">Prototype</span><h1 class="gf-h2">Pipeline overview</h1></div>
+    <div class="gf-segmented" role="radiogroup" aria-label="Period">
+      <label><input type="radio" name="period"> Week</label><label><input type="radio" name="period" checked> Month</label><label><input type="radio" name="period"> Year</label>
+    </div>
+  </div>
+
+  <section class="gf-stats" aria-label="Key figures">
+    <div class="gf-stat"><span class="gf-stat__label">Active projects</span><span class="gf-stat__value">[12]</span><span class="gf-stat__delta"><i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i>Up [3] on last month</span></div>
+    <div class="gf-stat"><span class="gf-stat__label">Proposals out</span><span class="gf-stat__value">[5]</span><span class="gf-stat__delta"><i class="ph-bold ph-minus" aria-hidden="true"></i>No change</span></div>
+    <div class="gf-stat"><span class="gf-stat__label">Avg. response</span><span class="gf-stat__value">[2.4d]</span><span class="gf-stat__delta"><i class="ph-bold ph-arrow-down-right" aria-hidden="true"></i>Down [0.6d]</span></div>
+  </section>
+
+  <section class="gf-panel gf-stack" aria-label="Projects by type">
+    <div class="gf-cluster" style="justify-content: space-between"><h2 class="gf-h4">Projects by type</h2>
+      <ul class="gf-legend"><li><span class="gf-legend__swatch" style="background: var(--gf-dv-1)"></span>Brand</li><li><span class="gf-legend__swatch" style="background: var(--gf-dv-2)"></span>Product</li><li><span class="gf-legend__swatch" style="background: var(--gf-dv-3)"></span>Experiments</li></ul></div>
+    <svg class="gf-chart" viewBox="0 0 640 200" role="img" aria-label="Bar chart of projects by type per quarter. Values are placeholders." style="width: 100%; height: auto">
+      <g><line class="grid" x1="40" x2="630" y1="20" y2="20"/><line class="grid" x1="40" x2="630" y1="80" y2="80"/><line class="grid" x1="40" x2="630" y1="140" y2="140"/></g>
+      <g class="axis"><text x="0" y="24">30</text><text x="0" y="84">20</text><text x="0" y="144">10</text><text x="90" y="196">Q1</text><text x="240" y="196">Q2</text><text x="390" y="196">Q3</text><text x="540" y="196">Q4</text></g>
+      <g><rect class="s1" x="70" y="80" width="24" height="96" rx="3"/><rect class="s2" x="98" y="110" width="24" height="66" rx="3"/><rect class="s3" x="126" y="140" width="24" height="36" rx="3"/>
+         <rect class="s1" x="220" y="60" width="24" height="116" rx="3"/><rect class="s2" x="248" y="96" width="24" height="80" rx="3"/><rect class="s3" x="276" y="130" width="24" height="46" rx="3"/>
+         <rect class="s1" x="370" y="50" width="24" height="126" rx="3"/><rect class="s2" x="398" y="80" width="24" height="96" rx="3"/><rect class="s3" x="426" y="120" width="24" height="56" rx="3"/>
+         <rect class="s1" x="520" y="30" width="24" height="146" rx="3"/><rect class="s2" x="548" y="70" width="24" height="106" rx="3"/><rect class="s3" x="576" y="110" width="24" height="66" rx="3"/></g>
+    </svg>
+    <p class="gf-caption">Placeholder values. Colours are categorical (dv-1 to dv-6); every series is also labelled.</p>
+  </section>
+
+  <section class="gf-stack" aria-label="Projects table">
+    <div class="gf-chips" role="group" aria-label="Filter by type">
+      <button class="gf-chip" type="button" aria-pressed="true"><i class="ph-bold ph-check gf-chip__check" aria-hidden="true"></i>Brand</button>
+      <button class="gf-chip" type="button" aria-pressed="false"><i class="ph-bold ph-check gf-chip__check" aria-hidden="true"></i>Product</button>
+      <button class="gf-chip" type="button" aria-pressed="false"><i class="ph-bold ph-check gf-chip__check" aria-hidden="true"></i>Experiments</button>
+    </div>
+    <div class="gf-table-wrap" data-density="compact">
+      <div class="gf-table-toolbar gf-table-toolbar--selection" data-gf-selection hidden><span data-gf-count>0 selected</span><span class="gf-cluster" style="gap: var(--gf-space-8)"><button class="gf-btn gf-btn--secondary gf-btn--sm" type="button">Archive</button><button class="gf-btn gf-btn--secondary gf-btn--sm" type="button" data-gf-open="details">Details</button></span></div>
+      <table class="gf-table gf-table--sticky">
+        <caption class="gf-visually-hidden">Projects</caption>
+        <thead><tr><th class="gf-select" scope="col"><label class="gf-check"><input type="checkbox" aria-label="Select all"></label></th>
+          <th scope="col" aria-sort="ascending"><button class="gf-sort" type="button">Project <i class="ph-bold ph-caret-up gf-sort__icon" aria-hidden="true"></i></button></th>
+          <th scope="col" aria-sort="none"><button class="gf-sort" type="button">Type <i class="ph-bold ph-caret-up gf-sort__icon" aria-hidden="true"></i></button></th>
+          <th scope="col" class="gf-num" aria-sort="none"><button class="gf-sort" type="button">Weeks <i class="ph-bold ph-caret-up gf-sort__icon" aria-hidden="true"></i></button></th>
+          <th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><td class="gf-select"><label class="gf-check"><input type="checkbox" aria-label="Select project A"></label></td><td>[Project A]</td><td>Brand</td><td class="gf-num">8</td><td><span class="gf-tag gf-tag--success">Live</span></td></tr>
+          <tr><td class="gf-select"><label class="gf-check"><input type="checkbox" aria-label="Select project B"></label></td><td>[Project B]</td><td>Product</td><td class="gf-num">14</td><td><span class="gf-tag gf-tag--warning">In review</span></td></tr>
+          <tr><td class="gf-select"><label class="gf-check"><input type="checkbox" aria-label="Select project C"></label></td><td>[Project C]</td><td>Experiments</td><td class="gf-num">3</td><td><span class="gf-tag">Draft</span></td></tr>
+        </tbody>
+      </table>
+      <div class="gf-table-foot"><span>3 of [24]</span><nav class="gf-pagination" aria-label="Pagination"><ul><li><a class="gf-page" href="#" aria-current="page">1</a></li><li><a class="gf-page" href="#">2</a></li></ul></nav></div>
+    </div>
+  </section>
+
+  <section class="gf-grid" aria-label="Settings">
+    <div class="gf-stack gf-span-6">
+      <h2 class="gf-h4">Budget range</h2>
+      <label class="gf-label" for="budget">Maximum weeks</label>
+      <input class="gf-slider" id="budget" type="range" min="0" max="52" value="20">
+    </div>
+    <div class="gf-stack gf-span-6">
+      <h2 class="gf-h4">Kick-off date</h2>
+      <div class="gf-calendar" role="group" aria-label="November 2026">
+        <div class="gf-calendar__head"><button class="gf-icon-btn" type="button" aria-label="Previous month"><i class="ph ph-caret-left gf-icon" aria-hidden="true"></i></button><span class="gf-calendar__title">November 2026</span><button class="gf-icon-btn" type="button" aria-label="Next month"><i class="ph ph-caret-right gf-icon" aria-hidden="true"></i></button></div>
+        <div class="gf-calendar__grid">
+          <span class="gf-calendar__dow">Mo</span><span class="gf-calendar__dow">Tu</span><span class="gf-calendar__dow">We</span><span class="gf-calendar__dow">Th</span><span class="gf-calendar__dow">Fr</span><span class="gf-calendar__dow">Sa</span><span class="gf-calendar__dow">Su</span>
+          <button class="gf-day gf-day--outside" type="button">26</button><button class="gf-day gf-day--outside" type="button">27</button><button class="gf-day gf-day--outside" type="button">28</button><button class="gf-day gf-day--outside" type="button">29</button><button class="gf-day gf-day--outside" type="button">30</button><button class="gf-day gf-day--outside" type="button">31</button><button class="gf-day" type="button">1</button>
+          <button class="gf-day" type="button">2</button><button class="gf-day" type="button">3</button><button class="gf-day" type="button">4</button><button class="gf-day" type="button">5</button><button class="gf-day" type="button">6</button><button class="gf-day" type="button" disabled>7</button><button class="gf-day" type="button" disabled>8</button>
+          <button class="gf-day" type="button">9</button><button class="gf-day" type="button">10</button><button class="gf-day" type="button">11</button><button class="gf-day" type="button">12</button><button class="gf-day" type="button">13</button><button class="gf-day" type="button">14</button><button class="gf-day" type="button">15</button>
+          <button class="gf-day" type="button">16</button><button class="gf-day" type="button">17</button><button class="gf-day" type="button" aria-current="date">18</button><button class="gf-day" type="button" aria-selected="true">19</button><button class="gf-day gf-day--in-range" type="button">20</button><button class="gf-day gf-day--in-range" type="button">21</button><button class="gf-day" type="button">22</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<dialog class="gf-sheet" id="details" aria-labelledby="sheet-t">
+  <span class="gf-sheet__handle" aria-hidden="true"></span>
+  <div class="gf-sheet__head"><h2 class="gf-h4" id="sheet-t">Project details</h2><button class="gf-icon-btn" type="button" aria-label="Close" data-gf-close><i class="ph ph-x gf-icon" aria-hidden="true"></i></button></div>
+  <p class="gf-body gf-text-secondary">[Details of the selected projects.]</p>
+</dialog>
+</body>
+</html>

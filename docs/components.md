@@ -1,4 +1,4 @@
-# DS-geofreitas.com — component reference (v1.1)
+# DS-geofreitas.com — component reference (v1.2)
 
 Every component lives in `components/components.css`; behaviour for tabs, switch, mobile nav and dialog lives in `components/components.js` (optional, no dependencies). Live examples of all of them: `examples/landing.html`.
 
@@ -245,3 +245,62 @@ An app layout: a 264px sticky sidebar plus `.gf-app__main`. Items are `.gf-sideb
 ## Density
 
 `data-density="compact"` on any container sets 32px controls and 28/32/40 buttons for dashboards and data-heavy screens. Hit areas stay 44px, and type is unchanged.
+
+---
+
+# Added in 1.2
+
+## Filter chips `.gf-chip`
+
+Toggle buttons for filtering: `<button class="gf-chip" aria-pressed="false">` with a hidden `ph-bold ph-check` (`.gf-chip__check`) that shows when the chip is selected. Selected chips are inverted ink (`gf-chip-selected-*`), never volt. Group them in `.gf-chips` with `role="group"` and an `aria-label`. Chips are 32px tall with a 44px hit area.
+
+## Segmented control `.gf-segmented`
+
+Two to five mutually exclusive views, built from native radios inside labels (`role="radiogroup"`, `aria-label`). The selected segment sits on a canvas-coloured pill with `gf-shadow-raised` (Apple style) and moves on `gf-spring-snappy`. Use it for views of the same content; use Tabs when the panels differ.
+
+## Slider `.gf-slider`
+
+A native `<input type="range">` with a 4px track filled in `gf-control-on` and a 20px thumb. `components.js` keeps `--value` in sync. Always pair it with a visible label, and show the value when it matters.
+
+## Calendar `.gf-calendar`
+
+The visual date panel for prototypes: a header with month navigation, a 7-column grid of `.gf-day` buttons (`aria-current="date"` for today, `aria-selected="true"` for the selection, `--in-range`, `--outside`, `disabled`). In production forms use `<input class="gf-input" type="date">`, which gives native, accessible keyboard entry.
+
+## Sheet `.gf-sheet`
+
+A native `<dialog>` opened with `showModal()` (`data-gf-open`). Under 820px it's a bottom sheet with a handle and 12px top corners; above that it's a 480px side panel on the right. It enters on `gf-spring-snappy` at the medium spring duration. Use it for details, filters and secondary flows that keep the page in view.
+
+## Carousel `.gf-carousel` and gallery `.gf-gallery`
+
+- **Carousel:** a scroll-snap track (`__track` > `__slide`) with on-media previous and next buttons, and dots (`aria-current="true"` marks the active one). `--cards` shows three cards at a time (85% under 820px). Swipe, the buttons and the dots all work, and it scrolls instantly under Reduce Motion.
+- **Gallery:** the Airbnb layout, one large image plus four smaller ones in a 12px-radius frame, with an optional `.gf-gallery__more` "Show all" button. It becomes a swipeable strip under 820px.
+
+## Data table (full)
+
+On top of `.gf-table`:
+
+- **Sorting:** `th[aria-sort]` holds `.gf-sort` buttons with a caret icon; `components.js` sorts the rows, numerically for `.gf-num` columns.
+- **Row selection:** a `.gf-select` checkbox column plus a select-all box that turns indeterminate when only some rows are selected. Selected rows get `aria-selected="true"`.
+- **Toolbars:** `.gf-table-toolbar--selection` with `data-gf-selection` and `data-gf-count` shows "N selected" and the bulk actions.
+- **Sticky header:** `.gf-table--sticky` in `.gf-table-wrap--scroll`.
+- **Footer:** `.gf-table-foot` for counts and pagination. Add `data-density="compact"` for dense tables.
+
+## Stat `.gf-stat`
+
+A 48px tabular `__value`, `__label` and an optional `__delta` (an arrow icon plus words, so the change is never shown by colour alone). Lay several out in `.gf-stats`. Values must be sourced; otherwise use `[x]`.
+
+## Quote `.gf-quote`
+
+`<figure>` holding `blockquote.gf-quote__text` (26px, 500) with a generated opening mark in tertiary ink, and `figcaption.gf-quote__by` (avatar, name, role). Only use real, approved quotes. No left-border cards.
+
+## Awards `.gf-award`
+
+A recognition block: a Phosphor duotone icon (trophy, medal, seal), `__title` and `__meta` (category · year), separated by a top hairline. Lay several out in `.gf-awards`.
+
+## Data visualisation
+
+Use the categorical colours `gf-dv-1`–`6`, the sequential ramp `gf-dv-seq-1`–`5`, `gf-dv-grid` and `gf-dv-axis`. Draw charts as inline SVG with `.gf-chart` (`.grid`, `.axis`, `.s1`–`.s6`, `.line`) plus `role="img"` and an `aria-label`, and add a `.gf-legend`. Label series directly where you can.
+
+## Presentation layer `.gf-slide`
+
+16:9 slides scaled with container units (`.gf-deck` > `.gf-slide` > `.gf-slide__inner`, a 12-column grid with 96px margins at 1920 wide). Type classes: `__display` 120, `__title` 72, `__h2` 48, `__body` 28, `__caption` 20, `__kicker`, `__muted`, `__foot`. Grounds: default, `--layer`, `--accent`. Each slide prints on its own page.

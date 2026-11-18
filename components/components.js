@@ -1,4 +1,4 @@
-/* DS-geofreitas.com — components.js v1.1 (optional, no dependencies)
+/* DS-geofreitas.com — components.js v1.2 (optional, no dependencies)
    Tabs: WAI-ARIA tabs with roving tabindex, ←/→/Home/End, automatic activation.
    Switch: toggles aria-checked. Nav: mobile menu toggle. Dialog: [data-gf-open="id"] opens <dialog id>.
    v1.1: menus and popovers (native [popover] + positioning + arrow keys), tooltip Esc, GF.toast(), sidebar toggle, search clear. */
@@ -72,6 +72,41 @@
     return close;
   }
 
+
+  // ---- 1.2: chips, slider, carousel, sortable/selectable tables, calendar
+  function initCarousel(c) {
+    var track = c.querySelector('.gf-carousel__track'), slides = Array.prototype.slice.call(c.querySelectorAll('.gf-carousel__slide'));
+    var dots = Array.prototype.slice.call(c.querySelectorAll('.gf-carousel__dot'));
+    var go = function (i) { i = Math.max(0, Math.min(slides.length - 1, i)); track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); };
+    var current = function () { var x = track.scrollLeft, best = 0; slides.forEach(function (s, i) { if (Math.abs(s.offsetLeft - track.offsetLeft - x) < Math.abs(slides[best].offsetLeft - track.offsetLeft - x)) best = i; }); return best; };
+    var prev = c.querySelector('.gf-carousel__prev'), next = c.querySelector('.gf-carousel__next');
+    if (prev) prev.addEventListener('click', function () { go(current() - 1); });
+    if (next) next.addEventListener('click', function () { go(current() + 1); });
+    dots.forEach(function (d, i) { d.addEventListener('click', function () { go(i); }); });
+    var sync = function () { var i = current(); dots.forEach(function (d, j) { d.setAttribute('aria-current', i === j ? 'true' : 'false'); }); };
+    track.addEventListener('scroll', function () { clearTimeout(track._t); track._t = setTimeout(sync, 80); }); sync();
+  }
+  function initTable(table) {
+    table.querySelectorAll('th[aria-sort] .gf-sort').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var th = btn.closest('th'), idx = Array.prototype.indexOf.call(th.parentNode.children, th), dir = th.getAttribute('aria-sort') === 'ascending' ? 'descending' : 'ascending';
+        table.querySelectorAll('th[aria-sort]').forEach(function (h) { h.setAttribute('aria-sort', 'none'); }); th.setAttribute('aria-sort', dir);
+        var body = table.tBodies[0], rows = Array.prototype.slice.call(body.rows), num = th.classList.contains('gf-num');
+        rows.sort(function (a, b) { var x = a.cells[idx].textContent.trim(), y = b.cells[idx].textContent.trim();
+          var r = num ? (parseFloat(x.replace(/[^0-9.-]/g, '')) || 0) - (parseFloat(y.replace(/[^0-9.-]/g, '')) || 0) : x.localeCompare(y); return dir === 'ascending' ? r : -r; });
+        rows.forEach(function (r) { body.appendChild(r); });
+      });
+    });
+    var all = table.querySelector('thead .gf-select input'), boxes = Array.prototype.slice.call(table.querySelectorAll('tbody .gf-select input'));
+    var update = function () { var n = 0; boxes.forEach(function (b) { b.closest('tr').setAttribute('aria-selected', b.checked ? 'true' : 'false'); if (b.checked) n++; });
+      if (all) { all.checked = n === boxes.length && n > 0; all.indeterminate = n > 0 && n < boxes.length; }
+      var wrap = table.closest('.gf-table-wrap'), bar = wrap && wrap.querySelector('[data-gf-selection]');
+      if (bar) { bar.hidden = n === 0; var c = bar.querySelector('[data-gf-count]'); if (c) c.textContent = n + ' selected'; } };
+    boxes.forEach(function (b) { b.addEventListener('change', update); });
+    if (all) all.addEventListener('change', function () { boxes.forEach(function (b) { b.checked = all.checked; }); update(); });
+    if (boxes.length) update();
+  }
+
   function init(root) {
     root = root || document;
     root.querySelectorAll('.gf-tabs[role="tablist"]').forEach(initTabs);
@@ -107,6 +142,12 @@
       w.addEventListener('mouseleave', function () { w.removeAttribute('data-dismissed'); });
       w.addEventListener('focusout', function () { w.removeAttribute('data-dismissed'); });
     });
+    root.querySelectorAll('.gf-chip[aria-pressed]').forEach(function (c) { c.addEventListener('click', function () { c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); }); });
+    root.querySelectorAll('.gf-slider').forEach(function (s) { var f = function () { var p = (s.value - (s.min || 0)) / ((s.max || 100) - (s.min || 0)) * 100; s.style.setProperty('--value', p + '%'); }; s.addEventListener('input', f); f(); });
+    root.querySelectorAll('.gf-carousel').forEach(initCarousel);
+    root.querySelectorAll('.gf-table').forEach(initTable);
+    root.querySelectorAll('.gf-calendar').forEach(function (cal) { cal.addEventListener('click', function (e) { var d = e.target.closest('.gf-day'); if (!d || d.disabled) return;
+      cal.querySelectorAll('.gf-day[aria-selected="true"]').forEach(function (x) { x.setAttribute('aria-selected', 'false'); }); d.setAttribute('aria-selected', 'true'); }); });
   }
 
   window.GF = { init: init, toast: toast };

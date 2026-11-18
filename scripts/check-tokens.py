@@ -35,7 +35,9 @@ pairs = [('text-primary', 'bg-canvas', 4.5), ('text-secondary', 'bg-canvas', 4.5
          ('border-control', 'bg-canvas', 3), ('control-off', 'bg-canvas', 3), ('control-on', 'bg-canvas', 3),
          ('focus-ring', 'bg-canvas', 3), ('control-mark', 'control-on', 3), ('status-fg', 'success-bg', 4.5),
          ('status-fg', 'warning-bg', 4.5), ('status-fg', 'error-bg', 4.5), ('tag-fg', 'tag-bg', 4.5), ('error-solid', 'bg-canvas', 3),
-         ('tooltip-fg', 'tooltip-bg', 4.5), ('text-primary', 'nav-active-bg', 4.5), ('text-secondary', 'bg-elevated', 4.5)]
+         ('tooltip-fg', 'tooltip-bg', 4.5), ('text-primary', 'nav-active-bg', 4.5), ('text-secondary', 'bg-elevated', 4.5),
+         ('chip-selected-fg', 'chip-selected-bg', 4.5), ('text-primary', 'row-selected', 4.5), ('slide-accent-fg', 'slide-accent-bg', 4.5), ('slide-accent-muted', 'slide-accent-bg', 4.5), ('dv-axis', 'bg-canvas', 4.5)]
+pairs += [(f'dv-{i}', 'bg-canvas', 3) for i in range(1, 7)]
 for theme in ('light', 'dark'):
     for fg, bg, need in pairs:
         r = ratio(th[fg][theme], th[bg][theme])
