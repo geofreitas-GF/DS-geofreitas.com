@@ -1,0 +1,6 @@
+/* Phosphor Icons 2.1 (MIT, phosphoricons.com) — regular, bold, fill and duotone web fonts.
+   Use: <i class="ph ph-house" aria-hidden="true"></i> · weights: ph (regular) · ph-bold · ph-fill · ph-duotone */
+@import url("./regular/style.css");
+@import url("./bold/style.css");
+@import url("./fill/style.css");
+@import url("./duotone/style.css");

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DS v1.1 — product reference screen</title>
+<link rel="icon" href="../assets/logos/favicon.svg">
+<link rel="stylesheet" href="../tokens/variables.css">
+<link rel="stylesheet" href="../components/components.css">
+<script src="../components/components.js" defer></script>
+</head>
+<body>
+<a class="gf-btn gf-btn--primary gf-skip" href="#main">Skip to content</a>
+<div class="gf-app">
+  <aside class="gf-sidebar" aria-label="Workspace">
+    <div class="gf-sidebar__brand"><picture><source srcset="../assets/logos/wordmark-white.svg" media="(prefers-color-scheme: dark)"><img src="../assets/logos/wordmark-black.svg" alt="geO freitas" height="24"></picture></div>
+    <nav aria-label="Main">
+      <ul>
+        <li><a class="gf-sidebar__item" href="#" aria-current="page"><i class="ph-fill ph-squares-four gf-icon" aria-hidden="true"></i>Projects</a></li>
+        <li><a class="gf-sidebar__item" href="#"><i class="ph ph-users gf-icon" aria-hidden="true"></i>Clients</a></li>
+        <li><a class="gf-sidebar__item" href="#"><i class="ph ph-chart-line-up gf-icon" aria-hidden="true"></i>Reports</a></li>
+      </ul>
+      <div class="gf-sidebar__section">
+        <span class="gf-eyebrow gf-sidebar__heading">Workspace</span>
+        <ul>
+          <li><a class="gf-sidebar__item" href="#"><i class="ph ph-gear gf-icon" aria-hidden="true"></i>Settings</a></li>
+          <li><a class="gf-sidebar__item" href="#"><i class="ph ph-question gf-icon" aria-hidden="true"></i>Help</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+
+  <div class="gf-app__main">
+    <header class="gf-nav" style="position: sticky">
+      <div class="gf-container gf-nav__inner" style="max-width: none">
+        <button class="gf-icon-btn gf-sidebar__toggle" type="button" aria-label="Open navigation" aria-expanded="false"><i class="ph ph-list gf-icon" aria-hidden="true"></i></button>
+        <div class="gf-search" style="flex: 1; max-width: 420px">
+          <i class="ph ph-magnifying-glass gf-icon gf-search__icon" aria-hidden="true"></i>
+          <label class="gf-visually-hidden" for="q">Search projects</label>
+          <input class="gf-input" id="q" type="search" placeholder="Search projects">
+          <button class="gf-icon-btn gf-search__clear" type="button" aria-label="Clear search"><i class="ph ph-x gf-icon--sm" aria-hidden="true"></i></button>
+        </div>
+        <div class="gf-cluster" style="gap: var(--gf-space-8)">
+          <span class="gf-tooltip-wrap">
+            <button class="gf-icon-btn" type="button" aria-label="Notifications" aria-describedby="tt1"><i class="ph ph-bell gf-icon" aria-hidden="true"></i></button>
+            <span class="gf-tooltip gf-tooltip--below" role="tooltip" id="tt1">Notifications</span>
+          </span>
+          <button class="gf-icon-btn" type="button" popovertarget="acct" aria-haspopup="menu" aria-expanded="false" aria-label="Account"><span class="gf-avatar gf-avatar--sm" aria-hidden="true">GF</span></button>
+          <div class="gf-menu" id="acct" popover role="menu" aria-label="Account">
+            <span class="gf-eyebrow gf-menu__label">geO freitas</span>
+            <a class="gf-menu__item" role="menuitem" href="#"><i class="ph ph-user gf-icon" aria-hidden="true"></i>Profile</a>
+            <button class="gf-menu__item" role="menuitem" type="button"><i class="ph ph-moon gf-icon" aria-hidden="true"></i>Dark mode<span class="gf-menu__meta">⌥D</span></button>
+            <hr class="gf-menu__sep">
+            <button class="gf-menu__item gf-menu__item--danger" role="menuitem" type="button"><i class="ph ph-sign-out gf-icon" aria-hidden="true"></i>Sign out</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="gf-container gf-stack" style="max-width: none; padding-block: var(--gf-space-32); gap: var(--gf-space-32)">
+      <nav class="gf-breadcrumb" aria-label="Breadcrumb"><ol><li><a class="gf-link" href="#">Workspace</a></li><li><a class="gf-link" href="#">Projects</a></li><li><span aria-current="page">[Project name]</span></li></ol></nav>
+      <div class="gf-cluster" style="justify-content: space-between">
+        <h1 class="gf-h2">Projects</h1>
+        <div class="gf-cluster" style="gap: var(--gf-space-12)">
+          <button class="gf-btn gf-btn--secondary" type="button" popovertarget="filters" aria-expanded="false"><i class="ph-bold ph-funnel" aria-hidden="true"></i>Filter</button>
+          <div class="gf-popover" id="filters" popover>
+            <h2 class="gf-h4" style="margin-bottom: var(--gf-space-12)">Filter projects</h2>
+            <label class="gf-check"><input type="checkbox" checked> Brand</label>
+            <label class="gf-check"><input type="checkbox"> Product</label>
+            <button class="gf-btn gf-btn--primary gf-btn--sm" type="button" popovertarget="filters" popovertargetaction="hide" style="margin-top: var(--gf-space-12)">Apply</button>
+          </div>
+          <button class="gf-btn gf-btn--primary" type="button" data-gf-toast="Project created."><i class="ph-bold ph-plus" aria-hidden="true"></i>New project</button>
+        </div>
+      </div>
+
+      <div class="gf-stack" style="gap: var(--gf-space-8)">
+        <div class="gf-cluster" style="justify-content: space-between"><span class="gf-ui">Uploading 3 covers</span><span class="gf-caption">72%</span></div>
+        <div class="gf-progress" role="progressbar" aria-label="Upload" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="--progress: 72%"><div class="gf-progress__bar"></div></div>
+      </div>
+
+      <div class="gf-cards">
+        <a class="gf-card" href="#"><img class="gf-card__media" src="../assets/imagery/hero-0.jpg" alt="[Project name] cover"><div class="gf-card__meta"><span class="gf-card__title">[Project name]</span><span class="gf-card__sub">Brand</span></div></a>
+        <a class="gf-card" href="#"><img class="gf-card__media" src="../assets/imagery/hero-6.jpg" alt="[Project name] cover"><div class="gf-card__meta"><span class="gf-card__title">[Project name]</span><span class="gf-card__sub">Product</span></div></a>
+        <div class="gf-card" aria-busy="true" aria-label="Loading project"><span class="gf-skeleton gf-skeleton--media"></span><div class="gf-card__meta"><span class="gf-skeleton gf-skeleton--text" style="width: 70%"></span><span class="gf-skeleton gf-skeleton--text" style="width: 40%"></span></div></div>
+        <div class="gf-card" aria-busy="true" aria-label="Loading project"><span class="gf-skeleton gf-skeleton--media"></span><div class="gf-card__meta"><span class="gf-skeleton gf-skeleton--text" style="width: 60%"></span><span class="gf-skeleton gf-skeleton--text" style="width: 30%"></span></div></div>
+      </div>
+
+      <nav class="gf-pagination" aria-label="Pagination"><ul>
+        <li><a class="gf-page" href="#" aria-label="Previous page"><i class="ph ph-caret-left gf-icon" aria-hidden="true"></i></a></li>
+        <li><a class="gf-page" href="#" aria-current="page">1</a></li><li><a class="gf-page" href="#">2</a></li><li><a class="gf-page" href="#">3</a></li>
+        <li><span class="gf-page gf-page--gap">…</span></li><li><a class="gf-page" href="#">12</a></li>
+        <li><a class="gf-page" href="#" aria-label="Next page"><i class="ph ph-caret-right gf-icon" aria-hidden="true"></i></a></li>
+      </ul></nav>
+
+      <section class="gf-panel" data-density="compact" aria-label="Archived">
+        <div class="gf-empty">
+          <i class="ph-duotone ph-archive gf-empty__icon" aria-hidden="true"></i>
+          <h2 class="gf-empty__title">No archived projects</h2>
+          <p class="gf-empty__text">Projects you archive appear here, so your main list stays focused.</p>
+          <span class="gf-cluster" style="gap: var(--gf-space-12)"><span class="gf-loader" role="status" aria-label="Loading"></span><button class="gf-btn gf-btn--secondary gf-btn--sm" type="button">Browse projects</button></span>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+</body>
+</html>

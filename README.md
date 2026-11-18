@@ -1,6 +1,6 @@
 # DS-geofreitas.com
 
-Carbon structure, Apple clarity, Material token roles and Airbnb patterns for geofreitas.com and personal work. Version 1.0.0.
+Carbon structure, Apple clarity and motion, Material token roles and Airbnb patterns: one system for prototypes, products, presentations and geofreitas.com. Version 1.1.0.
 
 ## Start here
 
@@ -23,11 +23,13 @@ Carbon structure, Apple clarity, Material token roles and Airbnb patterns for ge
 | `DESIGN.md` | Rulebook: influences, protected decisions, colour, type, layout, components, dark mode, voice |
 | `BRAND.md` | Prose brand guide with measured evidence and copy examples |
 | `tokens/tokens.json` | **Source of truth.** Every value, light and dark per token |
-| `tokens/variables.css` | The same tokens as `--gf-*` custom properties, with dark overrides |
+| `tokens/variables.css` | GENERATED from `tokens.json` by `scripts/build-variables.py`: `--gf-*` properties, dark, density, contrast |
 | `components/components.css` | All components, type and layout classes |
 | `components/components.js` | Optional behaviour: tabs keyboard, switch, mobile nav, dialog |
 | `docs/components.md` | Per-component specs: variants, states, accessibility, dos and don'ts, code |
-| `examples/landing.html` | Reference page using every component, light and dark |
+| `examples/landing.html`, `examples/product.html` | Reference site page and product screen using every component, light and dark |
+| `docs/writing.md` | UX writing rules for buttons, errors, empty states, toasts |
+| `assets/icons/phosphor/` | Phosphor Icons (MIT) web fonts: regular, bold, fill, duotone |
 | `MIGRATION.md`, `tokens/legacy-compat.css` | Map from the archived legacy system; compat layer so legacy pages keep working |
 | `scripts/check-tokens.py` | Run before any change: token parity, undefined vars, hardcoded hex, contrast |
 | `assets/fonts/` | Self-hosted Poppins 400–700 |
@@ -37,4 +39,4 @@ Carbon structure, Apple clarity, Material token roles and Airbnb patterns for ge
 
 ## Changing the system
 
-Edit `tokens/tokens.json`, mirror the change in `tokens/variables.css`, run `python3 scripts/check-tokens.py` (it must print OK), then update `DESIGN.md`, `docs/components.md` and the changelog. Version rules are in `MIGRATION.md`. There is no generator step, so nothing can overwrite the custom states.
+Edit `tokens/tokens.json`, run `python3 scripts/build-variables.py` then `python3 scripts/check-tokens.py` (it must print OK), then update `DESIGN.md`, `docs/components.md` and the changelog. Version rules are in `MIGRATION.md`. There is no generator step, so nothing can overwrite the custom states.

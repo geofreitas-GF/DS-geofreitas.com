@@ -1,9 +1,11 @@
-geO freitas's personal design system: Carbon structure, Apple clarity, Material token roles and Airbnb patterns, in one family (Poppins), with charcoal `#303030` and one volt highlight `#fefa54`. Use it by default for any design: web pages, product screens, decks, posters and social posts.
+geO freitas's personal design system: Carbon structure, Apple clarity, Material token roles and Airbnb patterns, in one family (Poppins), with charcoal `#303030` and one volt highlight `#fefa54`. Use it by default for any design: prototypes, product screens, web pages, decks, posters and social posts.
 
 ## Build with it
 
 - Load `tokens.css`, then `components/bundle.css`. On a Design canvas: `<link rel="stylesheet" href="ds/gf/tokens.css">` then `<link rel="stylesheet" href="ds/gf/components/bundle.css">`, with `fonts/` copied beside `tokens.css`.
 - Build with the `gf-` classes in markup; there is no React bundle. Every component, its classes and its states are in the Components section.
+- `components/bundle.css` imports the Phosphor icon fonts from `icons/phosphor/`. Copy that folder too, so icons render on a canvas.
+- Add `data-density="compact"` to a container for product screens and dashboards.
 - Theme with `data-theme="light"` or `data-theme="dark"` on the root or any container. Every component reads the same tokens in both themes.
 - Interactive state is markup: `aria-selected` on tabs, `aria-checked` on a switch, `aria-busy="true"` on a loading button, `aria-invalid="true"` on a field, `aria-current="page"` on the current nav link, and `open` on `<details>` and `<dialog>`. On a canvas, drive these from component state.
 
@@ -54,11 +56,20 @@ These five carry the brand. Never restyle them, override them with `!important`,
 - Use 1px borders only. The radius tiers are as protected above.
 - Everything is flat by default. `gf-shadow-float` is only for the sticky action panel, dialogs and menus; cards never cast shadows.
 
-### States and motion
+### States and motion (Apple-style)
 
 - Every interactive element has hover, pressed, focus-visible (a 2px `gf-focus-ring`, offset 2px) and disabled (40%) states.
 - Touch targets are at least 44px (`gf-touch-min`); smaller visuals get an extended hit area.
-- Use 150–300ms, ease-out on enter. Respect `prefers-reduced-motion`: the underline then appears instantly, and colour swaps stay.
+- Motion explains a change: where something came from, or what changed. It never decorates.
+- Springs move things, using `gf-spring-snappy` by default, `gf-spring-smooth` for no bounce, and `gf-spring-bouncy` only for celebrations, at `gf-dur-spring-sm`, `-md` or `-lg`. Colour and state changes take 150–180ms ease-out.
+- Exits are quieter: `gf-dur-exit` with `gf-ease-exit`, and no bounce. Under Reduce Motion, movement becomes a cross-fade.
+- The protected timings stay as they are: the hover swap at 180ms and the underline at 260ms.
+
+### Depth, layers and density
+
+- Use `gf-shadow-raised` for menus, popovers, tooltips and toasts; `gf-shadow-float` for the sticky panel; and `gf-shadow-overlay` for dialogs and sheets.
+- Stack with the `gf-z-*` tokens, never a raw z-index.
+- `data-density="compact"` tightens controls to 32px for product screens. Under `prefers-contrast: more`, secondary text and hairlines darken.
 
 ### Imagery
 
@@ -69,8 +80,11 @@ These five carry the brand. Never restyle them, override them with `!important`,
 
 ## Iconography
 
-- No icon font ships with the system. Use simple inline stroke SVGs at 1.5px, round caps and joins, 14–18px, in `currentColor`, inside `.gf-icon-btn` (always with an `aria-label`; the SVG takes `aria-hidden="true"`).
-- Never use emoji.
+- Use **Phosphor Icons** (MIT, self-hosted in `icons/phosphor/`): `<i class="ph ph-<name> gf-icon" aria-hidden="true"></i>`. Names are listed at phosphoricons.com.
+- Icon weight follows the adjacent text weight, Apple's SF Symbols rule. Use `ph` (regular) next to 400–500 text, and `ph-bold` next to 600–700 text and in every button. Use `ph-fill` for a selected or active state, and `ph-duotone` for empty states.
+- Sizes: `gf-icon--sm` 16px, `gf-icon` 20px, `gf-icon--lg` 24px. Icons are `currentColor`.
+- Never use emoji. Icon-only controls always carry an `aria-label`.
+- SF Symbols aren't used: their licence limits them to apps on Apple platforms.
 
 ## Logos
 

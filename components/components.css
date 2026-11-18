@@ -1,4 +1,4 @@
-/* DS-geofreitas.com — components.css v1.0
+/* DS-geofreitas.com — components.css v1.1
    Real classes, no !important, no attribute-selector hacks. Requires tokens/variables.css.
    Optional behaviour (tabs keyboard, dialog open/close): components/components.js.
    PROTECTED: .gf-btn--primary hover swap · .gf-link animated underline · radius tiers · volt avatars. */
@@ -192,7 +192,7 @@ a.gf-card:focus-visible { outline: 2px solid var(--gf-focus-ring); outline-offse
 .gf-panel { padding: var(--gf-space-24); border-radius: var(--gf-radius-panel); background: var(--gf-bg-layer-1); }
 .gf-panel--float { background: var(--gf-bg-elevated); border: 1px solid var(--gf-border-subtle); box-shadow: var(--gf-shadow-float); position: sticky; top: var(--gf-sticky-top); }
 @media (max-width: 820px) {
-  .gf-panel--float { position: fixed; top: auto; left: 0; right: 0; bottom: 0; z-index: 20; border-radius: var(--gf-radius-panel) var(--gf-radius-panel) 0 0;
+  .gf-panel--float { position: fixed; top: auto; left: 0; right: 0; bottom: 0; z-index: var(--gf-z-sticky); border-radius: var(--gf-radius-panel) var(--gf-radius-panel) 0 0;
     padding: var(--gf-space-12) var(--gf-space-16); display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: var(--gf-space-12); }
   .gf-panel--float .gf-panel__extra { display: none; } /* keep only title + primary action in the bar */
   body:has(.gf-panel--float) { padding-bottom: 88px; } /* content never hides under the bar */
@@ -229,12 +229,12 @@ a.gf-card:focus-visible { outline: 2px solid var(--gf-focus-ring); outline-offse
 .gf-accordion__body { padding-bottom: var(--gf-space-16); color: var(--gf-text-secondary); }
 
 /* ================= Navigation & footer ================= */
-.gf-nav { position: sticky; top: 0; z-index: 30; background: var(--gf-bg-canvas); border-bottom: 1px solid var(--gf-border-subtle); }
+.gf-nav { position: sticky; top: 0; z-index: var(--gf-z-nav); background: var(--gf-bg-canvas); border-bottom: 1px solid var(--gf-border-subtle); }
 .gf-nav__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--gf-space-24); min-height: var(--gf-nav-h); }
 .gf-nav__logo { display: inline-flex; height: 28px; }
 .gf-nav__links { display: flex; align-items: center; gap: var(--gf-space-32); margin: 0; padding: 0; list-style: none; font-size: var(--gf-type-ui-size); }
 .gf-nav__toggle { display: none; }
-.gf-skip { position: absolute; left: var(--gf-space-16); top: -100px; z-index: 40; }
+.gf-skip { position: absolute; left: var(--gf-space-16); top: -100px; z-index: var(--gf-z-skip); }
 .gf-skip:focus { top: var(--gf-space-16); }
 @media (max-width: 820px) {
   .gf-nav__toggle { display: inline-grid; }
@@ -252,17 +252,170 @@ a.gf-card:focus-visible { outline: 2px solid var(--gf-focus-ring); outline-offse
 
 /* ================= Dialog — native <dialog> ================= */
 .gf-dialog { width: min(var(--gf-dialog-w), calc(100vw - 32px)); padding: var(--gf-space-24); border: 1px solid var(--gf-border-subtle); border-radius: var(--gf-radius-panel);
-  background: var(--gf-bg-elevated); color: var(--gf-text-primary); box-shadow: var(--gf-shadow-float); }
+  background: var(--gf-bg-elevated); color: var(--gf-text-primary); box-shadow: var(--gf-shadow-overlay); }
 .gf-dialog::backdrop { background: var(--gf-scrim); }
 .gf-dialog__head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--gf-space-16); margin-bottom: var(--gf-space-16); }
 .gf-dialog__actions { display: flex; justify-content: flex-end; gap: var(--gf-space-12); margin-top: var(--gf-space-24); }
-.gf-dialog[open] { animation: gf-in var(--gf-dur-slow) var(--gf-ease-out); }
-@keyframes gf-in { from { opacity: 0; transform: translateY(8px); } }
+.gf-dialog[open] { animation: gf-rise var(--gf-dur-spring-md) var(--gf-spring-snappy); }
+
+/* ================= Menu & popover — native [popover], positioned by components.js ================= */
+.gf-menu, .gf-popover { position: fixed; inset: auto; margin: 0; z-index: var(--gf-z-popover); border: 1px solid var(--gf-border-subtle); border-radius: var(--gf-radius-control);
+  background: var(--gf-bg-elevated); color: var(--gf-text-primary); box-shadow: var(--gf-shadow-raised); font-family: var(--gf-font-body); }
+.gf-menu:popover-open, .gf-popover:popover-open { animation: gf-scale-in var(--gf-dur-spring-sm) var(--gf-spring-snappy); transform-origin: top left; }
+.gf-menu { min-width: var(--gf-menu-w); padding: var(--gf-space-4); }
+.gf-menu__item { display: flex; align-items: center; gap: var(--gf-space-12); width: 100%; min-height: var(--gf-control-h); padding: 0 var(--gf-space-12);
+  border: 0; border-radius: var(--gf-radius-tag); background: none; color: inherit; font: var(--gf-type-ui-weight) var(--gf-type-ui-size)/var(--gf-type-ui-line) var(--gf-font-body);
+  text-align: left; text-decoration: none; cursor: pointer; }
+.gf-menu__item:hover, .gf-menu__item:focus-visible { background: var(--gf-bg-layer-1); outline: none; }
+.gf-menu__item:focus-visible { box-shadow: inset 0 0 0 2px var(--gf-focus-ring); }
+.gf-menu__item[aria-disabled="true"] { opacity: 0.4; pointer-events: none; }
+.gf-menu__item--danger .gf-icon { color: var(--gf-error-solid); }
+.gf-menu__meta { margin-left: auto; color: var(--gf-text-tertiary); font-size: var(--gf-fs-12); }
+.gf-menu__sep { height: 1px; margin: var(--gf-space-4) 0; background: var(--gf-border-subtle); border: 0; }
+.gf-menu__label { padding: var(--gf-space-8) var(--gf-space-12) var(--gf-space-4); }
+.gf-popover { width: min(320px, calc(100vw - 32px)); padding: var(--gf-space-16); }
+.gf-popover:popover-open, .gf-popover:not([popover]) { display: grid; gap: var(--gf-space-4); justify-items: start; } /* stack content; the UA still hides a closed popover */
+
+/* ================= Tooltip — hover and focus, 400ms delay, Esc hides (components.js) ================= */
+.gf-tooltip-wrap { position: relative; display: inline-flex; }
+.gf-tooltip { position: absolute; left: 50%; bottom: calc(100% + 8px); z-index: var(--gf-z-popover); width: max-content; max-width: var(--gf-tooltip-max-w);
+  padding: var(--gf-space-4) var(--gf-space-8); border-radius: var(--gf-radius-tag); background: var(--gf-tooltip-bg); color: var(--gf-tooltip-fg);
+  font: var(--gf-fw-medium) var(--gf-fs-12)/var(--gf-type-caption-line) var(--gf-font-body); pointer-events: none;
+  opacity: 0; transform: translate(-50%, 4px); transition: opacity var(--gf-dur-fast) var(--gf-ease-exit), transform var(--gf-dur-fast) var(--gf-ease-exit); }
+.gf-tooltip--below { bottom: auto; top: calc(100% + 8px); }
+.gf-tooltip-wrap:hover .gf-tooltip, .gf-tooltip-wrap:focus-within .gf-tooltip { opacity: 1; transform: translate(-50%, 0);
+  transition: opacity var(--gf-dur-fast) var(--gf-ease-out) 400ms, transform var(--gf-dur-spring-sm) var(--gf-spring-snappy) 400ms; }
+.gf-tooltip-wrap[data-dismissed] .gf-tooltip { opacity: 0; transition: none; }
+
+/* ================= Toast — components.js GF.toast('Link copied.', { action: 'Undo', onAction }) ================= */
+.gf-toast-region { position: fixed; left: 50%; bottom: var(--gf-space-24); z-index: var(--gf-z-toast); display: grid; gap: var(--gf-space-8); width: min(var(--gf-toast-w), calc(100vw - 32px)); transform: translateX(-50%); }
+.gf-toast { display: flex; align-items: center; gap: var(--gf-space-12); min-height: 48px; padding: var(--gf-space-8) var(--gf-space-8) var(--gf-space-8) var(--gf-space-16);
+  border-radius: var(--gf-radius-control); background: var(--gf-tooltip-bg); color: var(--gf-tooltip-fg); box-shadow: var(--gf-shadow-raised);
+  font: var(--gf-fw-medium) var(--gf-fs-14)/var(--gf-type-ui-line) var(--gf-font-body); animation: gf-rise var(--gf-dur-spring-sm) var(--gf-spring-snappy); }
+.gf-toast__text { flex: 1; }
+.gf-toast__action { min-height: 32px; padding: 0 var(--gf-space-12); border: 0; border-radius: var(--gf-radius-pill); background: none; color: inherit; font: inherit; font-weight: var(--gf-fw-semibold); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.gf-toast__action:focus-visible { outline: 2px solid var(--gf-tooltip-fg); outline-offset: 2px; }
+.gf-toast.is-leaving { animation: gf-sink var(--gf-dur-exit) var(--gf-ease-exit) forwards; }
+
+/* ================= Progress, loader, skeleton ================= */
+.gf-progress { position: relative; height: 4px; border-radius: var(--gf-radius-pill); background: var(--gf-bg-layer-2); overflow: hidden; }
+.gf-progress__bar { height: 100%; width: var(--progress, 0%); border-radius: inherit; background: var(--gf-control-on); transition: width var(--gf-dur-spring-md) var(--gf-spring-smooth); }
+.gf-progress--indeterminate .gf-progress__bar { width: 40%; animation: gf-indeterminate 1.4s var(--gf-spring-smooth) infinite; }
+@keyframes gf-indeterminate { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
+.gf-loader { display: inline-block; width: var(--gf-icon-md); height: var(--gf-icon-md); border-radius: var(--gf-radius-pill);
+  border: 2px solid var(--gf-border-strong); border-top-color: var(--gf-text-primary); animation: gf-spin 700ms linear infinite; }
+.gf-loader--lg { width: 40px; height: 40px; border-width: 3px; }
+.gf-loader-mark { width: 48px; height: auto; animation: gf-breathe 1.6s var(--gf-spring-smooth) infinite alternate; } /* <img src="assets/logos/loading-mark.svg" alt="Loading"> for page loads */
+@keyframes gf-breathe { from { opacity: 0.35; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+.gf-skeleton { display: block; border-radius: var(--gf-radius-tag);
+  background: linear-gradient(90deg, var(--gf-skeleton) 0%, var(--gf-skeleton-shine) 50%, var(--gf-skeleton) 100%); background-size: 200% 100%; animation: gf-shimmer 1.4s linear infinite; }
+.gf-skeleton--text { height: 0.9em; margin: 0.3em 0; }
+.gf-skeleton--title { height: 1.4em; width: 60%; }
+.gf-skeleton--circle { border-radius: var(--gf-radius-pill); }
+.gf-skeleton--media { aspect-ratio: 4 / 3; border-radius: var(--gf-radius-card); }
+@keyframes gf-shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+
+/* ================= Empty state ================= */
+.gf-empty { display: grid; justify-items: center; gap: var(--gf-space-12); max-width: 420px; margin-inline: auto; padding: var(--gf-space-48) var(--gf-space-24); text-align: center; }
+.gf-empty__icon { font-size: 48px; color: var(--gf-text-secondary); }
+.gf-empty__title { margin: 0; font-size: var(--gf-type-h4-size); line-height: var(--gf-type-h4-line); font-weight: var(--gf-type-h4-weight); }
+.gf-empty__text { margin: 0; color: var(--gf-text-secondary); }
+.gf-empty .gf-btn { margin-top: var(--gf-space-8); }
+
+/* ================= Breadcrumb ================= */
+.gf-breadcrumb ol { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gf-space-8); margin: 0; padding: 0; list-style: none; font-size: var(--gf-type-ui-size); }
+.gf-breadcrumb li { display: inline-flex; align-items: center; gap: var(--gf-space-8); color: var(--gf-text-secondary); }
+.gf-breadcrumb li + li::before { content: "/"; color: var(--gf-text-tertiary); }
+.gf-breadcrumb a { color: var(--gf-text-secondary); }
+.gf-breadcrumb [aria-current="page"] { color: var(--gf-text-primary); font-weight: var(--gf-fw-semibold); }
+
+/* ================= Pagination ================= */
+.gf-pagination ul { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gf-space-4); margin: 0; padding: 0; list-style: none; }
+.gf-page { position: relative; display: inline-grid; place-items: center; min-width: var(--gf-icon-btn); height: var(--gf-icon-btn); padding: 0 var(--gf-space-8);
+  border: 1px solid transparent; border-radius: var(--gf-radius-pill); background: none; color: var(--gf-text-primary); font: var(--gf-fw-medium) var(--gf-type-ui-size) var(--gf-font-body); text-decoration: none; cursor: pointer;
+  transition: border-color var(--gf-dur-base) var(--gf-ease-out), background var(--gf-dur-base) var(--gf-ease-out); }
+.gf-page::before { content: ""; position: absolute; inset: calc((var(--gf-icon-btn) - var(--gf-touch-min)) / 2) 0; }
+.gf-page:hover { border-color: var(--gf-secondary-border-hover); }
+.gf-page[aria-current="page"] { border-color: var(--gf-text-primary); font-weight: var(--gf-fw-semibold); }
+.gf-page--gap { pointer-events: none; color: var(--gf-text-tertiary); }
+
+/* ================= Search field ================= */
+.gf-search { position: relative; display: flex; align-items: center; }
+.gf-search .gf-input { padding-left: calc(var(--gf-control-px) + var(--gf-icon-md) + var(--gf-space-8)); padding-right: 44px; }
+.gf-search__icon { position: absolute; left: var(--gf-control-px); color: var(--gf-text-secondary); pointer-events: none; }
+.gf-search__clear { position: absolute; right: 4px; width: 32px; height: 32px; }
+.gf-search .gf-input::-webkit-search-cancel-button { display: none; }
+.gf-search .gf-input:placeholder-shown ~ .gf-search__clear { display: none; }
+
+/* ================= Sidebar navigation ================= */
+.gf-app { display: flex; min-height: 100vh; }
+.gf-app__main { flex: 1 1 0; min-width: 0; }
+.gf-sidebar { position: sticky; top: 0; flex: none; width: var(--gf-sidebar-w); height: 100vh; overflow-y: auto; padding: var(--gf-space-16) var(--gf-space-12);
+  border-right: 1px solid var(--gf-border-subtle); background: var(--gf-bg-canvas); font-size: var(--gf-type-ui-size); }
+.gf-sidebar__brand { display: flex; align-items: center; height: 40px; padding: 0 var(--gf-space-12); margin-bottom: var(--gf-space-16); }
+.gf-sidebar__section { margin-top: var(--gf-space-16); }
+.gf-sidebar__heading { display: block; padding: var(--gf-space-8) var(--gf-space-12); }
+.gf-sidebar ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+.gf-sidebar__item { display: flex; align-items: center; gap: var(--gf-space-12); min-height: 40px; padding: 0 var(--gf-space-12); border-radius: var(--gf-radius-control);
+  color: var(--gf-text-secondary); font-weight: var(--gf-fw-medium); text-decoration: none; transition: background var(--gf-dur-fast) var(--gf-ease-out), color var(--gf-dur-fast) var(--gf-ease-out); }
+.gf-sidebar__item:hover { background: var(--gf-bg-layer-1); color: var(--gf-text-primary); }
+.gf-sidebar__item[aria-current="page"] { background: var(--gf-nav-active-bg); color: var(--gf-text-primary); font-weight: var(--gf-fw-semibold); }
+.gf-sidebar__toggle { display: none; }
+@media (max-width: 820px) {
+  .gf-app { flex-direction: column; }
+  .gf-sidebar { position: fixed; inset: 0 auto 0 0; z-index: var(--gf-z-modal); transform: translateX(-100%); transition: transform var(--gf-dur-spring-md) var(--gf-spring-smooth); box-shadow: var(--gf-shadow-overlay); }
+  .gf-app[data-sidebar-open="true"] .gf-sidebar { transform: none; }
+  .gf-sidebar__toggle { display: inline-grid; }
+}
+
+/* ================= Icons — Phosphor (weight follows text weight) ================= */
+/* <i class="ph ph-house gf-icon" aria-hidden="true"></i> · regular next to 400–500 text, ph-bold next to 600–700, ph-fill / ph-duotone for selected or active states */
+.gf-icon { display: inline-block; flex: none; font-size: var(--gf-icon-md); line-height: 1; vertical-align: -0.2em; }
+.gf-icon--sm { font-size: var(--gf-icon-sm); vertical-align: -0.15em; }
+.gf-icon--lg { font-size: var(--gf-icon-lg); vertical-align: -0.25em; }
+.gf-btn .gf-icon, .gf-btn [class^="ph"] { font-size: 1.25em; vertical-align: 0; }
+.gf-icon-btn .gf-icon, .gf-icon-btn [class^="ph"] { font-size: var(--gf-icon-md); }
+
+/* ================= Motion — Apple-style springs ================= */
+/* Motion explains a change (where it came from, what changed). Springs move things; durations fade or recolour them.
+   Enter: spring. Exit: shorter, ease-in, no bounce. Reduce Motion: cross-fade only. */
+@keyframes gf-rise { from { opacity: 0; transform: translateY(8px); } }
+@keyframes gf-scale-in { from { opacity: 0; transform: scale(0.96); } }
+@keyframes gf-fade-in { from { opacity: 0; } }
+@keyframes gf-fade-out { to { opacity: 0; } }
+@keyframes gf-sink { to { opacity: 0; transform: translateY(4px); } }
+.gf-enter-rise  { animation: gf-rise var(--gf-dur-spring-sm) var(--gf-spring-snappy) both; }
+.gf-enter-scale { animation: gf-scale-in var(--gf-dur-spring-sm) var(--gf-spring-snappy) both; }
+.gf-enter-pop   { animation: gf-scale-in var(--gf-dur-spring-md) var(--gf-spring-bouncy) both; } /* celebratory moments only */
+.gf-enter-fade  { animation: gf-fade-in var(--gf-dur-spring-sm) var(--gf-spring-smooth) both; }
+.gf-exit        { animation: gf-sink var(--gf-dur-exit) var(--gf-ease-exit) both; }
+
+/* ================= Contrast & forced colours ================= */
+@media (prefers-contrast: more) {
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible { outline-width: 3px; }
+  .gf-link::after { height: 2px; }
+}
+@media (forced-colors: active) {
+  .gf-btn, .gf-icon-btn, .gf-tag, .gf-alert, .gf-card__media, .gf-panel, .gf-dialog, .gf-switch__track, .gf-avatar { border: 1px solid CanvasText; }
+  .gf-btn--primary { forced-color-adjust: none; background: ButtonText; color: ButtonFace; }
+  .gf-btn--primary:hover { background: Highlight; color: HighlightText; }
+  .gf-link::after { background: LinkText; }
+  .gf-tab[aria-selected="true"] { border-bottom-color: Highlight; }
+  .gf-switch[aria-checked="true"] .gf-switch__track, .gf-check input:checked { background: Highlight; }
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible { outline: 2px solid Highlight; }
+}
 
 /* ================= Reduced motion ================= */
 @media (prefers-reduced-motion: reduce) {
   .gf-link::after { transition: none; }
   .gf-btn, .gf-icon-btn, .gf-input, .gf-select, .gf-textarea, .gf-tab, .gf-switch__track, .gf-switch__track::after, .gf-card__media { transition-duration: 1ms; }
-  .gf-dialog[open] { animation: none; }
+  .gf-dialog[open] { animation: gf-fade-in var(--gf-dur-fast) linear; }
+  .gf-enter-rise, .gf-enter-scale, .gf-enter-pop, .gf-enter-fade { animation: gf-fade-in var(--gf-dur-fast) linear both; }
+  .gf-exit { animation: gf-fade-out var(--gf-dur-fast) linear both; }
   .gf-btn[aria-busy="true"]::after { animation-duration: 1.6s; }
+  .gf-menu:popover-open, .gf-popover:popover-open, .gf-toast { animation: gf-fade-in var(--gf-dur-fast) linear; }
+  .gf-tooltip-wrap:hover .gf-tooltip, .gf-tooltip-wrap:focus-within .gf-tooltip { transform: translate(-50%, 0); transition: opacity var(--gf-dur-fast) linear 400ms; }
+  .gf-skeleton, .gf-loader-mark { animation: none; }
+  .gf-progress--indeterminate .gf-progress__bar { animation-duration: 3s; }
+  .gf-sidebar { transition: none; }
 }

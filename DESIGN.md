@@ -1,6 +1,6 @@
 ---
 name: "DS-geofreitas.com"
-version: "1.0.0"
+version: "1.1.0"
 surface: web
 source_of_truth: tokens/tokens.json
 ---
@@ -69,7 +69,7 @@ Poppins for display and body. One family, weight does the work.
 | Button | 13 (12 sm, 14 lg) | 600 | 1 | 0.01em |
 | Caption | 12 | 400 | 1.33 | 0 |
 
-Reading copy is 16px minimum at 60–75 characters per line (`.gf-body` caps at 68ch). 14px is for controls, labels and dense metadata. Under 600px, Display/H1/H2/H3 step down to 48/38/32/22. Sentence case throughout; the only uppercase is the 12px eyebrow label. Headlines never contain markdown syntax. Classes: `.gf-display` … `.gf-caption`, `.gf-eyebrow`.
+Sizes are tokens in rem (16px = 1rem), so all type follows the reader's browser text size. Reading copy is 16px minimum at 60–75 characters per line (`.gf-body` caps at 68ch). 14px is for controls, labels and dense metadata. Under 600px, Display/H1/H2/H3 step down to 48/38/32/22. Sentence case throughout; the only uppercase is the 12px eyebrow label. Headlines never contain markdown syntax. Classes: `.gf-display` … `.gf-caption`, `.gf-eyebrow`.
 
 ## 5. Space, grid, shape, elevation
 
@@ -80,7 +80,7 @@ Reading copy is 16px minimum at 60–75 characters per line (`.gf-body` caps at 
 
 ## 6. Components
 
-Full specs, states, accessibility and code for each: **`docs/components.md`**. Live: `examples/landing.html`.
+Full specs, states, accessibility and code for each: **`docs/components.md`**. Writing rules: **`docs/writing.md`**. Live: `examples/landing.html` (site) and `examples/product.html` (product screen).
 
 | Group | Components |
 |---|---|
@@ -88,6 +88,9 @@ Full specs, states, accessibility and code for each: **`docs/components.md`**. L
 | Forms | Field, Label, Input, Select, Textarea, Help/Error, Checkbox, Radio, Switch |
 | Display | Tag (neutral · success · warning · error · volt), Avatar (sm/md/lg), Alert, Card, Hero media, Figure, Table, Accordion |
 | Structure | Nav + mobile menu + skip link, Footer, Panel + floating sticky panel (bottom bar under 820px), Tabs, Dialog |
+| Overlays | Menu, Popover, Tooltip, Toast |
+| Feedback | Progress (determinate, indeterminate), Loader (spinner, brand mark), Skeleton (text, title, circle, media), Empty state |
+| Navigation | Breadcrumb, Pagination, Search field, Sidebar (app layout, off-canvas under 820px) |
 | Foundations | Type classes, Container, Section, 12-col Grid, Cards grid, Stack, Cluster |
 
 Rules that apply to all of them: every interactive element has hover, focus-visible, pressed and disabled states; touch targets are 44px minimum (hit areas extended where the visual is smaller); one primary button per view (a mobile sticky bar may repeat the page's primary).
@@ -96,9 +99,28 @@ Rules that apply to all of them: every interactive element has hover, focus-visi
 
 Same components, token swap only. Follows the visitor's OS setting by default; force with `data-theme="dark"` / `data-theme="light"` (or `.dark`) on `<html>` or any container. Logos swap to `wordmark-white.svg` with `<picture>` + `prefers-color-scheme`. Ground `#141414`, sections `#1d1d1d`, elevated `#272727`, borders `#303030`/`#3e3e3e`, headings and body `#ffffff`, secondary `#adadad`. Primary CTA is volt → white on hover. Links and underline are white.
 
-## 8. Motion
+## 8. Motion (Apple-style)
 
-150ms for small state changes, 180ms for colour swaps, 260ms for the underline draw, 300ms maximum. Ease-out on enter. Under `prefers-reduced-motion`, the underline appears instantly; colour swaps remain.
+- **Motion explains a change**: where something came from, what changed, what to look at. Never decorate.
+- **Springs move things; durations recolour them.** Movement (menus, toasts, sheets, dialogs, page transitions) uses the spring tokens `gf-spring-smooth` (no bounce), `gf-spring-snappy` (a hint of overshoot, the default) and `gf-spring-bouncy` (celebratory moments only), at `gf-dur-spring-sm` 350ms (small surfaces), `-md` 500ms (dialogs, sheets) or `-lg` 700ms (page-level). Colour and state changes use 150–180ms ease-out.
+- **Exits are quieter:** `gf-dur-exit` 150ms with `gf-ease-exit` (ease-in), no bounce.
+- **Reduce Motion** replaces movement with a short cross-fade; nothing jumps.
+- **Protected timings stay:** primary hover swap 180ms ease-out, link underline 260ms `gf-ease-draw`.
+- Classes: `.gf-enter-rise`, `.gf-enter-scale`, `.gf-enter-pop`, `.gf-enter-fade`, `.gf-exit`.
+
+## 8a. Icons (Phosphor, Apple's weight system)
+
+- Phosphor Icons (MIT), self-hosted in `assets/icons/phosphor/`. Use `<i class="ph ph-<name> gf-icon" aria-hidden="true"></i>`; names at phosphoricons.com.
+- **Weight follows text weight** (the SF Symbols rule): `ph` (regular) next to 400–500 text, `ph-bold` next to 600–700 text and in every button. `ph-fill` marks a selected or active state (current sidebar item, liked); `ph-duotone` is for empty states and large illustrative moments.
+- **Sizes:** `gf-icon--sm` 16px, `gf-icon` 20px, `gf-icon--lg` 24px; in buttons icons size to the label automatically.
+- Icons are `currentColor`, never volt on light grounds, never emoji. An icon-only control always has an `aria-label`. SF Symbols are not used: their licence limits them to apps on Apple platforms.
+
+## 8b. Depth, layers, density and contrast
+
+- **Elevation:** flat by default; `gf-shadow-raised` for menus, popovers, tooltips and toasts; `gf-shadow-float` for the sticky action panel; `gf-shadow-overlay` for dialogs and sheets.
+- **Stacking:** `gf-z-raised` 10 · `gf-z-sticky` 20 · `gf-z-nav` 30 · `gf-z-popover` 40 · `gf-z-modal` 50 · `gf-z-toast` 60 · `gf-z-skip` 70. Never a raw z-index.
+- **Density:** `data-density="compact"` on any container tightens controls (32px), buttons (28/32/40) and spacing for product screens and dashboards. Hit areas stay 44px.
+- **Contrast:** under `prefers-contrast: more`, secondary text darkens, hairlines reach 3:1 and focus rings go to 3px. Under Windows forced colours, components switch to system colours and keep visible borders and focus.
 
 ## 9. Voice
 
@@ -118,5 +140,7 @@ Editorial project covers and crisp product showcases, balanced with personal art
 Breakpoints 600 / 820 / 1024 / 1440. Validate at 360, 390, 430, 600, 820, 1024, 1366, 1440 and 1920 widths. Card grids reflow 4 → 3 → 2 → 1 at 1024 / 820 / 600; grid spans go full width under 820; nav collapses to a menu button under 820. Touch targets 44px minimum.
 
 ## Changelog
+
+- **1.1.0 (2026-11-18):** Scope widened to products, prototypes and presentations. Added Phosphor icons with Apple's weight-follows-text rule and three icon sizes; Apple-style spring motion with exit and Reduce Motion rules; rem type; raised and overlay elevation; stacking tokens; compact density; high-contrast and forced-colours support; UX writing rules. New components: menu, popover, tooltip, toast, progress, loader, skeleton, empty state, breadcrumb, pagination, search field, sidebar. `tokens/variables.css` is now generated from `tokens.json` (`scripts/build-variables.py`). Dialogs now enter with a spring. Nothing renamed or removed.
 
 - **1.0.0 (2026-11-18):** First release. Hand-owned tokens (`tokens/tokens.json`) replace the retired OpenDesign generator (archived in `_archive/legacy/`). The kits' custom states are the rule: charcoal/volt primary hover swap, editorial link underline, three-tier radius, volt avatars, Poppins. 22 components with full states, type and layout classes, dark mode that follows the OS, Airbnb-derived patterns (photo cards, sticky action panel, circular icon buttons, underline tabs), `components.js` behaviour, `docs/components.md`, `examples/landing.html`, `scripts/check-tokens.py` and a compat layer for legacy pages. Published to Claude Design as the default design system (`claude-design/`).

@@ -1,4 +1,4 @@
-# DS-geofreitas.com — component reference (v1.0)
+# DS-geofreitas.com — component reference (v1.1)
 
 Every component lives in `components/components.css`; behaviour for tabs, switch, mobile nav and dialog lives in `components/components.js` (optional, no dependencies). Live examples of all of them: `examples/landing.html`.
 
@@ -164,3 +164,84 @@ Native `<dialog>` opened with `showModal()`, so focus trapping, Esc and the back
 ## Layout classes
 
 `.gf-container` (1200px max, 24/16px gutters), `.gf-section` (64/48px vertical rhythm), `--layer-1`/`--layer-2` tonal sections, `.gf-grid` (12 columns) with `.gf-span-4/6/7/8/12` and `.gf-start-9` (all go full width under 820px), `.gf-cards` (4→3→2→1 columns), `.gf-stack`, `.gf-cluster`.
+
+---
+
+# Added in 1.1
+
+## Icons `.gf-icon` (Phosphor)
+
+`<i class="ph ph-<name> gf-icon" aria-hidden="true"></i>`, with weight classes `ph` / `ph-bold` / `ph-fill` / `ph-duotone` and sizes `gf-icon--sm` / default / `--lg`. Weight follows the adjacent text (bold in buttons). An icon-only control needs an `aria-label`. Find names at phosphoricons.com.
+
+## Menu `.gf-menu`
+
+An action list on the native `[popover]` top layer, positioned under its trigger by `components.js`.
+
+| State | Visual |
+|---|---|
+| Item H / F | `gf-bg-layer-1` fill; focus adds an inset ring |
+| Disabled | `aria-disabled="true"`, 40% |
+| Danger | `.gf-menu__item--danger` tints the icon only, and the label still says what happens |
+
+**Keyboard:** Enter or Space opens and focuses the first item; ↑/↓, Home and End move; Esc closes and returns focus to the trigger.
+
+```html
+<button class="gf-btn gf-btn--secondary" popovertarget="m1" aria-haspopup="menu" aria-expanded="false">Actions</button>
+<div class="gf-menu" id="m1" popover role="menu" aria-label="Actions">
+  <button class="gf-menu__item" role="menuitem" type="button"><i class="ph ph-copy gf-icon" aria-hidden="true"></i>Duplicate</button>
+  <hr class="gf-menu__sep">
+  <button class="gf-menu__item gf-menu__item--danger" role="menuitem" type="button"><i class="ph ph-trash gf-icon" aria-hidden="true"></i>Delete</button>
+</div>
+```
+
+## Popover `.gf-popover`
+
+The same mechanics as Menu, for rich content (a small form, filters, details). It's 320px wide, 16px padding, `gf-shadow-raised`, and dismisses when you click outside. Close it from inside with `popovertargetaction="hide"`.
+
+## Tooltip `.gf-tooltip`
+
+A short label (≤ 1 line) for icon-only controls. It shows on hover and on focus after 400ms, and Esc hides it (WCAG 1.4.13). Ink on `gf-tooltip-bg` (inverted per theme). Never put interactive content inside, and never use it for essential information.
+
+```html
+<span class="gf-tooltip-wrap"><button class="gf-icon-btn" aria-label="Share" aria-describedby="t1">…</button><span class="gf-tooltip" role="tooltip" id="t1">Share</span></span>
+```
+
+## Toast `GF.toast(text, { action, onAction, timeout })`
+
+A confirmation, bottom-centre, in an inverted ink fill with `gf-shadow-raised`. It lasts 4s (6s with an action) and pauses while the pointer is over it. It enters with a snappy spring and exits by sinking for 150ms. It's announced through a polite live region. The text is past tense ("Link copied."), and Undo is the preferred action. `data-gf-toast="…"` on a button shows one without code.
+
+## Progress `.gf-progress`
+
+A 4px pill track with a `gf-control-on` bar. Set `--progress: 72%` and `aria-valuenow`. `--indeterminate` loops on a smooth spring. Always give it an `aria-label`.
+
+## Loader `.gf-loader`, `.gf-loader-mark`
+
+A spinner the size of an icon (`--lg` is 40px) for actions in place. For a page or app load, use `.gf-loader-mark` on `assets/logos/loading-mark.svg` (breathing animation). Mark it `role="status"` with an `aria-label`.
+
+## Skeleton `.gf-skeleton`
+
+Placeholder shapes `--text`, `--title`, `--circle` and `--media` (4:3), with a shimmer that stops under Reduce Motion. Mirror the real layout, and set `aria-busy="true"` on the container.
+
+## Empty state `.gf-empty`
+
+A duotone icon (48px) plus `__title`, `__text` and one action. Copy rules are in `docs/writing.md`.
+
+## Breadcrumb `.gf-breadcrumb`
+
+`<nav aria-label="Breadcrumb"><ol>`, with "/" separators and the current page as `aria-current="page"` in ink at 600. Links are `.gf-link`.
+
+## Pagination `.gf-pagination`
+
+40px pill pages with a 44px hit area. The current page has an ink border and 600 weight (`aria-current="page"`), not a primary fill. Previous and next use caret icons with `aria-label`. `.gf-page--gap` marks the ellipsis.
+
+## Search field `.gf-search`
+
+A `type="search"` input (8px control tier) with a leading magnifier and a trailing clear icon button that shows only when there's text. It needs a visually hidden `<label>`.
+
+## Sidebar `.gf-app` + `.gf-sidebar`
+
+An app layout: a 264px sticky sidebar plus `.gf-app__main`. Items are `.gf-sidebar__item` with an icon and label. The current item gets `aria-current="page"`, `gf-nav-active-bg`, 600 weight and a `ph-fill` icon. Section headings use `gf-eyebrow`. Under 820px it becomes an off-canvas drawer opened by `.gf-sidebar__toggle` (`aria-expanded`).
+
+## Density
+
+`data-density="compact"` on any container sets 32px controls and 28/32/40 buttons for dashboards and data-heavy screens. Hit areas stay 44px, and type is unchanged.
