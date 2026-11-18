@@ -1,6 +1,6 @@
 # DS-geofreitas.com
 
-Carbon structure, Apple clarity and motion, Material token roles and Airbnb patterns: one system for prototypes, products, presentations and geofreitas.com. Version 1.2.3.
+Carbon structure, Apple clarity and motion, Material token roles and Airbnb patterns: one system for prototypes, products, presentations and geofreitas.com. Version 1.2.4.
 
 ## Start here
 

@@ -267,8 +267,9 @@ a.gf-card:focus-visible { outline: 2px solid var(--gf-focus-ring); outline-offse
   .gf-nav__toggle { display: inline-grid; }
   .gf-nav__links { display: none; position: absolute; top: var(--gf-nav-h); left: 0; right: 0; flex-direction: column; align-items: flex-start; gap: 0;
     padding: var(--gf-space-8) var(--gf-gutter-mobile) var(--gf-space-24); background: var(--gf-bg-canvas); border-bottom: 1px solid var(--gf-border-subtle); }
-  .gf-nav__links li { width: 100%; }
-  .gf-nav__links .gf-link { min-height: var(--gf-touch-min); }
+  .gf-nav__links li { width: 100%; display: flex; align-items: center; min-height: var(--gf-touch-min); }
+  /* Link box stays tight to the text so the underline sits 2px under the words; the 44px hit area is an invisible ::before */
+  .gf-nav__links .gf-link::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: var(--gf-touch-min); transform: translateY(-50%); }
   .gf-nav[data-open="true"] .gf-nav__links { display: flex; }
 }
 .gf-footer { padding-block: var(--gf-space-48); background: var(--gf-bg-layer-1); font-size: var(--gf-type-ui-size); }

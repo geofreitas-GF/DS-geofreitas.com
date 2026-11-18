@@ -1,6 +1,6 @@
 ---
 name: "DS-geofreitas.com"
-version: "1.2.3"
+version: "1.2.4"
 surface: web
 source_of_truth: tokens/tokens.json
 ---
@@ -159,6 +159,7 @@ Breakpoints 600 / 820 / 1024 / 1440. Validate at 360, 390, 430, 600, 820, 1024, 
 
 ## Changelog
 
+- **1.2.4 (2026-11-18):** Mobile nav: the link underline now sits 2px under the words, not at the bottom of the 44px touch box. Rows stay 44px; the hit area is an invisible `::before`.
 - **1.2.3 (2026-11-18):** `.gf-highlight` is now a volt band from just above the letters to just below the descenders, not the full line-height box, so it no longer rises into the line above in display type. Wraps with `box-decoration-break: clone`.
 - **1.2.2 (2026-11-18):** Dark mode only: `bg-elevated` #272727 → #333333, so menus, popovers, dialogs and sheets sit one step above layer 2 (as in Apple, Carbon and Material); `border-strong` #3e3e3e → #525252 (1.7:1 → 2.4:1 on the ground), so dashed slots, dividers and strong outlines read. Ground, layers, text and the protected states are unchanged.
 - **1.2.1 (2026-11-18):** Linked cards (`a.gf-card`) now hover with the protected editorial line under the title (draws L→R, retracts R→L, 260ms), replacing the static underline. Every text hover in the system is now that line.
