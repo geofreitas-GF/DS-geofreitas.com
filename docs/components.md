@@ -1,4 +1,4 @@
-# DS-geofreitas.com — component reference (v1.2)
+# DS-geofreitas.com — component reference (v1.3)
 
 Every component lives in `components/components.css`; behaviour for tabs, switch, mobile nav and dialog lives in `components/components.js` (optional, no dependencies). Live examples of all of them: `examples/landing.html`.
 
