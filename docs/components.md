@@ -1,4 +1,4 @@
-# DS-geofreitas.com — component reference (v1.5)
+# DS-geofreitas.com — component reference (v1.6)
 
 Every component lives in `components/components.css`; behaviour for tabs, switch, mobile nav and dialog lives in `components/components.js` (optional, no dependencies). Live examples of all of them: `examples/landing.html`.
 
@@ -65,8 +65,8 @@ Inside running text, wrap the text in `.gf-prose`: links there carry a static un
 | State | Visual |
 |---|---|
 | D | control border, canvas fill, tertiary placeholder |
-| H | border turns ink |
-| F | ink border + 2px ring (Raggio in dark) |
+| H | border steps up one grey (`gf-field-border-hover`) |
+| F | `gf-field-border-focus` border + soft 3px `gf-focus-halo` |
 | E | `aria-invalid="true"` sets an error border; `.gf-help--error` prefixes the message with "Error:" |
 | X / read-only | layer-1 fill, tertiary text |
 
@@ -82,7 +82,7 @@ Inside running text, wrap the text in `.gf-prose`: links there carry a static un
 
 ## Checkbox and radio `.gf-check`
 
-Native inputs, restyled: a 20px box (4px corners) or circle, with a 44px row. Off: 1.5px `--gf-control-off` border (3.3:1). On: `--gf-control-on` fill with `--gf-control-mark` tick. H: ink border. X: 40%.
+Native inputs, restyled: a 20px box (4px corners) or circle, with a 44px row. Off: 1.5px `--gf-control-off` border (3.3:1). On: checkbox = `--gf-control-on` fill with `--gf-control-mark` tick; radio = `--gf-control-on` ring and dot on the canvas. Monochrome in both themes (white in dark, never Raggio). H: `gf-field-border-hover`. X: 40%.
 
 ```html
 <label class="gf-check"><input type="checkbox"> Send me the newsletter</label>
@@ -90,7 +90,7 @@ Native inputs, restyled: a 20px box (4px corners) or circle, with a 44px row. Of
 
 ## Switch `.gf-switch`
 
-`<button role="switch" aria-checked>` with a 44×24 track. Off: `--gf-control-off`. On: `#303030` (light) or Raggio (dark), with the knob in the canvas colour. `components.js` toggles `aria-checked`. Use a switch for instant settings and a checkbox for form answers.
+`<button role="switch" aria-checked>` with a 44×24 track. Off: `--gf-control-off`. On: `gf-control-on` (charcoal in light, white in dark), with the knob in `gf-control-mark`. `components.js` toggles `aria-checked`. Use a switch for instant settings and a checkbox for form answers.
 
 ```html
 <button class="gf-switch" type="button" role="switch" aria-checked="false"><span class="gf-switch__track" aria-hidden="true"></span>Reply by phone</button>
@@ -317,6 +317,27 @@ Previous / next links at the end of a case study, article or docs page. A `<nav 
 </nav>
 ```
 
-**Fields (1.5):** focus shows an ink border with a soft 3px `gf-focus-halo`; invalid fields keep the red border with `gf-error-halo`. Buttons, links and other controls keep the solid 2px focus ring.
+**Fields (1.5):** focus shows a one-step border (`gf-field-border-focus`) with a soft 3px `gf-focus-halo`; hover steps up once (`gf-field-border-hover`); invalid fields keep the red border with `gf-error-halo`. Buttons, links and other controls keep the solid 2px focus ring.
 
 **Tags (1.5):** no border; neutral text `gf-tag-fg`, status text `gf-success-fg` / `gf-warning-fg` / `gf-error-fg` on their tints (all at least 5.9:1). Corners stay 4px: round means clickable.
+
+
+## Added in 1.6
+
+### Input group `.gf-input-group`
+Wrap any `.gf-input` to add a prefix or suffix (`.gf-input-group__affix`, e.g. `https://`, `£`, `GBP`) or a clear button (`.gf-input-group__clear`, needs a `placeholder` so it hides when empty). The group draws the border, hover and focus halo; the input inside is borderless.
+
+### Combobox `.gf-combobox`
+A searchable select. Markup: label, an input group holding `ph-magnifying-glass` (`.gf-combobox__icon`), an input with `role="combobox" aria-expanded aria-controls aria-autocomplete="list" autocomplete="off"`, and a `.gf-combobox__toggle`; then `<ul class="gf-combobox__list" role="listbox" hidden>` of `.gf-combobox__option[role="option"]` (optional `data-value`) and a `.gf-combobox__empty` row. `components.js`: focus or click opens, typing filters, ↑/↓ move, Enter picks, Esc restores the last value, Tab and blur close; the picked row gets a check; result counts are announced. Fires `gf-change` with `detail.value`. Use `.gf-select` for short fixed lists, where the phone's own picker is better.
+
+### Choicebox `.gf-choicebox`
+A `<fieldset>` of `.gf-choice` cards, each a `<label>` with a radio or checkbox, `.gf-choice__title` and `.gf-choice__desc`. Selected: ink border, doubled. Focus ring on the whole card.
+
+### Copy `[data-gf-copy]`
+`<button class="gf-btn gf-btn--secondary gf-btn--sm gf-copy" data-gf-copy="text">` with `.gf-copy__idle` and `.gf-copy__done` icon and label pairs; or `.gf-copytext` with a `.gf-copytext__value` and an icon-only `.gf-copy` (empty `data-gf-copy` copies the value). Shows the done state for 2s and announces "Copied to clipboard".
+
+### Theme switcher `.gf-theme-switch`
+A `.gf-segmented.gf-theme-switch` fieldset of three radios (`system`, `light`, `dark`) with `ph-desktop`, `ph-sun`, `ph-moon` and an `aria-label` each. Remembered in `localStorage` (`gf-theme`). Logos: `<img src="wordmark-black.svg" data-gf-logo-dark="wordmark-white.svg">` swaps with the theme; `<meta name="theme-color">` follows. Put the one-line snippet from `examples/forms.html` in `<head>` so a saved theme applies before first paint.
+
+### Video `.gf-video`
+`<figure class="gf-video">` with `<video playsinline muted loop preload="metadata" poster data-gf-autoplay aria-label>`, an MP4 `<source>`, a captions `<track>`, a `.gf-video__toggle` (`.gf-icon-btn--on-media`) and an optional `<figcaption>`. Autoplays muted only with `data-gf-autoplay` and never under Reduce Motion; the toggle pauses and plays. Ratio via the local `--ratio` property on the figure (default 16 / 9). Showreels with sound: use native `controls` instead, never autoplay.

@@ -32,7 +32,7 @@ def ratio(a, b): a, b = L(a), L(b); return (max(a, b)+.05)/(min(a, b)+.05)
 th = t['themed']
 pairs = [('text-primary', 'bg-canvas', 4.5), ('text-secondary', 'bg-canvas', 4.5), ('text-tertiary', 'bg-canvas', 4.5),
          ('text-secondary', 'bg-layer-1', 4.5), ('primary-fg', 'primary-bg', 4.5), ('primary-fg-hover', 'primary-bg-hover', 4.5),
-         ('border-control', 'bg-canvas', 3), ('control-off', 'bg-canvas', 3), ('control-on', 'bg-canvas', 3),
+         ('border-control', 'bg-canvas', 3), ('field-border-hover', 'bg-canvas', 3), ('field-border-focus', 'bg-canvas', 3), ('control-off', 'bg-canvas', 3), ('control-on', 'bg-canvas', 3),
          ('focus-ring', 'bg-canvas', 3), ('control-mark', 'control-on', 3), ('status-fg', 'success-bg', 4.5),
          ('status-fg', 'warning-bg', 4.5), ('status-fg', 'error-bg', 4.5), ('tag-fg', 'tag-bg', 4.5), ('success-fg', 'success-bg', 4.5), ('warning-fg', 'warning-bg', 4.5), ('error-fg', 'error-bg', 4.5), ('error-solid', 'bg-canvas', 3),
          ('tooltip-fg', 'tooltip-bg', 4.5), ('text-primary', 'nav-active-bg', 4.5), ('text-secondary', 'bg-elevated', 4.5),

@@ -1,6 +1,6 @@
 ---
 name: "DS-geofreitas.com"
-version: "1.5.0"
+version: "1.6.0"
 surface: web
 source_of_truth: tokens/tokens.json
 ---
@@ -9,16 +9,17 @@ source_of_truth: tokens/tokens.json
 
 *The brand says it. The experience proves it.*
 
-Carbon structure, Apple clarity, Material token roles, Airbnb patterns. One rulebook: if this file, the tokens and the kits ever disagree, `tokens/tokens.json` wins and this file is corrected.
+IBM Carbon structure, Apple HIG clarity and motion, Google Material token roles, Airbnb DLS patterns and Vercel Geist interface detail. One rulebook: if this file, the tokens and the kits ever disagree, `tokens/tokens.json` wins and this file is corrected.
 
 ## 1. What each influence contributes
 
 | Source | Takes | Never takes |
 | --- | --- | --- |
-| IBM Carbon | 12-column grid, 8px spacing scale, 1px hairlines, status-tag pastels, tonal layering | Square-corner buttons, IBM Plex |
-| Apple | Editorial restraint, 35–40% whitespace, type-led hierarchy, low chrome | SF Pro, system blur materials |
-| Google Material / antd | Token roles (bg, text, border, action, state), light/dark per token | Material colour palette, elevation shadows on cards |
-| Airbnb | Photo-first 4:3 cards, sticky floating action panel, circular icon buttons, underline tabs, dense metadata stacks, a rare single accent | Rausch #ff385c and tier colours, Cereal, 500-as-body, 14/20/32px radii, 0.92 press scale, hairlines on every row, 1920px grid |
+| IBM — Carbon Design System | 12-column grid, 8px spacing scale, 1px hairlines, status-tag pastels, tonal layering | Square-corner buttons, IBM Plex |
+| Apple — Human Interface Guidelines (HIG) | Editorial restraint, 35–40% whitespace, type-led hierarchy, low chrome; motion (springs, Reduce Motion, HIG Motion rules); the icon weight system, applied to Phosphor | SF Pro, SF Symbols (licence), system blur materials |
+| Google — Material Design 3 (with Ant Design for token naming) | Token roles (bg, text, border, action, state), light/dark per token | Material colour palette, elevation shadows on cards |
+| Airbnb — DLS (Design Language System) | Photo-first 4:3 cards, sticky floating action panel, circular icon buttons, underline tabs, dense metadata stacks, a rare single accent | Rausch #ff385c and tier colours, Airbnb Cereal (their typeface), 500-as-body, 14/20/32px radii, 0.92 press scale, hairlines on every row, 1920px grid |
+| Vercel — Geist | Web Interface Guidelines (§8e), quieter field hover and focus, monochrome checked controls, ring-and-dot radios, borderless status tags, Combobox, Choicebox, Input group, Copy, Theme switcher, Pager | Geist Sans and Mono, the 10-step colour scales, pill tags, Title Case and "&" copy, APCA contrast |
 
 ## 2. Protected decisions (do not change without a version bump)
 
@@ -42,6 +43,8 @@ Implementation: `components/components.css` (`.gf-btn--primary`, `.gf-link`, `.g
 | Text tertiary | `#6f6f6f` | `#999999` | Metadata only, on canvas; 5.0:1 / 6.5:1 (4.7:1 on layer 1) |
 | Border subtle | `#e2e5ec` | `#303030` | 1px rules inside components, cards, tables |
 | Border control | `#8d8d8d` | `#6f6f6f` | Input, select, textarea boundary and checkbox/switch off: 3.3:1 / 3.7:1 (WCAG 1.4.11) |
+| Field hover / focus | `#525252` / `#303030` | `#8d8d8d` / `#c6c6c6` | One step up on hover, never full ink; focus adds a soft 3px halo |
+| Control on | `#303030` | `#ffffff` | Checked box, radio ring and dot, switch, slider, selected day. Never Raggio |
 | Primary action | `#303030` / `#fefa54` text | `#fefa54` / `#161616` text | See protected hover |
 | Raggio highlight | `#fefa54` + `#161616` | same | Brand highlight |
 | Focus ring | `#303030` | `#fefa54` | 2px, offset 2px |
@@ -93,6 +96,8 @@ Full specs, states, accessibility and code for each: **`docs/components.md`**. W
 | Overlays | Menu, Popover, Tooltip, Toast |
 | Feedback | Progress (determinate, indeterminate), Loader (spinner, brand mark), Skeleton (text, title, circle, media), Empty state |
 | Navigation | Breadcrumb, Pagination, Pager (previous / next), Search field, Sidebar (app layout, off-canvas under 820px) |
+| Forms (1.6) | Input group (prefix, suffix, clear), Combobox (type to filter, arrows, Enter, Esc, check on the selected row), Choicebox (selectable cards, radio or checkbox) |
+| Utilities and media (1.6) | Copy button and text with copy, Theme switcher (System / Light / Dark), Video (poster, captions, pause control) |
 | Selection | Filter chips, Segmented control, Slider, Calendar (date picker panel) |
 | Content | Carousel, Gallery (1 large + 4), Data table (sort, select, sticky header, selection toolbar, footer), Stat, Quote, Awards |
 | Surfaces | Sheet (bottom sheet under 820px, side panel above) |
@@ -214,6 +219,7 @@ Breakpoints 600 / 820 / 1024 / 1440. Validate at 360, 390, 430, 600, 820, 1024, 
 
 ## Changelog
 
+- **1.6.0 (2026-11-18):** Site and case-study components, after a review of Vercel Geist: Combobox, Choicebox, Input group (prefix, suffix and clear on any input), Copy button and text with copy, Theme switcher (System / Light / Dark, remembered, swaps the logo and theme-color), Video (muted loop with poster and captions, pause control, no autoplay under Reduce Motion). New example `examples/forms.html`; sample media in `assets/media/`. Use `.gf-select` for short fixed lists and the Combobox when people need to search. Fields and selection controls refined after Geist: hover steps up one grey (`gf-field-border-hover`), focus is a one-step border (`gf-field-border-focus`) with a softer halo; checked controls are monochrome (white in dark, no Raggio); radios are a ring and dot.
 - **1.5.0 (2026-11-18):** New Pager (`.gf-pager`, previous / next) for case studies and docs, with the drawn underline on hover. Field focus is quieter: ink border plus a soft 3px halo (`gf-focus-halo`), no Raggio ring on fields; controls keep the solid ring. Tags lose their border and show status in the text colour (`gf-success-fg`, `gf-warning-fg`, `gf-error-fg`); 4px corners kept.
 - **1.4.0 (2026-11-18):** Interface details (§8e) after Vercel's Web Interface Guidelines: copy, forms, feedback and state, visual detail and site build rules. Code: 16px inputs on mobile (no iOS zoom), loading buttons keep their label, overlays contain scrolling, no tap delay or flash, balanced headings and no widows, headings clear the sticky nav.
 - **1.3.1 (2026-11-18):** Motion section completed against Apple's HIG: motion is never the only signal, brief and precise, exits reverse entrances, no motion on frequent actions, never block input, rare icon motion, pause control for anything that moves on its own. Code: dialogs and sheets now play their exit (sheet slides back out, dialog sinks), including on Esc; toasts pause while focused.

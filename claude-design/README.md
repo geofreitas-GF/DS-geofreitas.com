@@ -1,4 +1,4 @@
-geO freitas's personal design system: Carbon structure, Apple clarity, Material token roles and Airbnb patterns, in one family (Poppins), with charcoal `#303030` and one Raggio highlight `#fefa54`. Use it by default for any design: prototypes, product screens, web pages, decks, posters and social posts.
+geO freitas's personal design system: IBM Carbon structure, Apple HIG clarity and motion, Google Material token roles, Airbnb DLS patterns and Vercel Geist interface detail, in one family (Poppins), with charcoal `#303030` and one Raggio highlight `#fefa54`. Use it by default for any design: prototypes, product screens, web pages, decks, posters and social posts.
 
 ## Build with it
 
@@ -73,7 +73,8 @@ These five carry the brand. Never restyle them, override them with `!important`,
 
 ### States and motion (Apple-style)
 
-- Every interactive element has hover, pressed, focus-visible (a 2px `gf-focus-ring`, offset 2px) and disabled (40%) states. Fields are quieter: on focus the border turns ink (white in dark) with a soft 3px `gf-focus-halo`; an invalid field keeps its red border with `gf-error-halo`.
+- Every interactive element has hover, pressed, focus-visible (a 2px `gf-focus-ring`, offset 2px) and disabled (40%) states. Fields are quieter: hover steps the border up one grey (`gf-field-border-hover`), focus uses `gf-field-border-focus` with a soft 3px `gf-focus-halo`; an invalid field keeps its red border with `gf-error-halo`.
+- Checked controls are monochrome: `gf-control-on` is charcoal in light and white in dark, never Raggio. Radios are a ring and dot; checkboxes are filled with a tick.
 - Tags have no border: neutral text `gf-tag-fg`, status text `gf-success-fg`, `gf-warning-fg` or `gf-error-fg` on their tint. Corners stay 4px, because round means clickable.
 - End a case study or article with the Pager (`.gf-pager`): Previous on the left, Next on the right, the title drawing the editorial underline on hover.
 - Touch targets are at least 44px (`gf-touch-min`); smaller visuals get an extended hit area.
@@ -95,6 +96,15 @@ These five carry the brand. Never restyle them, override them with `!important`,
 - Destructive actions need a confirmation or Undo. Delay spinners about 150ms and keep them at least 300ms. Skeletons match the final layout.
 - Nested corners are never rounder than their parent. Hover, pressed and focus always have more contrast than rest.
 - Use real links, and keep tabs, filters and pages in the URL.
+
+### Site and case-study components (1.6)
+
+- **Combobox** (`.gf-combobox`) when people need to search a long list: type to filter, arrows and Enter to pick, Esc to undo; the picked row shows a check. Keep `.gf-select` for short fixed lists.
+- **Choicebox** (`.gf-choicebox` of `.gf-choice` cards) for a few options that need a line of explanation each; radio or checkbox inside.
+- **Input group** (`.gf-input-group`) adds a prefix, suffix or clear button to any input; the group carries the border and focus halo.
+- **Copy** (`[data-gf-copy]`): a "Copy email" button or `.gf-copytext` value with an icon button; confirms with a check for 2s.
+- **Theme switcher** (`.gf-theme-switch`): System / Light / Dark on the segmented control, icon-only with labels for screen readers; remembered per visitor; the logo and theme-color follow.
+- **Video** (`.gf-video`): muted loop with a poster and captions, a pause control on the frame, 12px corners; it never autoplays under Reduce Motion. Showreels with sound use native controls.
 
 ### Depth, layers and density
 

@@ -1,4 +1,4 @@
-/* DS-geofreitas.com — variables.css v1.5.0 — GENERATED from tokens/tokens.json by scripts/build-variables.py. Do not edit by hand.
+/* DS-geofreitas.com — variables.css v1.6.0 — GENERATED from tokens/tokens.json by scripts/build-variables.py. Do not edit by hand.
    Theme: light by default; follows the OS dark setting; force with data-theme="light" | "dark" (or .dark).
    Density: data-density="compact". Contrast: follows prefers-contrast: more. */
 
@@ -101,6 +101,7 @@
   --gf-dur-exit: 150ms;
   --gf-ease-exit: cubic-bezier(0.4, 0, 1, 1);
   --gf-menu-w: 240px;
+  --gf-listbox-max-h: 280px;
   --gf-sidebar-w: 264px;
   --gf-tooltip-max-w: 240px;
   --gf-toast-w: 360px;
@@ -171,6 +172,8 @@
   --gf-text-tertiary: #6f6f6f;
   --gf-border-subtle: #e2e5ec;
   --gf-border-strong: #dbdcdc;
+  --gf-field-border-hover: #525252;
+  --gf-field-border-focus: #303030;
   --gf-border-control: #8d8d8d;
   --gf-primary-bg: #303030;
   --gf-primary-fg: #fefa54;
@@ -199,7 +202,7 @@
   --gf-success-fg: #0f6b33;
   --gf-warning-fg: #7a4f00;
   --gf-error-fg: #b3261e;
-  --gf-focus-halo: rgba(22,22,22,0.12);
+  --gf-focus-halo: rgba(22,22,22,0.10);
   --gf-error-halo: rgba(255,77,79,0.20);
   --gf-status-fg: #161616;
   --gf-focus-ring: #303030;
@@ -247,6 +250,8 @@
   --gf-text-tertiary: #6f6f6f;
   --gf-border-subtle: #e2e5ec;
   --gf-border-strong: #dbdcdc;
+  --gf-field-border-hover: #525252;
+  --gf-field-border-focus: #303030;
   --gf-border-control: #8d8d8d;
   --gf-primary-bg: #303030;
   --gf-primary-fg: #fefa54;
@@ -275,7 +280,7 @@
   --gf-success-fg: #0f6b33;
   --gf-warning-fg: #7a4f00;
   --gf-error-fg: #b3261e;
-  --gf-focus-halo: rgba(22,22,22,0.12);
+  --gf-focus-halo: rgba(22,22,22,0.10);
   --gf-error-halo: rgba(255,77,79,0.20);
   --gf-status-fg: #161616;
   --gf-focus-ring: #303030;
@@ -323,6 +328,8 @@
   --gf-text-tertiary: #999999;
   --gf-border-subtle: #303030;
   --gf-border-strong: #525252;
+  --gf-field-border-hover: #8d8d8d;
+  --gf-field-border-focus: #c6c6c6;
   --gf-border-control: #6f6f6f;
   --gf-primary-bg: #fefa54;
   --gf-primary-fg: #161616;
@@ -351,12 +358,12 @@
   --gf-success-fg: #7ed99a;
   --gf-warning-fg: #f2c45a;
   --gf-error-fg: #ff8f8a;
-  --gf-focus-halo: rgba(255,255,255,0.18);
+  --gf-focus-halo: rgba(255,255,255,0.12);
   --gf-error-halo: rgba(220,105,102,0.28);
   --gf-status-fg: #ffffff;
   --gf-focus-ring: #fefa54;
   --gf-control-off: #6f6f6f;
-  --gf-control-on: #fefa54;
+  --gf-control-on: #ffffff;
   --gf-control-mark: #161616;
   --gf-scrim: rgba(0,0,0,0.64);
   --gf-shadow-float: 0 0 0 1px rgba(255,255,255,0.06), 0 8px 24px rgba(0,0,0,0.5);
@@ -400,6 +407,8 @@
     --gf-text-tertiary: #999999;
     --gf-border-subtle: #303030;
     --gf-border-strong: #525252;
+    --gf-field-border-hover: #8d8d8d;
+    --gf-field-border-focus: #c6c6c6;
     --gf-border-control: #6f6f6f;
     --gf-primary-bg: #fefa54;
     --gf-primary-fg: #161616;
@@ -428,12 +437,12 @@
     --gf-success-fg: #7ed99a;
     --gf-warning-fg: #f2c45a;
     --gf-error-fg: #ff8f8a;
-    --gf-focus-halo: rgba(255,255,255,0.18);
+    --gf-focus-halo: rgba(255,255,255,0.12);
     --gf-error-halo: rgba(220,105,102,0.28);
     --gf-status-fg: #ffffff;
     --gf-focus-ring: #fefa54;
     --gf-control-off: #6f6f6f;
-    --gf-control-on: #fefa54;
+    --gf-control-on: #ffffff;
     --gf-control-mark: #161616;
     --gf-scrim: rgba(0,0,0,0.64);
     --gf-shadow-float: 0 0 0 1px rgba(255,255,255,0.06), 0 8px 24px rgba(0,0,0,0.5);

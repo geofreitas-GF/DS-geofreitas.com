@@ -1,6 +1,7 @@
-/* DS-geofreitas.com — components.js v1.3 (optional, no dependencies)
+/* DS-geofreitas.com — components.js v1.6 (optional, no dependencies)
    Tabs: WAI-ARIA tabs with roving tabindex, ←/→/Home/End, automatic activation.
    Switch: toggles aria-checked. Nav: mobile menu toggle. Dialog: [data-gf-open="id"] opens <dialog id>.
+   v1.6: combobox (filter, arrows, Enter, Esc), theme switcher (system/light/dark, remembered, logo swap), copy, video (pause control, no autoplay under Reduce Motion), input clear.
    v1.1: menus and popovers (native [popover] + positioning + arrow keys), tooltip Esc, GF.toast(), sidebar toggle, search clear. */
 (function () {
   function initTabs(list) {
@@ -108,6 +109,117 @@
     if (boxes.length) update();
   }
 
+  /* ---- 1.6: combobox, theme switcher, copy, video, input clear ---- */
+  function initCombobox(cb) {
+    var input = cb.querySelector('[role="combobox"]'), list = cb.querySelector('[role="listbox"]');
+    if (!input || !list) return;
+    var toggle = cb.querySelector('.gf-combobox__toggle'), empty = cb.querySelector('.gf-combobox__empty');
+    var opts = Array.prototype.slice.call(list.querySelectorAll('[role="option"]'));
+    var status = document.createElement('span'); status.className = 'gf-visually-hidden'; status.setAttribute('aria-live', 'polite'); cb.appendChild(status);
+    var committed = input.value;
+    opts.forEach(function (o, i) { if (!o.id) o.id = (list.id || 'gf-cb') + '-o' + i; if (!o.hasAttribute('aria-selected')) o.setAttribute('aria-selected', 'false'); });
+    var isOpen = function () { return cb.getAttribute('data-open') === 'true'; };
+    var visible = function () { return opts.filter(function (o) { return !o.hidden; }); };
+    var setActive = function (o) {
+      opts.forEach(function (x) { x.classList.remove('is-active'); });
+      if (o) { o.classList.add('is-active'); input.setAttribute('aria-activedescendant', o.id); o.scrollIntoView({ block: 'nearest' }); }
+      else input.removeAttribute('aria-activedescendant');
+    };
+    var reset = function () { opts.forEach(function (x) { x.hidden = false; }); if (empty) empty.hidden = true; };
+    var open = function () {
+      if (isOpen()) return;
+      list.hidden = false; cb.setAttribute('data-open', 'true'); input.setAttribute('aria-expanded', 'true');
+      setActive(opts.filter(function (o) { return o.getAttribute('aria-selected') === 'true' && !o.hidden; })[0] || null);
+    };
+    var close = function () { list.hidden = true; cb.setAttribute('data-open', 'false'); input.setAttribute('aria-expanded', 'false'); setActive(null); };
+    var filter = function () {
+      var q = input.value.trim().toLowerCase(), n = 0;
+      opts.forEach(function (o) { var hit = !q || o.textContent.toLowerCase().indexOf(q) > -1; o.hidden = !hit; if (hit) n++; });
+      if (empty) empty.hidden = n > 0;
+      status.textContent = n ? n + (n === 1 ? ' result' : ' results') : 'No results';
+      setActive(visible()[0] || null);
+    };
+    var pick = function (o) {
+      opts.forEach(function (x) { x.setAttribute('aria-selected', 'false'); }); o.setAttribute('aria-selected', 'true');
+      input.value = o.textContent.trim(); committed = input.value; reset(); close();
+      cb.dispatchEvent(new CustomEvent('gf-change', { bubbles: true, detail: { value: o.getAttribute('data-value') || input.value } }));
+    };
+    input.addEventListener('focus', function () { open(); });
+    input.addEventListener('click', open);
+    input.addEventListener('input', function () { open(); filter(); });
+    input.addEventListener('keydown', function (e) {
+      var v = visible(), cur = list.querySelector('.is-active'), i = v.indexOf(cur);
+      if (e.key === 'ArrowDown') { e.preventDefault(); if (!isOpen()) { open(); return; } setActive(v[Math.min(i + 1, v.length - 1)] || null); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); if (!isOpen()) { open(); return; } setActive(v[Math.max(i - 1, 0)] || null); }
+      else if (e.key === 'Enter') { if (isOpen() && cur) { e.preventDefault(); pick(cur); } }
+      else if (e.key === 'Escape') { if (isOpen()) { e.preventDefault(); input.value = committed; reset(); close(); } }
+      else if (e.key === 'Tab') { close(); }
+    });
+    list.addEventListener('mousedown', function (e) { e.preventDefault(); });
+    list.addEventListener('click', function (e) { var o = e.target.closest('[role="option"]'); if (o) pick(o); });
+    list.addEventListener('mousemove', function (e) { var o = e.target.closest('[role="option"]'); if (o && !o.classList.contains('is-active')) setActive(o); });
+    if (toggle) { toggle.addEventListener('mousedown', function (e) { e.preventDefault(); }); toggle.addEventListener('click', function () { if (isOpen()) close(); else { input.focus(); open(); } }); }
+    input.addEventListener('blur', function () { setTimeout(function () { if (!cb.contains(document.activeElement)) { input.value = committed; reset(); close(); } }, 0); });
+  }
+
+  /* Theme: "system" (follow the OS), "light" or "dark", remembered per visitor. Logos: <img data-gf-logo-dark="…"> swaps. */
+  var THEME_KEY = 'gf-theme';
+  function applyTheme(mode) {
+    var r = document.documentElement;
+    if (mode === 'light' || mode === 'dark') r.setAttribute('data-theme', mode); else r.removeAttribute('data-theme');
+    var dark = mode === 'dark' || (mode !== 'light' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+    document.querySelectorAll('img[data-gf-logo-dark]').forEach(function (img) {
+      if (!img.getAttribute('data-gf-logo-light')) img.setAttribute('data-gf-logo-light', img.getAttribute('src'));
+      img.setAttribute('src', dark ? img.getAttribute('data-gf-logo-dark') : img.getAttribute('data-gf-logo-light'));
+    });
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', getComputedStyle(r).getPropertyValue('--gf-bg-canvas').trim() || (dark ? '#141414' : '#ffffff'));
+  }
+  function storedTheme() { try { return localStorage.getItem(THEME_KEY) || 'system'; } catch (e) { return 'system'; } }
+  function initThemeSwitch(sw) {
+    var mode = storedTheme(), radios = sw.querySelectorAll('input[type="radio"]');
+    radios.forEach(function (r) {
+      r.checked = r.value === mode;
+      r.addEventListener('change', function () { if (!r.checked) return; try { localStorage.setItem(THEME_KEY, r.value); } catch (e) {} applyTheme(r.value); });
+    });
+  }
+
+  /* Copy: [data-gf-copy="text"], or empty inside .gf-copytext to copy its value. Confirms for 2s and announces it. */
+  function copyText(t) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t);
+    return new Promise(function (res, rej) {
+      var a = document.createElement('textarea'); a.value = t; a.setAttribute('readonly', ''); a.style.position = 'fixed'; a.style.opacity = '0';
+      document.body.appendChild(a); a.select(); var ok = false; try { ok = document.execCommand('copy'); } catch (e) {} a.remove(); ok ? res() : rej();
+    });
+  }
+  function initCopy(b) {
+    var label = b.getAttribute('aria-label');
+    b.addEventListener('click', function () {
+      var t = b.getAttribute('data-gf-copy'), wrap = b.closest('.gf-copytext');
+      if (!t && wrap) { var v = wrap.querySelector('.gf-copytext__value'); t = v ? v.textContent.trim() : ''; }
+      copyText(t).then(function () {
+        b.setAttribute('data-copied', 'true'); if (label) b.setAttribute('aria-label', 'Copied');
+        var live = region(), s = document.createElement('span'); s.className = 'gf-visually-hidden'; s.textContent = 'Copied to clipboard'; live.appendChild(s); setTimeout(function () { s.remove(); }, 1500);
+        clearTimeout(b._gfT); b._gfT = setTimeout(function () { b.removeAttribute('data-copied'); if (label) b.setAttribute('aria-label', label); }, 2000);
+      }, function () { toast('Copy failed. Select the text and copy it instead.'); });
+    });
+  }
+
+  /* Video: autoplays muted only with [data-gf-autoplay] and never under Reduce Motion; the toggle pauses and plays. */
+  function initVideo(f) {
+    var v = f.querySelector('video'), b = f.querySelector('.gf-video__toggle'); if (!v) return;
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sync = function () {
+      if (!b) return; var playing = !v.paused;
+      b.setAttribute('aria-label', playing ? 'Pause video' : 'Play video');
+      var i = b.querySelector('i'); if (i) i.className = 'ph-fill ' + (playing ? 'ph-pause' : 'ph-play') + ' gf-icon';
+    };
+    v.addEventListener('play', sync); v.addEventListener('pause', sync);
+    if (b) b.addEventListener('click', function () { if (v.paused) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); });
+    if (v.hasAttribute('data-gf-autoplay') && !reduce) { v.muted = true; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    sync();
+  }
+
   function init(root) {
     root = root || document;
     root.querySelectorAll('.gf-tabs[role="tablist"]').forEach(initTabs);
@@ -157,10 +269,18 @@
     root.querySelectorAll('.gf-slider').forEach(function (s) { var f = function () { var p = (s.value - (s.min || 0)) / ((s.max || 100) - (s.min || 0)) * 100; s.style.setProperty('--value', p + '%'); }; s.addEventListener('input', f); f(); });
     root.querySelectorAll('.gf-carousel').forEach(initCarousel);
     root.querySelectorAll('.gf-table').forEach(initTable);
+    root.querySelectorAll('.gf-combobox').forEach(initCombobox);
+    root.querySelectorAll('.gf-theme-switch').forEach(initThemeSwitch);
+    root.querySelectorAll('[data-gf-copy]').forEach(initCopy);
+    root.querySelectorAll('.gf-video').forEach(initVideo);
+    root.querySelectorAll('.gf-input-group__clear').forEach(function (c) { var i = c.closest('.gf-input-group').querySelector('input'); if (!i) return;
+      c.addEventListener('click', function () { i.value = ''; i.dispatchEvent(new Event('input', { bubbles: true })); i.focus(); }); });
     root.querySelectorAll('.gf-calendar').forEach(function (cal) { cal.addEventListener('click', function (e) { var d = e.target.closest('.gf-day'); if (!d || d.disabled) return;
       cal.querySelectorAll('.gf-day[aria-selected="true"]').forEach(function (x) { x.setAttribute('aria-selected', 'false'); }); d.setAttribute('aria-selected', 'true'); }); });
   }
 
-  window.GF = { init: init, toast: toast };
+  applyTheme(storedTheme());
+  if (window.matchMedia) matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { if (storedTheme() === 'system') applyTheme('system'); });
+  window.GF = { init: init, toast: toast, theme: applyTheme, copy: copyText };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { init(); }); else init();
 })();

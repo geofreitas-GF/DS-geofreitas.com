@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>DS v1.6 — contact, forms and media</title>
+<link rel="icon" href="../assets/logos/favicon.svg">
+<link rel="stylesheet" href="../tokens/variables.css">
+<link rel="stylesheet" href="../components/components.css">
+<script>try{var t=localStorage.getItem('gf-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<script src="../components/components.js" defer></script>
+</head>
+<body style="margin: 0; background: var(--gf-bg-canvas); color: var(--gf-text-primary); font-family: var(--gf-font-body)">
+<a class="gf-skip gf-btn gf-btn--primary gf-btn--sm" href="#main">Skip to content</a>
+<header class="gf-nav">
+  <div class="gf-container gf-nav__inner">
+    <a class="gf-nav__logo" href="#"><img src="../assets/logos/wordmark-black.svg" data-gf-logo-dark="../assets/logos/wordmark-white.svg" alt="geO freitas" height="28"></a>
+    <fieldset class="gf-segmented gf-theme-switch" style="margin: 0; border: 0">
+      <legend class="gf-visually-hidden">Theme</legend>
+      <label><input type="radio" name="theme" value="system" aria-label="System theme"><i class="ph ph-desktop" aria-hidden="true"></i></label>
+      <label><input type="radio" name="theme" value="light" aria-label="Light theme"><i class="ph ph-sun" aria-hidden="true"></i></label>
+      <label><input type="radio" name="theme" value="dark" aria-label="Dark theme"><i class="ph ph-moon" aria-hidden="true"></i></label>
+    </fieldset>
+  </div>
+</header>
+
+<main id="main">
+  <section class="gf-section"><div class="gf-container ex-split">
+    <form class="gf-stack" style="gap: var(--gf-space-24)" onsubmit="event.preventDefault()" novalidate>
+      <div class="gf-stack" style="gap: var(--gf-space-8)">
+        <p class="gf-eyebrow" style="margin: 0">Contact</p>
+        <h1 class="gf-h2" style="margin: 0">Start a conversation</h1>
+      </div>
+
+      <fieldset class="gf-choicebox">
+        <legend class="gf-label">What’s this about?</legend>
+        <label class="gf-choice"><input type="radio" name="topic" value="role" checked><span class="gf-choice__title">A role</span><span class="gf-choice__desc">Permanent or contract leadership</span></label>
+        <label class="gf-choice"><input type="radio" name="topic" value="project"><span class="gf-choice__title">A project</span><span class="gf-choice__desc">Brand, product or both</span></label>
+        <label class="gf-choice"><input type="radio" name="topic" value="talk"><span class="gf-choice__title">A talk</span><span class="gf-choice__desc">Events, panels, podcasts</span></label>
+      </fieldset>
+
+      <div class="gf-field">
+        <label class="gf-label" for="email">Email</label>
+        <div class="gf-input-group">
+          <input class="gf-input" id="email" type="email" name="email" autocomplete="email" spellcheck="false" placeholder="name@example.com…">
+          <button class="gf-input-group__clear" type="button" aria-label="Clear email"><i class="ph ph-x" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <div class="gf-field">
+        <label class="gf-label" for="site">Company website</label>
+        <div class="gf-input-group">
+          <span class="gf-input-group__affix">https://</span>
+          <input class="gf-input" id="site" type="text" inputmode="url" name="site" autocomplete="url" spellcheck="false" placeholder="example.com…">
+        </div>
+      </div>
+
+      <div class="gf-field">
+        <label class="gf-label" for="budget">Budget</label>
+        <div class="gf-input-group" style="max-width: 280px">
+          <span class="gf-input-group__affix">£</span>
+          <input class="gf-input" id="budget" type="text" inputmode="numeric" name="budget" placeholder="25,000…">
+          <span class="gf-input-group__affix">GBP</span>
+        </div>
+      </div>
+
+      <div class="gf-field gf-combobox">
+        <label class="gf-label" for="country" id="country-label">Country</label>
+        <div class="gf-input-group">
+          <i class="ph ph-magnifying-glass gf-icon gf-combobox__icon" aria-hidden="true"></i>
+          <input class="gf-input" id="country" type="text" role="combobox" aria-expanded="false" aria-controls="country-list" aria-autocomplete="list" autocomplete="off" placeholder="Search countries…" value="United Kingdom">
+          <button class="gf-combobox__toggle" type="button" tabindex="-1" aria-label="Show countries"><i class="ph ph-caret-down" aria-hidden="true"></i></button>
+        </div>
+        <ul class="gf-combobox__list" id="country-list" role="listbox" aria-labelledby="country-label" hidden>
+          <li class="gf-combobox__option" role="option" data-value="BR">Brazil</li>
+          <li class="gf-combobox__option" role="option" data-value="FR">France</li>
+          <li class="gf-combobox__option" role="option" data-value="DE">Germany</li>
+          <li class="gf-combobox__option" role="option" data-value="HK">Hong Kong</li>
+          <li class="gf-combobox__option" role="option" data-value="IT">Italy</li>
+          <li class="gf-combobox__option" role="option" data-value="NL">Netherlands</li>
+          <li class="gf-combobox__option" role="option" data-value="PT">Portugal</li>
+          <li class="gf-combobox__option" role="option" data-value="SA">Saudi Arabia</li>
+          <li class="gf-combobox__option" role="option" data-value="ES">Spain</li>
+          <li class="gf-combobox__option" role="option" data-value="AE">United Arab Emirates</li>
+          <li class="gf-combobox__option" role="option" data-value="GB" aria-selected="true">United Kingdom</li>
+          <li class="gf-combobox__option" role="option" data-value="US">United States</li>
+          <li class="gf-combobox__empty" hidden>No countries match</li>
+        </ul>
+      </div>
+
+      <div class="gf-field">
+        <label class="gf-label" for="msg">Message</label>
+        <textarea class="gf-textarea" id="msg" name="message" rows="4" placeholder="A line or two about what you have in mind…"></textarea>
+      </div>
+
+      <div class="gf-cluster">
+        <button class="gf-btn gf-btn--primary" type="submit">Send message</button>
+        <span class="gf-caption gf-text-secondary">Or write directly:</span>
+      </div>
+      <span class="gf-copytext"><span class="gf-copytext__value">hello@geofreitas.com</span><button class="gf-copy" type="button" data-gf-copy aria-label="Copy email"><i class="ph ph-copy gf-copy__idle" aria-hidden="true"></i><i class="ph-bold ph-check gf-copy__done" aria-hidden="true"></i></button></span>
+    </form>
+
+    <aside class="gf-stack" style="gap: var(--gf-space-24)">
+      <figure class="gf-video">
+        <video playsinline muted loop preload="metadata" poster="../assets/media/sample-poster.jpg" data-gf-autoplay aria-label="[Project] showreel, 6 seconds, no sound">
+          <source src="../assets/media/sample-loop.mp4" type="video/mp4">
+          <track kind="captions" src="../assets/media/sample-loop.en.vtt" srclang="en" label="English">
+        </video>
+        <button class="gf-icon-btn gf-icon-btn--on-media gf-video__toggle" type="button" aria-label="Pause video"><i class="ph-fill ph-pause gf-icon" aria-hidden="true"></i></button>
+        <figcaption class="gf-caption gf-text-secondary">[Project] — a six-second loop. It plays muted and pauses under Reduce Motion.</figcaption>
+      </figure>
+      <div class="gf-cluster">
+        <button class="gf-btn gf-btn--secondary gf-btn--sm gf-copy" type="button" data-gf-copy="https://geofreitas.com"><i class="ph-bold ph-link gf-copy__idle" aria-hidden="true"></i><i class="ph-bold ph-check gf-copy__done" aria-hidden="true"></i><span class="gf-copy__idle">Copy link</span><span class="gf-copy__done">Copied</span></button>
+      </div>
+    </aside>
+  </div></section>
+</main>
+<style>.ex-split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 64px; align-items: start; } @media (max-width: 820px) { .ex-split { grid-template-columns: minmax(0, 1fr); gap: 48px; } }</style>
+</body>
+</html>
