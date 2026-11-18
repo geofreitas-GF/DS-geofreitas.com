@@ -5,8 +5,8 @@
   --brand-border-radius: var(--gf-radius-control);
   --brand-border-radius-lg: var(--gf-radius-panel);
   --brand-border-radius-sm: var(--gf-radius-tag);
-  --brand-color-accent-secondary: var(--gf-volt);
-  --brand-color-accent-secondary-contrast: var(--gf-on-volt);
+  --brand-color-accent-secondary: var(--gf-raggio);
+  --brand-color-accent-secondary-contrast: var(--gf-on-raggio);
   --brand-color-bg-container: var(--gf-bg-canvas);
   --brand-color-bg-elevated: var(--gf-bg-elevated);
   --brand-color-bg-layout: var(--gf-bg-layer-1);

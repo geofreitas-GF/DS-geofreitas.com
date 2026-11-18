@@ -1,6 +1,6 @@
 # Migrating from the legacy system (`--brand-*`, generator) to 1.0 (`--gf-*`, hand-owned)
 
-The legacy system is the generated pre-1.0 kit archived in `_archive/legacy/`.
+The legacy system is the generated pre-1.0 kit. It was removed from the repo in 1.3.0 and is kept in Git history: `git checkout v1.0.0 -- _archive` restores it.
 
 ## Quick path (nothing breaks)
 
@@ -21,8 +21,8 @@ Load `tokens/legacy-compat.css` after `tokens/variables.css`. It maps all 75 `--
 
 | Legacy | 1.0 | Why |
 |---|---|---|
-| Light primary hover `#4a4a4a` (`--brand-color-primary-hover`) | Volt `#fefa54` | The kit's custom hover is now the rule |
-| `--brand-color-primary-contrast` `#ffffff` | Volt text | Matches the kit's charcoal + volt primary |
+| Light primary hover `#4a4a4a` (`--brand-color-primary-hover`) | Raggio `#fefa54` | The kit's custom hover is now the rule |
+| `--brand-color-primary-contrast` `#ffffff` | Raggio text | Matches the kit's charcoal + Raggio primary |
 | Control heights 24 / 32 / 40 | 34 / 40 / 48 | 1.0 button and input sizes |
 | Radii 3 / 5 / 8 / 10 | 4 / 8 / 12 + pill | Three-tier radius |
 | Heading sizes 40 / 32 / 24 / 20 | 38 / 32 / 26 / 22 | Nearest 1.0 scale steps |
@@ -37,3 +37,14 @@ Load `tokens/legacy-compat.css` after `tokens/variables.css`. It maps all 75 `--
 - **Major (2.0):** a renamed or removed token, or a changed protected decision. It needs a migration table like the one above.
 
 Run `python3 scripts/check-tokens.py` before every version bump. It fails on token drift, undefined variables, hardcoded colours in components, or any contrast pair below its minimum. Keep `claude-design/` in step: after a change, update the Claude Design system and copy its files here.
+
+
+## 1.3 rename: volt → Raggio
+
+| Old | New |
+|---|---|
+| `--gf-volt` | `--gf-raggio` |
+| `--gf-on-volt` | `--gf-on-raggio` |
+| `.gf-tag--volt` | `.gf-tag--raggio` |
+
+The old names were removed in 1.3.0; nothing in the system used them. Replace them if you meet them in an old file.

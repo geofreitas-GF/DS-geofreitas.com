@@ -1,4 +1,4 @@
-geO freitas's personal design system: Carbon structure, Apple clarity, Material token roles and Airbnb patterns, in one family (Poppins), with charcoal `#303030` and one volt highlight `#fefa54`. Use it by default for any design: prototypes, product screens, web pages, decks, posters and social posts.
+geO freitas's personal design system: Carbon structure, Apple clarity, Material token roles and Airbnb patterns, in one family (Poppins), with charcoal `#303030` and one Raggio highlight `#fefa54`. Use it by default for any design: prototypes, product screens, web pages, decks, posters and social posts.
 
 ## Build with it
 
@@ -14,23 +14,23 @@ geO freitas's personal design system: Carbon structure, Apple clarity, Material 
 
 These five carry the brand. Never restyle them, override them with `!important`, or replace them with a generic library's states.
 
-1. **Primary hover swap.** In light, `.gf-btn--primary` is `gf-primary-bg` (charcoal) with `gf-primary-fg` (volt) text, and on hover the two swap. In dark, it is a volt fill with `#161616` text that turns white on hover. The swap takes 180ms (`gf-dur-base`, ease-out).
+1. **Primary hover swap.** In light, `.gf-btn--primary` is `gf-primary-bg` (charcoal) with `gf-primary-fg` (Raggio) text, and on hover the two swap. In dark, it is a Raggio fill with `#161616` text that turns white on hover. The swap takes 180ms (`gf-dur-base`, ease-out).
 2. **Editorial link underline.** `.gf-link` draws a 1px `gf-link-underline` left to right on hover and retracts it right to left over 260ms (`gf-dur-draw`, `gf-ease-draw`). Links never get lighter on hover. Linked cards (`a.gf-card`) use the same drawn line under `.gf-card__title`; every text hover in the system is this line, never a static underline.
 3. **Three-tier radius.** `gf-radius-pill` for buttons, icon buttons and avatars; `gf-radius-control` (8px) for inputs and cards; `gf-radius-tag` (4px) for tags. `gf-radius-panel` (12px) for panels and hero media only.
 4. **Poppins** at 400, 500, 600 and 700 for everything: one family, and weight does the work.
-5. **Volt letter avatars.** `.gf-avatar` is a `gf-volt` circle with `gf-on-volt` initials at 600.
+5. **Raggio letter avatars.** `.gf-avatar` is a `gf-raggio` circle with `gf-on-raggio` initials at 600.
 
 ## Data visualisation
 
 - Use the categorical colours `gf-dv-1` to `gf-dv-6` in order (blue, orange, teal, violet, ink, magenta). Each is at least 3:1 on the canvas in both themes. Label every series, and never rely on colour alone.
 - Use the sequential ramp `gf-dv-seq-1` to `-5` for ranges and heatmaps. Give the two lightest steps a border or a label.
-- Use `gf-dv-grid` for gridlines and `gf-dv-axis` for axis text. Volt is never a data colour on light grounds.
+- Use `gf-dv-grid` for gridlines and `gf-dv-axis` for axis text. Raggio is never a data colour on light grounds.
 
 ## Presentations
 
 - Slides are 16:9 at a 1920 × 1080 design size, built with `.gf-slide` (`--layer`, `--accent`) and a 12-column `.gf-slide__inner` (96px margins, 32px gutters). They scale with their container.
 - Type at 1920 wide: `__display` 120, `__title` 72, `__h2` 48, `__body` 28, `__caption` 20.
-- Use the accent ground (`gf-slide-accent-bg`, white titles) for the cover, statements and the ask, with one volt highlight at most.
+- Use the accent ground (`gf-slide-accent-bg`, white titles) for the cover, statements and the ask, with one Raggio highlight at most.
 - One idea per slide. Numbers are sourced or bracketed placeholders.
 
 ## Content fundamentals
@@ -48,8 +48,9 @@ These five carry the brand. Never restyle them, override them with `!important`,
 
 - Text is `gf-text-primary` on `gf-bg-canvas`, `gf-bg-layer-1` or `gf-bg-layer-2`. Use `gf-text-secondary` for supporting copy and labels, and `gf-text-tertiary` for metadata on canvas only.
 - Separate sections by tone: canvas → `gf-bg-layer-1` → `gf-bg-layer-2`. Never separate them with shadows.
-- Volt (`gf-volt`) is a highlight, never a wash. Use one static volt element per view: a `.gf-tag--volt` badge, a `.gf-highlight` accent word, a marker, or the avatar group. Never use volt text, or a volt button fill, on a light surface. Interaction states (primary hover, the dark CTA, the dark focus ring) are exempt.
-- Never place a primary button on a volt ground, because its hover would disappear. On white, a hovered primary has about 1.1:1 edge contrast; the label stays at 12.0:1, and this is an accepted, brand-defining trade-off.
+- **Raggio** is the brand yellow `#fefa54`, named from *raggio di sole* (a ray of sunshine), the sun in the logo mark.
+- Raggio (`gf-raggio`) is a highlight, never a wash. Use one static Raggio element per view: a `.gf-tag--raggio` badge, a `.gf-highlight` accent word, a marker, or the avatar group. Never use Raggio text, or a Raggio button fill, on a light surface. Interaction states (primary hover, the dark CTA, the dark focus ring) are exempt.
+- Never place a primary button on a Raggio ground, because its hover would disappear. On white, a hovered primary has about 1.1:1 edge contrast; the label stays at 12.0:1, and this is an accepted, brand-defining trade-off.
 - Status uses Carbon pastels (`gf-success-bg`, `gf-warning-bg`, `gf-error-bg` with their borders) and `gf-status-fg` text, always paired with a word ("Sent.", "Error:"). `gf-error-solid` is only for an invalid field's border.
 - Field boundaries use `gf-border-control` (3:1). Hairlines inside components use `gf-border-subtle`.
 

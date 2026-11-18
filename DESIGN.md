@@ -1,6 +1,6 @@
 ---
 name: "DS-geofreitas.com"
-version: "1.2.5"
+version: "1.3.0"
 surface: web
 source_of_truth: tokens/tokens.json
 ---
@@ -26,7 +26,7 @@ Carbon structure, Apple clarity, Material token roles, Airbnb patterns. One rule
 2. **Editorial link underline.** 1px underline in the link colour, draws left-to-right on hover and retracts right-to-left on exit, 260ms `cubic-bezier(0.22, 1, 0.36, 1)`. `#161616` on light, `#ffffff` on dark. Linked cards use the same line under the card title.
 3. **Three-tier radius.** 9999px pill for buttons, icon buttons and avatars; 8px for inputs, selects and cards; 4px for tags. 12px for large panels and hero media only.
 4. **Poppins** 400/500/600/700, self-hosted in `assets/fonts/`.
-5. **Volt letter avatars.** `#fefa54` circle, `#161616` 600 initials, no border.
+5. **Raggio letter avatars.** `#fefa54` circle, `#161616` 600 initials, no border.
 
 Implementation: `components/components.css` (`.gf-btn--primary`, `.gf-link`, `.gf-avatar`). Never re-implement these with `!important` or `[style*=…]` selectors. `scripts/check-tokens.py` fails if a protected token drifts between `tokens.json` and `variables.css`.
 
@@ -43,12 +43,14 @@ Implementation: `components/components.css` (`.gf-btn--primary`, `.gf-link`, `.g
 | Border subtle | `#e2e5ec` | `#303030` | 1px rules inside components, cards, tables |
 | Border control | `#8d8d8d` | `#6f6f6f` | Input, select, textarea boundary and checkbox/switch off: 3.3:1 / 3.7:1 (WCAG 1.4.11) |
 | Primary action | `#303030` / `#fefa54` text | `#fefa54` / `#161616` text | See protected hover |
-| Volt highlight | `#fefa54` + `#161616` | same | Brand highlight |
+| Raggio highlight | `#fefa54` + `#161616` | same | Brand highlight |
 | Focus ring | `#303030` | `#fefa54` | 2px, offset 2px |
 
-**Volt rule.** Static volt (a badge, a marker, an accent word, an avatar group) is limited to one element per view. Interaction states (primary hover, dark-mode CTA, dark focus ring) are exempt because they are transient or functional. Never volt text on a light surface (1.1:1).
+**Raggio** `#fefa54` is the brand yellow, named from *raggio di sole* (a ray of sunshine), the sun in the logo mark. Code: `--gf-raggio`, `--gf-on-raggio`, `.gf-tag--raggio`.
 
-**Accepted trade-off.** A hovered primary button on a white canvas has ~1.1:1 edge contrast; the label stays at 12.0:1 and the colour inversion itself signals state. Accepted as brand-defining. Do not place primary buttons on `#fefa54` or volt-tinted grounds.
+**Raggio rule.** Static Raggio (a badge, a marker, an accent word, an avatar group) is limited to one element per view. Interaction states (primary hover, dark-mode CTA, dark focus ring) are exempt because they are transient or functional. Never Raggio text on a light surface (1.1:1).
+
+**Accepted trade-off.** A hovered primary button on a white canvas has ~1.1:1 edge contrast; the label stays at 12.0:1 and the colour inversion itself signals state. Accepted as brand-defining. Do not place primary buttons on `#fefa54` or Raggio-tinted grounds.
 
 **Status.** Tags and alerts use Carbon pastels with primary text: success `#defbe6`/`#a7f0ba`, warning `#fcf4d6`/`#fddc69`, error `#fff1f1`/`#ffb3b8`. The only solid status colour is `#ff4d4f` / `#dc6966` for an invalid field's border. Never mid-grey fills in light mode. Never colour alone: pair state with a word ("Error:", "Sent.") or an icon.
 
@@ -86,7 +88,7 @@ Full specs, states, accessibility and code for each: **`docs/components.md`**. W
 |---|---|
 | Actions | Button (primary · secondary · sm/md/lg · block · loading · disabled), Icon button (default · on-media), Link (protected underline, `.gf-prose` for inline) |
 | Forms | Field, Label, Input, Select, Textarea, Help/Error, Checkbox, Radio, Switch |
-| Display | Tag (neutral · success · warning · error · volt), Avatar (sm/md/lg), Alert, Card, Hero media, Figure, Table, Accordion |
+| Display | Tag (neutral · success · warning · error · Raggio), Avatar (sm/md/lg), Alert, Card, Hero media, Figure, Table, Accordion |
 | Structure | Nav + mobile menu + skip link, Footer, Panel + floating sticky panel (bottom bar under 820px), Tabs, Dialog |
 | Overlays | Menu, Popover, Tooltip, Toast |
 | Feedback | Progress (determinate, indeterminate), Loader (spinner, brand mark), Skeleton (text, title, circle, media), Empty state |
@@ -101,7 +103,7 @@ Rules that apply to all of them: every interactive element has hover, focus-visi
 
 ## 7. Dark mode
 
-Same components, token swap only. Follows the visitor's OS setting by default; force with `data-theme="dark"` / `data-theme="light"` (or `.dark`) on `<html>` or any container. Logos swap to `wordmark-white.svg` with `<picture>` + `prefers-color-scheme`. Ground `#141414`, sections `#1d1d1d`, elevated `#333333`, borders `#303030`/`#525252`, headings and body `#ffffff`, secondary `#adadad`. Primary CTA is volt → white on hover. Links and underline are white.
+Same components, token swap only. Follows the visitor's OS setting by default; force with `data-theme="dark"` / `data-theme="light"` (or `.dark`) on `<html>` or any container. Logos swap to `wordmark-white.svg` with `<picture>` + `prefers-color-scheme`. Ground `#141414`, sections `#1d1d1d`, elevated `#333333`, borders `#303030`/`#525252`, headings and body `#ffffff`, secondary `#adadad`. Primary CTA is Raggio → white on hover. Links and underline are white.
 
 ## 8. Motion (Apple-style)
 
@@ -117,7 +119,7 @@ Same components, token swap only. Follows the visitor's OS setting by default; f
 - Phosphor Icons (MIT), self-hosted in `assets/icons/phosphor/`. Use `<i class="ph ph-<name> gf-icon" aria-hidden="true"></i>`; names at phosphoricons.com.
 - **Weight follows text weight** (the SF Symbols rule): `ph` (regular) next to 400–500 text, `ph-bold` next to 600–700 text and in every button. `ph-fill` marks a selected or active state (current sidebar item, liked); `ph-duotone` is for empty states and large illustrative moments.
 - **Sizes:** `gf-icon--sm` 16px, `gf-icon` 20px, `gf-icon--lg` 24px; in buttons icons size to the label automatically.
-- Icons are `currentColor`, never volt on light grounds, never emoji. An icon-only control always has an `aria-label`. SF Symbols are not used: their licence limits them to apps on Apple platforms.
+- Icons are `currentColor`, never Raggio on light grounds, never emoji. An icon-only control always has an `aria-label`. SF Symbols are not used: their licence limits them to apps on Apple platforms.
 
 ## 8b. Depth, layers, density and contrast
 
@@ -130,14 +132,14 @@ Same components, token swap only. Follows the visitor's OS setting by default; f
 
 - **Categorical** `gf-dv-1` to `gf-dv-6` (blue, orange, teal, violet, ink, magenta), each at least 3:1 on the canvas in both themes. Use them in order, label every series, and never rely on colour alone.
 - **Sequential** `gf-dv-seq-1` to `-5` for heatmaps and ranges; the two lightest steps need a border or a label.
-- Gridlines `gf-dv-grid`, axis text `gf-dv-axis`. Volt is never a data colour on light grounds.
+- Gridlines `gf-dv-grid`, axis text `gf-dv-axis`. Raggio is never a data colour on light grounds.
 - Charts are inline SVG with the `.gf-chart` classes (`.grid`, `.axis`, `.s1`–`.s6`, `.line`) and an `aria-label` that states what the chart shows.
 
 ## 8d. Presentations
 
 - Slides are 16:9 (1920 × 1080 design size), built with `.gf-slide` and scaled by container units, so one deck works at any width and prints a slide per page.
 - **Type at 1920 wide:** display 120, title 72, H2 48, body 28, caption 20. **Layout:** 96px margins, 12 columns, 32px gutters.
-- **Grounds:** canvas for content, `--layer` for supporting slides, and `--accent` (`#303030`, white text) for the cover, statements and the ask, with at most one volt highlight per slide.
+- **Grounds:** canvas for content, `--layer` for supporting slides, and `--accent` (`#303030`, white text) for the cover, statements and the ask, with at most one Raggio highlight per slide.
 - One idea per slide; numbers are sourced or bracketed placeholders; slide footers stay at 4.5:1 or better.
 
 ## 9. Voice
@@ -159,6 +161,7 @@ Breakpoints 600 / 820 / 1024 / 1440. Validate at 360, 390, 430, 600, 820, 1024, 
 
 ## Changelog
 
+- **1.3.0 (2026-11-18):** The brand yellow is named **Raggio** (from *raggio di sole*). New tokens `--gf-raggio`, `--gf-on-raggio` and class `.gf-tag--raggio`; the old `volt` names are removed (nothing used them). Colour unchanged. The pre-1.0 archive (`_archive/legacy/`) is removed from the repo; restore it with `git checkout v1.0.0 -- _archive`.
 - **1.2.5 (2026-11-18):** Touch targets: every `.gf-btn` size, every `.gf-link` and the nav logo now carry an invisible 44px hit area (`::before`); footer link lists space to a 44px pitch. Found in the homepage audit; nothing visual changes.
 - **1.2.4 (2026-11-18):** Mobile nav: the link underline now sits 2px under the words, not at the bottom of the 44px touch box. Rows stay 44px; the hit area is an invisible `::before`.
 - **1.2.3 (2026-11-18):** `.gf-highlight` is now a volt band from just above the letters to just below the descenders, not the full line-height box, so it no longer rises into the line above in display type. Wraps with `box-decoration-break: clone`.

@@ -20,7 +20,7 @@ for k, v in t['static'].items():
     if isinstance(v, dict): continue
     got = val(light, k)
     if got is None: fails.append(f'static {k}: missing in css'); continue
-    exp = f'var(--gf-{v})' if re.fullmatch(r'[a-z]+(-[a-z0-9]+)+', v) and val(light, v) is not None else v
+    exp = f'var(--gf-{v})' if re.fullmatch(r'[a-z]+(-[a-z0-9]+)*', v) and val(light, v) is not None else v
     if got.replace(' ', '') not in (exp.replace(' ', ''), v.replace(' ', '')): fails.append(f'static {k}: json={v} css={got}')
 defined = set(re.findall(r'--gf-([a-z0-9-]+):', css))
 for u in sorted(set(re.findall(r'var\(--gf-([a-z0-9-]+)', comp + css)) - defined): fails.append(f'undefined var --gf-{u}')

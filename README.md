@@ -1,6 +1,6 @@
 # DS-geofreitas.com
 
-Carbon structure, Apple clarity and motion, Material token roles and Airbnb patterns: one system for prototypes, products, presentations and geofreitas.com. Version 1.2.5.
+Carbon structure, Apple clarity and motion, Material token roles and Airbnb patterns: one system for prototypes, products, presentations and geofreitas.com. Version 1.3.0.
 
 ## Start here
 
@@ -35,7 +35,6 @@ Carbon structure, Apple clarity and motion, Material token roles and Airbnb patt
 | `assets/fonts/` | Self-hosted Poppins 400–700 |
 | `assets/logos/`, `assets/imagery/` | Wordmarks, favicon, project imagery |
 | `claude-design/` | The same system as published to Claude Design (the default design system): brand book, tokens in Claude's format, component previews, cover. Mirror of https://claude.ai/artifact/AuwHbJwtVnSJhxKvVq8u68 |
-| `_archive/legacy/` | The pre-1.0 generator system, archived: original kits, sample pages, retired generator, old docs. Nothing here is used (see its README) |
 
 ## Changing the system
 

@@ -1,7 +1,7 @@
 /* DS-geofreitas.com — components.css v1.2
    Real classes, no !important, no attribute-selector hacks. Requires tokens/variables.css.
    Optional behaviour (tabs keyboard, dialog open/close): components/components.js.
-   PROTECTED: .gf-btn--primary hover swap · .gf-link animated underline · radius tiers · volt avatars. */
+   PROTECTED: .gf-btn--primary hover swap · .gf-link animated underline · radius tiers · Raggio avatars. */
 
 /* ================= Base ================= */
 *, *::before, *::after { box-sizing: border-box; }
@@ -27,9 +27,9 @@ img { max-width: 100%; display: block; }
 .gf-eyebrow { font-size: var(--gf-type-eyebrow-size); line-height: var(--gf-type-eyebrow-line); letter-spacing: var(--gf-type-eyebrow-track); font-weight: var(--gf-type-eyebrow-weight); color: var(--gf-text-secondary); text-transform: uppercase; }
 .gf-text-secondary { color: var(--gf-text-secondary); }
 .gf-text-tertiary { color: var(--gf-text-tertiary); }
-/* the one static volt moment. A band from just above the letters to just below the descenders (tuned to Poppins metrics),
+/* the one static Raggio moment. A band from just above the letters to just below the descenders (tuned to Poppins metrics),
    so it never rises into the line above. Wraps cleanly across lines. */
-.gf-highlight { background: linear-gradient(transparent 20%, var(--gf-volt) 20%, var(--gf-volt) 96%, transparent 96%); color: var(--gf-on-volt); padding: 0 0.12em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.gf-highlight { background: linear-gradient(transparent 20%, var(--gf-raggio) 20%, var(--gf-raggio) 96%, transparent 96%); color: var(--gf-on-raggio); padding: 0 0.12em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .gf-code { font-family: var(--gf-font-code); font-size: 0.9em; }
 
 /* ================= Layout ================= */
@@ -61,7 +61,7 @@ img { max-width: 100%; display: block; }
 .gf-btn::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: max(100%, var(--gf-touch-min)); transform: translateY(-50%); } /* 44px hit area on every size */
 .gf-btn--block { width: 100%; }
 
-/* Primary — PROTECTED. Light: charcoal + volt text → volt + charcoal. Dark: volt → white. */
+/* Primary — PROTECTED. Light: charcoal + Raggio text → Raggio + charcoal. Dark: Raggio → white. */
 .gf-btn--primary { background: var(--gf-primary-bg); color: var(--gf-primary-fg); }
 .gf-btn--primary:hover { background: var(--gf-primary-bg-hover); color: var(--gf-primary-fg-hover); }
 .gf-btn--primary:active { background: var(--gf-primary-bg-pressed); color: var(--gf-primary-fg-pressed); }
@@ -154,17 +154,17 @@ img { max-width: 100%; display: block; }
 .gf-switch[aria-checked="true"] .gf-switch__track::after { transform: translateX(20px); background: var(--gf-control-mark); }
 .gf-switch:disabled { opacity: 0.4; cursor: not-allowed; }
 
-/* ================= Tags (4px) & avatars (pill, volt) ================= */
+/* ================= Tags (4px) & avatars (pill, Raggio) ================= */
 .gf-tag { display: inline-flex; align-items: center; gap: var(--gf-space-4); height: var(--gf-tag-h); padding: 0 var(--gf-tag-px); border-radius: var(--gf-radius-tag);
   border: 1px solid var(--gf-tag-border); background: var(--gf-tag-bg); color: var(--gf-tag-fg);
   font-size: var(--gf-type-caption-size); font-weight: var(--gf-fw-medium); white-space: nowrap; }
 .gf-tag--success { background: var(--gf-success-bg); border-color: var(--gf-success-border); color: var(--gf-status-fg); }
 .gf-tag--warning { background: var(--gf-warning-bg); border-color: var(--gf-warning-border); color: var(--gf-status-fg); }
 .gf-tag--error   { background: var(--gf-error-bg);   border-color: var(--gf-error-border);   color: var(--gf-status-fg); }
-.gf-tag--volt    { background: var(--gf-volt); border-color: var(--gf-volt); color: var(--gf-on-volt); }
+.gf-tag--raggio  { background: var(--gf-raggio); border-color: var(--gf-raggio); color: var(--gf-on-raggio); }
 
 .gf-avatar { display: inline-grid; place-items: center; flex: none; width: var(--gf-avatar-md); height: var(--gf-avatar-md); border-radius: var(--gf-radius-pill);
-  background: var(--gf-volt); color: var(--gf-on-volt); font-weight: var(--gf-fw-semibold); font-size: var(--gf-fs-14); overflow: hidden; }
+  background: var(--gf-raggio); color: var(--gf-on-raggio); font-weight: var(--gf-fw-semibold); font-size: var(--gf-fs-14); overflow: hidden; }
 .gf-avatar--sm { width: var(--gf-avatar-sm); height: var(--gf-avatar-sm); font-size: var(--gf-fs-12); }
 .gf-avatar--lg { width: var(--gf-avatar-lg); height: var(--gf-avatar-lg); font-size: var(--gf-fs-16); }
 .gf-avatar img { width: 100%; height: 100%; object-fit: cover; }

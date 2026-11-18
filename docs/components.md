@@ -19,17 +19,17 @@ Pill-shaped action. Use for actions; use `.gf-link` for navigation inside text.
 
 | State | Primary light | Primary dark | Secondary |
 |---|---|---|---|
-| D | `#303030` fill, volt text | volt fill, `#161616` text | canvas fill, subtle border |
-| H | volt fill, `#303030` text (180ms) | `#ffffff` fill | layer-1 fill, ink border |
-| P | `#1f1f1f`, volt text | `#e2e5ec` | layer-2 fill |
-| F / X | ring / 40% | ring (volt) / 40% | ring / 40% |
+| D | `#303030` fill, Raggio text | Raggio fill, `#161616` text | canvas fill, subtle border |
+| H | Raggio fill, `#303030` text (180ms) | `#ffffff` fill | layer-1 fill, ink border |
+| P | `#1f1f1f`, Raggio text | `#e2e5ec` | layer-2 fill |
+| F / X | ring / 40% | ring (Raggio) / 40% | ring / 40% |
 | L | `aria-busy="true"`: label hidden, spinner, width kept | same | spinner in ink |
 
 **Accessibility:** use `<button>` for actions and `<a>` for navigation. Disabled anchors take `aria-disabled="true"`. A loading button keeps its accessible name; announce the outcome elsewhere.
 
 | ✅ Do | ❌ Don't |
 |---|---|
-| One primary per view (a mobile sticky bar may repeat the page's primary) | Put a primary on a volt ground (the hover would vanish) |
+| One primary per view (a mobile sticky bar may repeat the page's primary) | Put a primary on a Raggio ground (the hover would vanish) |
 | Sentence-case verbs: "Start a conversation" | Re-implement the hover with `!important` or `filter` |
 
 ```html
@@ -66,7 +66,7 @@ Inside running text, wrap the text in `.gf-prose`: links there carry a static un
 |---|---|
 | D | control border, canvas fill, tertiary placeholder |
 | H | border turns ink |
-| F | ink border + 2px ring (volt in dark) |
+| F | ink border + 2px ring (Raggio in dark) |
 | E | `aria-invalid="true"` sets an error border; `.gf-help--error` prefixes the message with "Error:" |
 | X / read-only | layer-1 fill, tertiary text |
 
@@ -90,7 +90,7 @@ Native inputs, restyled: a 20px box (4px corners) or circle, with a 44px row. Of
 
 ## Switch `.gf-switch`
 
-`<button role="switch" aria-checked>` with a 44×24 track. Off: `--gf-control-off`. On: `#303030` (light) or volt (dark), with the knob in the canvas colour. `components.js` toggles `aria-checked`. Use a switch for instant settings and a checkbox for form answers.
+`<button role="switch" aria-checked>` with a 44×24 track. Off: `--gf-control-off`. On: `#303030` (light) or Raggio (dark), with the knob in the canvas colour. `components.js` toggles `aria-checked`. Use a switch for instant settings and a checkbox for form answers.
 
 ```html
 <button class="gf-switch" type="button" role="switch" aria-checked="false"><span class="gf-switch__track" aria-hidden="true"></span>Reply by phone</button>
@@ -98,11 +98,11 @@ Native inputs, restyled: a 20px box (4px corners) or circle, with a 44px row. Of
 
 ## Tag `.gf-tag`
 
-24px tall, 4px corners, not interactive. Variants: neutral (default), `--success`, `--warning`, `--error`, `--volt` (counts as the view's one static volt element). Status always pairs the tint with a word.
+24px tall, 4px corners, not interactive. Variants: neutral (default), `--success`, `--warning`, `--error`, `--raggio` (counts as the view's one static Raggio element). Status always pairs the tint with a word.
 
 ## Avatar `.gf-avatar` (protected)
 
-A volt circle with 600-weight initials. `--sm` 32 / default 40 / `--lg` 48. It may hold an `<img>`. Decorative avatars take `aria-hidden="true"` next to a visible name.
+A Raggio circle with 600-weight initials. `--sm` 32 / default 40 / `--lg` 48. It may hold an `<img>`. Decorative avatars take `aria-hidden="true"` next to a visible name.
 
 ## Alert `.gf-alert`
 
@@ -124,7 +124,7 @@ A tonal panel (layer 1, 12px corners, 24px padding). `--float` is the sticky act
 
 ## Tabs `.gf-tabs` + `.gf-tab` + `.gf-tabpanel`
 
-Text tabs with a 2px ink underline on the selected tab (never volt). H: ink text with a grey underline. F: inset ring.
+Text tabs with a 2px ink underline on the selected tab (never Raggio). H: ink text with a grey underline. F: inset ring.
 
 **Keyboard** (`components.js`, WAI-ARIA pattern): ←/→ move and select, Home/End jump. Only the selected tab sits in the Tab order (roving `tabindex`).
 
@@ -159,7 +159,7 @@ Native `<dialog>` opened with `showModal()`, so focus trapping, Esc and the back
 
 ## Type classes
 
-`.gf-display` `.gf-h1`–`.gf-h4` `.gf-body-lg` `.gf-body` `.gf-ui` `.gf-caption` `.gf-eyebrow` map 1:1 to the type role tokens. Display, H1, H2 and H3 step down one size under 600px. `.gf-body` and `.gf-body-lg` cap line length at 68ch. `.gf-highlight` is the one static volt word per view.
+`.gf-display` `.gf-h1`–`.gf-h4` `.gf-body-lg` `.gf-body` `.gf-ui` `.gf-caption` `.gf-eyebrow` map 1:1 to the type role tokens. Display, H1, H2 and H3 step down one size under 600px. `.gf-body` and `.gf-body-lg` cap line length at 68ch. `.gf-highlight` is the one static Raggio word per view.
 
 ## Layout classes
 
@@ -252,7 +252,7 @@ An app layout: a 264px sticky sidebar plus `.gf-app__main`. Items are `.gf-sideb
 
 ## Filter chips `.gf-chip`
 
-Toggle buttons for filtering: `<button class="gf-chip" aria-pressed="false">` with a hidden `ph-bold ph-check` (`.gf-chip__check`) that shows when the chip is selected. Selected chips are inverted ink (`gf-chip-selected-*`), never volt. Group them in `.gf-chips` with `role="group"` and an `aria-label`. Chips are 32px tall with a 44px hit area.
+Toggle buttons for filtering: `<button class="gf-chip" aria-pressed="false">` with a hidden `ph-bold ph-check` (`.gf-chip__check`) that shows when the chip is selected. Selected chips are inverted ink (`gf-chip-selected-*`), never Raggio. Group them in `.gf-chips` with `role="group"` and an `aria-label`. Chips are 32px tall with a 44px hit area.
 
 ## Segmented control `.gf-segmented`
 
