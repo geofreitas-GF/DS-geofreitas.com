@@ -73,7 +73,9 @@ These five carry the brand. Never restyle them, override them with `!important`,
 
 ### States and motion (Apple-style)
 
-- Every interactive element has hover, pressed, focus-visible (a 2px `gf-focus-ring`, offset 2px) and disabled (40%) states.
+- Every interactive element has hover, pressed, focus-visible (a 2px `gf-focus-ring`, offset 2px) and disabled (40%) states. Fields are quieter: on focus the border turns ink (white in dark) with a soft 3px `gf-focus-halo`; an invalid field keeps its red border with `gf-error-halo`.
+- Tags have no border: neutral text `gf-tag-fg`, status text `gf-success-fg`, `gf-warning-fg` or `gf-error-fg` on their tint. Corners stay 4px, because round means clickable.
+- End a case study or article with the Pager (`.gf-pager`): Previous on the left, Next on the right, the title drawing the editorial underline on hover.
 - Touch targets are at least 44px (`gf-touch-min`); smaller visuals get an extended hit area.
 - Motion explains a change: where something came from, or what changed. It never decorates, and it is never the only signal: the end state also shows the change in text, style, focus or a count.
 - Springs move things, using `gf-spring-snappy` by default, `gf-spring-smooth` for no bounce, and `gf-spring-bouncy` only for celebrations, at `gf-dur-spring-sm`, `-md` or `-lg`. Colour and state changes take 150–180ms ease-out. Keep feedback brief and tied to the action.

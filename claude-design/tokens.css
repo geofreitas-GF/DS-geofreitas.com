@@ -25,7 +25,7 @@
   --gf-link-fg: #161616;
   --gf-link-underline: #161616;
   --gf-tag-bg: #f5f5f5;
-  --gf-tag-fg: #161616;
+  --gf-tag-fg: #3d3d3d;
   --gf-tag-border: #e0e0e0;
   --gf-success-bg: #defbe6;
   --gf-success-border: #a7f0ba;
@@ -34,6 +34,11 @@
   --gf-error-bg: #fff1f1;
   --gf-error-border: #ffb3b8;
   --gf-error-solid: #ff4d4f;
+  --gf-success-fg: #0f6b33;
+  --gf-warning-fg: #7a4f00;
+  --gf-error-fg: #b3261e;
+  --gf-focus-halo: rgba(22,22,22,0.12);
+  --gf-error-halo: rgba(255,77,79,0.20);
   --gf-status-fg: #161616;
   --gf-focus-ring: #303030;
   --gf-control-off: #8d8d8d;
@@ -100,7 +105,7 @@
   --gf-link-fg: #ffffff;
   --gf-link-underline: #ffffff;
   --gf-tag-bg: #262626;
-  --gf-tag-fg: #ffffff;
+  --gf-tag-fg: #dcdcdc;
   --gf-tag-border: #4a4a4a;
   --gf-success-bg: #192913;
   --gf-success-border: #304d20;
@@ -109,6 +114,11 @@
   --gf-error-bg: #32191a;
   --gf-error-border: #5b3231;
   --gf-error-solid: #dc6966;
+  --gf-success-fg: #7ed99a;
+  --gf-warning-fg: #f2c45a;
+  --gf-error-fg: #ff8f8a;
+  --gf-focus-halo: rgba(255,255,255,0.18);
+  --gf-error-halo: rgba(220,105,102,0.28);
   --gf-status-fg: #ffffff;
   --gf-focus-ring: #fefa54;
   --gf-control-off: #6f6f6f;

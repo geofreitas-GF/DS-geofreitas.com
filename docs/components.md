@@ -1,4 +1,4 @@
-# DS-geofreitas.com — component reference (v1.4)
+# DS-geofreitas.com — component reference (v1.5)
 
 Every component lives in `components/components.css`; behaviour for tabs, switch, mobile nav and dialog lives in `components/components.js` (optional, no dependencies). Live examples of all of them: `examples/landing.html`.
 
@@ -304,3 +304,19 @@ Use the categorical colours `gf-dv-1`–`6`, the sequential ramp `gf-dv-seq-1`�
 ## Presentation layer `.gf-slide`
 
 16:9 slides scaled with container units (`.gf-deck` > `.gf-slide` > `.gf-slide__inner`, a 12-column grid with 96px margins at 1920 wide). Type classes: `__display` 120, `__title` 72, `__h2` 48, `__body` 28, `__caption` 20, `__kicker`, `__muted`, `__foot`. Grounds: default, `--layer`, `--accent`. Each slide prints on its own page.
+
+
+## Pager `.gf-pager` (added in 1.5)
+
+Previous / next links at the end of a case study, article or docs page. A `<nav aria-label="More projects">` holding up to two real links: `.gf-pager__link--prev` (left) and `.gf-pager__link--next` (right), each with a `.gf-pager__label` ("Previous" / "Next"), a `.gf-pager__title` and a `ph-bold ph-caret-left|right` `.gf-pager__icon`. Either side may be missing; the next link stays on the right. The title draws the editorial underline on hover and focus. Under 600px the two stack. Hit area 44px+.
+
+```html
+<nav class="gf-pager" aria-label="More projects">
+  <a class="gf-pager__link gf-pager__link--prev" href="starbucks.html"><span class="gf-pager__label">Previous</span><i class="ph-bold ph-caret-left gf-icon gf-pager__icon" aria-hidden="true"></i><span class="gf-pager__title">Starbucks</span></a>
+  <a class="gf-pager__link gf-pager__link--next" href="qiddiya.html"><span class="gf-pager__label">Next</span><span class="gf-pager__title">Qiddiya</span><i class="ph-bold ph-caret-right gf-icon gf-pager__icon" aria-hidden="true"></i></a>
+</nav>
+```
+
+**Fields (1.5):** focus shows an ink border with a soft 3px `gf-focus-halo`; invalid fields keep the red border with `gf-error-halo`. Buttons, links and other controls keep the solid 2px focus ring.
+
+**Tags (1.5):** no border; neutral text `gf-tag-fg`, status text `gf-success-fg` / `gf-warning-fg` / `gf-error-fg` on their tints (all at least 5.9:1). Corners stay 4px: round means clickable.

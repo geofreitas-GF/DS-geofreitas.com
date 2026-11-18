@@ -1,6 +1,6 @@
 ---
 name: "DS-geofreitas.com"
-version: "1.4.0"
+version: "1.5.0"
 surface: web
 source_of_truth: tokens/tokens.json
 ---
@@ -92,7 +92,7 @@ Full specs, states, accessibility and code for each: **`docs/components.md`**. W
 | Structure | Nav + mobile menu + skip link, Footer, Panel + floating sticky panel (bottom bar under 820px), Tabs, Dialog |
 | Overlays | Menu, Popover, Tooltip, Toast |
 | Feedback | Progress (determinate, indeterminate), Loader (spinner, brand mark), Skeleton (text, title, circle, media), Empty state |
-| Navigation | Breadcrumb, Pagination, Search field, Sidebar (app layout, off-canvas under 820px) |
+| Navigation | Breadcrumb, Pagination, Pager (previous / next), Search field, Sidebar (app layout, off-canvas under 820px) |
 | Selection | Filter chips, Segmented control, Slider, Calendar (date picker panel) |
 | Content | Carousel, Gallery (1 large + 4), Data table (sort, select, sticky header, selection toolbar, footer), Stat, Quote, Awards |
 | Surfaces | Sheet (bottom sheet under 820px, side panel above) |
@@ -214,6 +214,7 @@ Breakpoints 600 / 820 / 1024 / 1440. Validate at 360, 390, 430, 600, 820, 1024, 
 
 ## Changelog
 
+- **1.5.0 (2026-11-18):** New Pager (`.gf-pager`, previous / next) for case studies and docs, with the drawn underline on hover. Field focus is quieter: ink border plus a soft 3px halo (`gf-focus-halo`), no Raggio ring on fields; controls keep the solid ring. Tags lose their border and show status in the text colour (`gf-success-fg`, `gf-warning-fg`, `gf-error-fg`); 4px corners kept.
 - **1.4.0 (2026-11-18):** Interface details (§8e) after Vercel's Web Interface Guidelines: copy, forms, feedback and state, visual detail and site build rules. Code: 16px inputs on mobile (no iOS zoom), loading buttons keep their label, overlays contain scrolling, no tap delay or flash, balanced headings and no widows, headings clear the sticky nav.
 - **1.3.1 (2026-11-18):** Motion section completed against Apple's HIG: motion is never the only signal, brief and precise, exits reverse entrances, no motion on frequent actions, never block input, rare icon motion, pause control for anything that moves on its own. Code: dialogs and sheets now play their exit (sheet slides back out, dialog sinks), including on Esc; toasts pause while focused.
 - **1.3.0 (2026-11-18):** The brand yellow is named **Raggio** (from *raggio di sole*). New tokens `--gf-raggio`, `--gf-on-raggio` and class `.gf-tag--raggio`; the old `volt` names are removed (nothing used them). Colour unchanged. The pre-1.0 archive (`_archive/legacy/`) is removed from the repo; restore it with `git checkout v1.0.0 -- _archive`.
