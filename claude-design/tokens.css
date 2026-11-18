@@ -1,0 +1,217 @@
+/* DS-geofreitas.com — generated from tokens.json */
+:root, [data-theme="light"] {
+  --gf-bg-canvas: #ffffff;
+  --gf-bg-layer-1: #f6f7f9;
+  --gf-bg-layer-2: #eceef2;
+  --gf-bg-elevated: #ffffff;
+  --gf-text-primary: #161616;
+  --gf-text-secondary: #525252;
+  --gf-text-tertiary: #6f6f6f;
+  --gf-border-subtle: #e2e5ec;
+  --gf-border-strong: #dbdcdc;
+  --gf-border-control: #8d8d8d;
+  --gf-primary-bg: #303030;
+  --gf-primary-fg: #fefa54;
+  --gf-primary-bg-hover: #fefa54;
+  --gf-primary-fg-hover: #303030;
+  --gf-primary-bg-pressed: #1f1f1f;
+  --gf-primary-fg-pressed: #fefa54;
+  --gf-secondary-bg: #ffffff;
+  --gf-secondary-fg: #161616;
+  --gf-secondary-border: #e2e5ec;
+  --gf-secondary-bg-hover: #f6f7f9;
+  --gf-secondary-border-hover: #303030;
+  --gf-secondary-bg-pressed: #eceef2;
+  --gf-link-fg: #161616;
+  --gf-link-underline: #161616;
+  --gf-tag-bg: #f5f5f5;
+  --gf-tag-fg: #161616;
+  --gf-tag-border: #e0e0e0;
+  --gf-success-bg: #defbe6;
+  --gf-success-border: #a7f0ba;
+  --gf-warning-bg: #fcf4d6;
+  --gf-warning-border: #fddc69;
+  --gf-error-bg: #fff1f1;
+  --gf-error-border: #ffb3b8;
+  --gf-error-solid: #ff4d4f;
+  --gf-status-fg: #161616;
+  --gf-focus-ring: #303030;
+  --gf-control-off: #8d8d8d;
+  --gf-control-on: #303030;
+  --gf-control-mark: #ffffff;
+  --gf-scrim: rgba(22,22,22,0.48);
+  --gf-volt: #fefa54;
+  --gf-on-volt: #161616;
+  --gf-media-btn-bg: #ffffff;
+  --gf-media-btn-fg: #161616;
+  --gf-media-ring: rgba(255,255,255,0.9);
+  --gf-switch-knob: #ffffff;
+  --gf-shadow-float: 0 0 0 1px rgba(0,0,0,0.02), 0 2px 6px rgba(0,0,0,0.04), 0 4px 8px rgba(0,0,0,0.08);
+}
+[data-theme="dark"] {
+  --gf-bg-canvas: #141414;
+  --gf-bg-layer-1: #1d1d1d;
+  --gf-bg-layer-2: #272727;
+  --gf-bg-elevated: #272727;
+  --gf-text-primary: #ffffff;
+  --gf-text-secondary: #adadad;
+  --gf-text-tertiary: #999999;
+  --gf-border-subtle: #303030;
+  --gf-border-strong: #3e3e3e;
+  --gf-border-control: #6f6f6f;
+  --gf-primary-bg: #fefa54;
+  --gf-primary-fg: #161616;
+  --gf-primary-bg-hover: #ffffff;
+  --gf-primary-fg-hover: #161616;
+  --gf-primary-bg-pressed: #e2e5ec;
+  --gf-primary-fg-pressed: #161616;
+  --gf-secondary-bg: #141414;
+  --gf-secondary-fg: #ffffff;
+  --gf-secondary-border: #3e3e3e;
+  --gf-secondary-bg-hover: #1d1d1d;
+  --gf-secondary-border-hover: #ffffff;
+  --gf-secondary-bg-pressed: #272727;
+  --gf-link-fg: #ffffff;
+  --gf-link-underline: #ffffff;
+  --gf-tag-bg: #262626;
+  --gf-tag-fg: #ffffff;
+  --gf-tag-border: #4a4a4a;
+  --gf-success-bg: #192913;
+  --gf-success-border: #304d20;
+  --gf-warning-bg: #312512;
+  --gf-warning-border: #5b4920;
+  --gf-error-bg: #32191a;
+  --gf-error-border: #5b3231;
+  --gf-error-solid: #dc6966;
+  --gf-status-fg: #ffffff;
+  --gf-focus-ring: #fefa54;
+  --gf-control-off: #6f6f6f;
+  --gf-control-on: #fefa54;
+  --gf-control-mark: #161616;
+  --gf-scrim: rgba(0,0,0,0.64);
+  --gf-shadow-float: 0 0 0 1px rgba(255,255,255,0.06), 0 8px 24px rgba(0,0,0,0.5);
+}
+:root {
+  --gf-space-4: 4px;
+  --gf-space-8: 8px;
+  --gf-space-12: 12px;
+  --gf-space-16: 16px;
+  --gf-space-24: 24px;
+  --gf-space-32: 32px;
+  --gf-space-48: 48px;
+  --gf-space-64: 64px;
+  --gf-gutter: 24px;
+  --gf-gutter-mobile: 16px;
+  --gf-section-gap: 64px;
+  --gf-max-width: 1200px;
+  --gf-radius-tag: 4px;
+  --gf-radius-control: 8px;
+  --gf-radius-card: 8px;
+  --gf-radius-panel: 12px;
+  --gf-radius-pill: 9999px;
+  --gf-fs-12: 12px;
+  --gf-fs-13: 13px;
+  --gf-fs-14: 14px;
+  --gf-fs-16: 16px;
+  --gf-fs-18: 18px;
+  --gf-fs-22: 22px;
+  --gf-fs-26: 26px;
+  --gf-fs-32: 32px;
+  --gf-fs-38: 38px;
+  --gf-fs-48: 48px;
+  --gf-fs-64: 64px;
+  --gf-fw-regular: 400;
+  --gf-fw-medium: 500;
+  --gf-fw-semibold: 600;
+  --gf-fw-bold: 700;
+  --gf-btn-fs-sm: 12px;
+  --gf-btn-fs-md: 13px;
+  --gf-btn-fs-lg: 14px;
+  --gf-btn-track: 0.01em;
+  --gf-type-display-size: 64px;
+  --gf-type-display-line: 1.05;
+  --gf-type-display-track: -0.02em;
+  --gf-type-display-weight: 700;
+  --gf-type-h1-size: 48px;
+  --gf-type-h1-line: 1.1;
+  --gf-type-h1-track: -0.02em;
+  --gf-type-h1-weight: 700;
+  --gf-type-h2-size: 38px;
+  --gf-type-h2-line: 1.15;
+  --gf-type-h2-track: -0.015em;
+  --gf-type-h2-weight: 600;
+  --gf-type-h3-size: 26px;
+  --gf-type-h3-line: 1.25;
+  --gf-type-h3-track: -0.01em;
+  --gf-type-h3-weight: 600;
+  --gf-type-h4-size: 22px;
+  --gf-type-h4-line: 1.25;
+  --gf-type-h4-track: 0;
+  --gf-type-h4-weight: 600;
+  --gf-type-body-lg-size: 18px;
+  --gf-type-body-lg-line: 1.6;
+  --gf-type-body-lg-track: 0;
+  --gf-type-body-lg-weight: 400;
+  --gf-type-body-size: 16px;
+  --gf-type-body-line: 1.55;
+  --gf-type-body-track: 0;
+  --gf-type-body-weight: 400;
+  --gf-type-ui-size: 14px;
+  --gf-type-ui-line: 1.43;
+  --gf-type-ui-track: 0;
+  --gf-type-ui-weight: 500;
+  --gf-type-caption-size: 12px;
+  --gf-type-caption-line: 1.33;
+  --gf-type-caption-track: 0;
+  --gf-type-caption-weight: 400;
+  --gf-type-eyebrow-size: 12px;
+  --gf-type-eyebrow-line: 1.33;
+  --gf-type-eyebrow-track: 0.08em;
+  --gf-type-eyebrow-weight: 600;
+  --gf-btn-h-sm: 34px;
+  --gf-btn-h-md: 40px;
+  --gf-btn-h-lg: 48px;
+  --gf-btn-px-sm: 20px;
+  --gf-btn-px-md: 26px;
+  --gf-btn-px-lg: 32px;
+  --gf-control-h: 40px;
+  --gf-control-px: 14px;
+  --gf-control-py-multiline: 10px;
+  --gf-icon-btn: 40px;
+  --gf-touch-min: 44px;
+  --gf-tag-h: 24px;
+  --gf-tag-px: 8px;
+  --gf-avatar-sm: 32px;
+  --gf-avatar-md: 40px;
+  --gf-avatar-lg: 48px;
+  --gf-switch-w: 44px;
+  --gf-switch-h: 24px;
+  --gf-check: 20px;
+  --gf-nav-h: 72px;
+  --gf-sticky-top: 96px;
+  --gf-dialog-w: 520px;
+  --gf-measure: 68ch;
+  --gf-columns: 12;
+  --gf-dur-fast: 150ms;
+  --gf-dur-base: 180ms;
+  --gf-dur-draw: 260ms;
+  --gf-dur-slow: 300ms;
+  --gf-ease-out: ease-out;
+  --gf-ease-draw: cubic-bezier(0.22, 1, 0.36, 1);
+  --font-sans: Poppins, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+.gf-display { font-family: var(--font-sans); font-size: 64px; line-height: 1.05; font-weight: 700; letter-spacing: -0.02em; }
+.gf-h1 { font-family: var(--font-sans); font-size: 48px; line-height: 1.1; font-weight: 700; letter-spacing: -0.02em; }
+.gf-h2 { font-family: var(--font-sans); font-size: 38px; line-height: 1.15; font-weight: 600; letter-spacing: -0.015em; }
+.gf-h3 { font-family: var(--font-sans); font-size: 26px; line-height: 1.25; font-weight: 600; letter-spacing: -0.01em; }
+.gf-h4 { font-family: var(--font-sans); font-size: 22px; line-height: 1.25; font-weight: 600; }
+.gf-body-lg { font-family: var(--font-sans); font-size: 18px; line-height: 1.6; font-weight: 400; }
+.gf-body { font-family: var(--font-sans); font-size: 16px; line-height: 1.55; font-weight: 400; }
+.gf-ui { font-family: var(--font-sans); font-size: 14px; line-height: 1.43; font-weight: 500; }
+.gf-caption { font-family: var(--font-sans); font-size: 12px; line-height: 1.33; font-weight: 400; }
+.gf-eyebrow { font-family: var(--font-sans); font-size: 12px; line-height: 1.33; font-weight: 600; letter-spacing: 0.08em; }
+@font-face { font-family: "Poppins"; src: url("fonts/poppins-400-latin.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Poppins"; src: url("fonts/poppins-500-latin.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Poppins"; src: url("fonts/poppins-600-latin.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Poppins"; src: url("fonts/poppins-700-latin.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }

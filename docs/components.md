@@ -1,0 +1,166 @@
+# DS-geofreitas.com — component reference (v1.0)
+
+Every component lives in `components/components.css`; behaviour for tabs, switch, mobile nav and dialog lives in `components/components.js` (optional, no dependencies). Live examples of all of them: `examples/landing.html`.
+
+States key: **D** default · **H** hover · **P** pressed · **F** focus-visible (2px ring, `--gf-focus-ring`, 2px offset) · **X** disabled (40% opacity, not interactive) · **L** loading · **E** error.
+
+---
+
+## Button `.gf-btn`
+
+Pill-shaped action. Use for actions; use `.gf-link` for navigation inside text.
+
+| Variant | Use when |
+|---|---|
+| `--primary` | The one main action of the view. **Protected hover.** |
+| `--secondary` | Supporting actions, alongside or instead of a primary |
+| `--sm` / default / `--lg` | 34 / 40 / 48px tall. `--sm` gets an invisible 44px hit area |
+| `--block` | Full-width inside panels and dialogs |
+
+| State | Primary light | Primary dark | Secondary |
+|---|---|---|---|
+| D | `#303030` fill, volt text | volt fill, `#161616` text | canvas fill, subtle border |
+| H | volt fill, `#303030` text (180ms) | `#ffffff` fill | layer-1 fill, ink border |
+| P | `#1f1f1f`, volt text | `#e2e5ec` | layer-2 fill |
+| F / X | ring / 40% | ring (volt) / 40% | ring / 40% |
+| L | `aria-busy="true"`: label hidden, spinner, width kept | same | spinner in ink |
+
+**Accessibility:** use `<button>` for actions and `<a>` for navigation. Disabled anchors take `aria-disabled="true"`. A loading button keeps its accessible name; announce the outcome elsewhere.
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| One primary per view (a mobile sticky bar may repeat the page's primary) | Put a primary on a volt ground (the hover would vanish) |
+| Sentence-case verbs: "Start a conversation" | Re-implement the hover with `!important` or `filter` |
+
+```html
+<a class="gf-btn gf-btn--primary gf-btn--lg" href="#contact">Start a conversation</a>
+<button class="gf-btn gf-btn--secondary" type="button">View work</button>
+<button class="gf-btn gf-btn--primary" type="submit" aria-busy="true">Sending</button>
+```
+
+## Icon button `.gf-icon-btn`
+
+A 40px circle with a 44px hit area. States: D, H (ink border), P (layer-2 fill), F, X. `--on-media` puts a white fill with a 4px white ring over photography.
+
+**Accessibility:** always add an `aria-label`; the SVG inside takes `aria-hidden="true"`.
+
+```html
+<button class="gf-icon-btn" type="button" aria-label="Next"><svg aria-hidden="true">…</svg></button>
+```
+
+## Link `.gf-link` (protected)
+
+A 1px underline draws left to right on hover and focus and retracts right to left (260ms, `--gf-ease-draw`). `aria-current="page"` keeps the underline drawn. Under reduced motion the underline appears instantly.
+
+Inside running text, wrap the text in `.gf-prose`: links there carry a static underline so they are never told apart by colour alone.
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| Nav, footer, card actions, "Download CV" | Lighten the link on hover |
+
+## Form field `.gf-field` + `.gf-label` + `.gf-input` / `.gf-select` / `.gf-textarea` + `.gf-help`
+
+40px tall, 8px corners, 1px `--gf-border-control` border (3:1).
+
+| State | Visual |
+|---|---|
+| D | control border, canvas fill, tertiary placeholder |
+| H | border turns ink |
+| F | ink border + 2px ring (volt in dark) |
+| E | `aria-invalid="true"` sets an error border; `.gf-help--error` prefixes the message with "Error:" |
+| X / read-only | layer-1 fill, tertiary text |
+
+**Accessibility:** every control has a `<label for>`. Help and error text connect through `aria-describedby`. Use `autocomplete` for name and email.
+
+```html
+<div class="gf-field">
+  <label class="gf-label" for="email">Email</label>
+  <input class="gf-input" id="email" type="email" aria-invalid="true" aria-describedby="email-err">
+  <span class="gf-help gf-help--error" id="email-err">enter a full email address</span>
+</div>
+```
+
+## Checkbox and radio `.gf-check`
+
+Native inputs, restyled: a 20px box (4px corners) or circle, with a 44px row. Off: 1.5px `--gf-control-off` border (3.3:1). On: `--gf-control-on` fill with `--gf-control-mark` tick. H: ink border. X: 40%.
+
+```html
+<label class="gf-check"><input type="checkbox"> Send me the newsletter</label>
+```
+
+## Switch `.gf-switch`
+
+`<button role="switch" aria-checked>` with a 44×24 track. Off: `--gf-control-off`. On: `#303030` (light) or volt (dark), with the knob in the canvas colour. `components.js` toggles `aria-checked`. Use a switch for instant settings and a checkbox for form answers.
+
+```html
+<button class="gf-switch" type="button" role="switch" aria-checked="false"><span class="gf-switch__track" aria-hidden="true"></span>Reply by phone</button>
+```
+
+## Tag `.gf-tag`
+
+24px tall, 4px corners, not interactive. Variants: neutral (default), `--success`, `--warning`, `--error`, `--volt` (counts as the view's one static volt element). Status always pairs the tint with a word.
+
+## Avatar `.gf-avatar` (protected)
+
+A volt circle with 600-weight initials. `--sm` 32 / default 40 / `--lg` 48. It may hold an `<img>`. Decorative avatars take `aria-hidden="true"` next to a visible name.
+
+## Alert `.gf-alert`
+
+An inline message with an 8px radius, in neutral (default), `--success`, `--warning` or `--error` tints with primary text. Start it with `.gf-alert__title`, a word such as "Sent." or "Error:" that names the state. Use `role="status"` for confirmations and `role="alert"` for blocking errors.
+
+## Card `.gf-card` (Airbnb pattern)
+
+4:3 `__media` at 8px corners, no shadow, no text over the image. `__meta` stacks title (16/600), `__sub` (14 secondary) and `__detail` (12 tertiary) at 4px gaps. When the card is a link: on hover the media fades to 92% and the title underlines; on focus a ring with 4px offset appears.
+
+**Accessibility:** the whole card is one `<a>`. The image alt names the project; never place a nested link inside a card.
+
+## Hero media `.gf-hero-media` and figure `.gf-figure`
+
+16:9 at 12px corners. Captions go in `<figcaption>`, below the image.
+
+## Panel `.gf-panel` / `.gf-panel--float`
+
+A tonal panel (layer 1, 12px corners, 24px padding). `--float` is the sticky action panel: elevated, with the single float shadow, pinned at `--gf-sticky-top`. Under 820px it becomes a fixed bottom bar. Anything marked `.gf-panel__extra` hides there, and the body gets bottom padding so content is never covered.
+
+## Tabs `.gf-tabs` + `.gf-tab` + `.gf-tabpanel`
+
+Text tabs with a 2px ink underline on the selected tab (never volt). H: ink text with a grey underline. F: inset ring.
+
+**Keyboard** (`components.js`, WAI-ARIA pattern): ←/→ move and select, Home/End jump. Only the selected tab sits in the Tab order (roving `tabindex`).
+
+```html
+<div class="gf-tabs" role="tablist" aria-label="Filter work">
+  <button class="gf-tab" role="tab" id="t1" aria-controls="p1" aria-selected="true">All work</button>
+  <button class="gf-tab" role="tab" id="t2" aria-controls="p2" aria-selected="false">Brand</button>
+</div>
+<div class="gf-tabpanel" role="tabpanel" id="p1" aria-labelledby="t1" tabindex="0">…</div>
+<div class="gf-tabpanel" role="tabpanel" id="p2" aria-labelledby="t2" tabindex="0" hidden>…</div>
+```
+
+## Table `.gf-table-wrap` + `.gf-table`
+
+Hairline rows, a layer-1 header, 8px outer corners and horizontal scroll on narrow screens. `.gf-num` right-aligns tabular figures. Always include a `<caption>` and `scope` on header cells.
+
+## Accordion `.gf-accordion`
+
+Native `<details>/<summary>`, so there is no JavaScript and the keyboard and screen-reader behaviour comes free. The chevron rotates 180ms. Each row is at least 44px.
+
+## Navigation `.gf-nav` and skip link `.gf-skip`
+
+A sticky 72px bar on the canvas colour with a hairline bottom. Links are `.gf-link`, the current page carries `aria-current="page"`, and one `--sm` primary sits at the end. Under 820px the links collapse behind `.gf-nav__toggle`, an icon button with `aria-expanded` and `aria-controls`. Make `.gf-skip` the first element in `<body>`.
+
+## Footer `.gf-footer`
+
+Layer-1 ground in 3 columns (one column under 820px). Footer links keep a 24px minimum height.
+
+## Dialog `.gf-dialog`
+
+Native `<dialog>` opened with `showModal()`, so focus trapping, Esc and the backdrop come free. Max width 520px, 12px corners, float shadow, `--gf-scrim` backdrop, 300ms entrance (none under reduced motion). `[data-gf-open="id"]` opens it and `[data-gf-close]` closes it. Label it with `aria-labelledby` and put actions at the end: secondary, then primary.
+
+## Type classes
+
+`.gf-display` `.gf-h1`–`.gf-h4` `.gf-body-lg` `.gf-body` `.gf-ui` `.gf-caption` `.gf-eyebrow` map 1:1 to the type role tokens. Display, H1, H2 and H3 step down one size under 600px. `.gf-body` and `.gf-body-lg` cap line length at 68ch. `.gf-highlight` is the one static volt word per view.
+
+## Layout classes
+
+`.gf-container` (1200px max, 24/16px gutters), `.gf-section` (64/48px vertical rhythm), `--layer-1`/`--layer-2` tonal sections, `.gf-grid` (12 columns) with `.gf-span-4/6/7/8/12` and `.gf-start-9` (all go full width under 820px), `.gf-cards` (4→3→2→1 columns), `.gf-stack`, `.gf-cluster`.

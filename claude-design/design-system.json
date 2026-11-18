@@ -1,0 +1,150 @@
+{
+ "v": 3,
+ "layout": "files",
+ "createdOnFiles": {
+  "v": 1,
+  "at": "2026-11-18T13:44:04Z"
+ },
+ "title": "DS-geofreitas.com",
+ "namespace": "gf",
+ "libraries": [],
+ "sections": {},
+ "groups": [
+  "Logos",
+  "Imagery"
+ ],
+ "assetGroups": {
+  "Logos": {
+   "name": "Logos",
+   "tile": "m",
+   "order": [
+    "wordmark-black.svg",
+    "wordmark-white.svg",
+    "loading-mark.svg",
+    "favicon.svg",
+    "footer-logo-black.png"
+   ],
+   "files": {
+    "wordmark-black.svg": {
+     "name": "wordmark-black.svg",
+     "blob": "2e7e3c23ecfd2cea1fe09513918cb4c9",
+     "size": 2987,
+     "type": "image/svg+xml"
+    },
+    "wordmark-white.svg": {
+     "name": "wordmark-white.svg",
+     "blob": "e45d3370bd2f28ba26885139d0855040",
+     "size": 2987,
+     "type": "image/svg+xml"
+    },
+    "loading-mark.svg": {
+     "name": "loading-mark.svg",
+     "blob": "bc6342e35386a363cd12924f6f62ca4d",
+     "size": 1763,
+     "type": "image/svg+xml"
+    },
+    "favicon.svg": {
+     "name": "favicon.svg",
+     "blob": "aa127214a497c7fe87468438325cec65",
+     "size": 1780,
+     "type": "image/svg+xml"
+    },
+    "footer-logo-black.png": {
+     "name": "footer-logo-black.png",
+     "blob": "580eb697438f87ffa24c17149461c18a",
+     "size": 17539,
+     "type": "image/png"
+    }
+   }
+  },
+  "Imagery": {
+   "name": "Imagery",
+   "tile": "l",
+   "order": [
+    "hero-0.jpg",
+    "hero-1.jpg",
+    "hero-2.jpg",
+    "hero-3.jpg",
+    "hero-4.jpg",
+    "hero-5.gif",
+    "hero-6.jpg",
+    "hero-7.jpg",
+    "lloyds-app.png",
+    "mobile-screens.jpg"
+   ],
+   "files": {
+    "hero-0.jpg": {
+     "name": "hero-0.jpg",
+     "blob": "a092f593949d7603985f04a1d6e28fe3",
+     "size": 137721,
+     "type": "image/jpeg"
+    },
+    "hero-1.jpg": {
+     "name": "hero-1.jpg",
+     "blob": "ad1b3c952ce0db198fe1cb32d00c12e6",
+     "size": 441908,
+     "type": "image/jpeg"
+    },
+    "hero-2.jpg": {
+     "name": "hero-2.jpg",
+     "blob": "95bec975da82e39b2e9639ed67e0c068",
+     "size": 285339,
+     "type": "image/jpeg"
+    },
+    "hero-3.jpg": {
+     "name": "hero-3.jpg",
+     "blob": "a8393172914520ed4e9a6f9115d72539",
+     "size": 48215,
+     "type": "image/jpeg"
+    },
+    "hero-4.jpg": {
+     "name": "hero-4.jpg",
+     "blob": "0440cd313255abdff69793f438aa1904",
+     "size": 45757,
+     "type": "image/jpeg"
+    },
+    "hero-5.gif": {
+     "name": "hero-5.gif",
+     "blob": "93a0ac83b6a0ad4b78397dfaaeaf3ea6",
+     "size": 539536,
+     "type": "image/gif"
+    },
+    "hero-6.jpg": {
+     "name": "hero-6.jpg",
+     "blob": "5d4a87c7c3ad57b083c2ba489d386fbb",
+     "size": 365463,
+     "type": "image/jpeg"
+    },
+    "hero-7.jpg": {
+     "name": "hero-7.jpg",
+     "blob": "ddfe095fef5ce63861288e3a3859996b",
+     "size": 257934,
+     "type": "image/jpeg"
+    },
+    "lloyds-app.png": {
+     "name": "lloyds-app.png",
+     "blob": "b24ed1fda98fe59c3be8d3e1b6229625",
+     "size": 2027312,
+     "type": "image/png"
+    },
+    "mobile-screens.jpg": {
+     "name": "mobile-screens.jpg",
+     "blob": "b6ba39b6b5020f506d7f98d7263a756a",
+     "size": 265057,
+     "type": "image/jpeg"
+    }
+   }
+  }
+ },
+ "blobs": {},
+ "docs": {
+  "readme": "project/README.md",
+  "sections": []
+ },
+ "lastChange": {
+  "by": "geO Freitas",
+  "at": "2026-11-18T13:44:04Z",
+  "via": "Cowork",
+  "note": "Version 1.0.0, from the DS-geofreitas.com repo"
+ }
+}

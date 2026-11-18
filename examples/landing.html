@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>geO freitas — DS v1.0 reference page</title>
+<link rel="icon" href="../assets/logos/favicon.svg">
+<link rel="stylesheet" href="../tokens/variables.css">
+<link rel="stylesheet" href="../components/components.css">
+<script src="../components/components.js" defer></script>
+</head>
+<body>
+<a class="gf-btn gf-btn--primary gf-skip" href="#main">Skip to content</a>
+
+<header class="gf-nav">
+  <div class="gf-container gf-nav__inner">
+    <a class="gf-nav__logo" href="#" aria-label="geO freitas, home">
+      <picture>
+        <source srcset="../assets/logos/wordmark-white.svg" media="(prefers-color-scheme: dark)">
+        <img src="../assets/logos/wordmark-black.svg" alt="" height="28">
+      </picture>
+    </a>
+    <nav aria-label="Main">
+      <ul class="gf-nav__links" id="nav-links">
+        <li><a class="gf-link" href="#work" aria-current="page">Work</a></li>
+        <li><a class="gf-link" href="#about">About</a></li>
+        <li><a class="gf-link" href="#experiments">Experiments</a></li>
+        <li><a class="gf-btn gf-btn--primary gf-btn--sm" href="#contact">Get in touch</a></li>
+      </ul>
+    </nav>
+    <button class="gf-icon-btn gf-nav__toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 5h12M3 9h12M3 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="gf-section">
+    <div class="gf-container gf-stack" style="gap: var(--gf-space-24)">
+      <span class="gf-eyebrow">Creative &amp; Design Director · London</span>
+      <h1 class="gf-display">The brand says it. The experience <span class="gf-highlight">proves</span> it.</h1>
+      <p class="gf-body-lg gf-text-secondary">I unite brand, product and business strategy into systems where people, culture and brands grow together.</p>
+      <div class="gf-cluster">
+        <a class="gf-btn gf-btn--primary gf-btn--lg" href="#contact">Start a conversation</a>
+        <a class="gf-btn gf-btn--secondary gf-btn--lg" href="#work">View work</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="gf-section gf-section--layer-1" id="work">
+    <div class="gf-container gf-stack" style="gap: var(--gf-space-32)">
+      <h2 class="gf-h2">Selected work</h2>
+      <div class="gf-tabs" role="tablist" aria-label="Filter work">
+        <button class="gf-tab" role="tab" id="t-all" aria-controls="p-all" aria-selected="true">All work</button>
+        <button class="gf-tab" role="tab" id="t-brand" aria-controls="p-brand" aria-selected="false">Brand</button>
+        <button class="gf-tab" role="tab" id="t-product" aria-controls="p-product" aria-selected="false">Product</button>
+      </div>
+      <div class="gf-tabpanel" role="tabpanel" id="p-all" aria-labelledby="t-all" tabindex="0">
+        <div class="gf-cards">
+          <a class="gf-card" href="#"><img class="gf-card__media" src="../assets/imagery/hero-0.jpg" alt="[Project name] cover"><div class="gf-card__meta"><span class="gf-card__title">[Project name]</span><span class="gf-card__sub">Brand transformation</span><span class="gf-card__detail">[Year] · [Client]</span></div></a>
+          <a class="gf-card" href="#"><img class="gf-card__media" src="../assets/imagery/hero-1.jpg" alt="[Project name] cover"><div class="gf-card__meta"><span class="gf-card__title">[Project name]</span><span class="gf-card__sub">Digital product</span><span class="gf-card__detail">[Year] · [Client]</span></div></a>
+          <a class="gf-card" href="#"><img class="gf-card__media" src="../assets/imagery/hero-6.jpg" alt="[Project name] cover"><div class="gf-card__meta"><span class="gf-card__title">[Project name]</span><span class="gf-card__sub">Product ecosystem</span><span class="gf-card__detail">[Year] · [Client]</span></div></a>
+          <a class="gf-card" href="#"><img class="gf-card__media" src="../assets/imagery/hero-7.jpg" alt="[Project name] cover"><div class="gf-card__meta"><span class="gf-card__title">[Project name]</span><span class="gf-card__sub">Personal experiment</span><span class="gf-card__detail">[Year] · Art and music</span></div></a>
+        </div>
+      </div>
+      <div class="gf-tabpanel" role="tabpanel" id="p-brand" aria-labelledby="t-brand" tabindex="0" hidden><p class="gf-body">[Brand projects]</p></div>
+      <div class="gf-tabpanel" role="tabpanel" id="p-product" aria-labelledby="t-product" tabindex="0" hidden><p class="gf-body">[Product projects]</p></div>
+    </div>
+  </section>
+
+  <section class="gf-section" id="about">
+    <div class="gf-container gf-grid">
+      <div class="gf-stack gf-span-7">
+        <h2 class="gf-h2">Systems-led, human-first</h2>
+        <figure class="gf-figure">
+          <img class="gf-hero-media" src="../assets/imagery/mobile-screens.jpg" alt="Product screens on a neutral ground">
+          <figcaption>Captions sit below the image, never on it.</figcaption>
+        </figure>
+        <div class="gf-table-wrap">
+          <table class="gf-table">
+            <caption>Engagement models</caption>
+            <thead><tr><th scope="col">Model</th><th scope="col">Focus</th><th scope="col" class="gf-num">Typical length</th></tr></thead>
+            <tbody>
+              <tr><td>Brand system</td><td>Identity, voice, design system</td><td class="gf-num">[weeks]</td></tr>
+              <tr><td>Product ecosystem</td><td>Experience strategy and craft</td><td class="gf-num">[weeks]</td></tr>
+              <tr><td>Creative leadership</td><td>Teams, culture, AI-driven process</td><td class="gf-num">[months]</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="gf-accordion">
+          <details><summary>How do you work with in-house teams?</summary><div class="gf-accordion__body">[Answer]</div></details>
+          <details><summary>Which industries have you worked in?</summary><div class="gf-accordion__body">[Answer]</div></details>
+        </div>
+      </div>
+      <aside class="gf-panel gf-panel--float gf-stack gf-span-4 gf-start-9" style="align-self: start" aria-label="Contact">
+        <div class="gf-cluster" style="gap: var(--gf-space-12)">
+          <span class="gf-avatar gf-avatar--lg" aria-hidden="true">GF</span>
+          <div class="gf-card__meta"><span class="gf-card__title">geO freitas</span><span class="gf-card__sub">[Availability]</span></div>
+        </div>
+        <p class="gf-body gf-text-secondary gf-panel__extra">25+ years across brand, digital and product.</p>
+        <button class="gf-btn gf-btn--primary gf-btn--block" type="button" data-gf-open="contact-dialog">Start a conversation</button>
+        <a class="gf-link gf-panel__extra" href="#" style="align-self: center">Download CV</a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="gf-section gf-section--layer-1" id="contact">
+    <div class="gf-container gf-grid">
+      <form class="gf-stack gf-span-6" novalidate>
+        <h2 class="gf-h3">Say hello</h2>
+        <div class="gf-alert gf-alert--success" role="status"><span class="gf-alert__title">Sent.</span><span>[Shown after a successful submit.]</span></div>
+        <div class="gf-field"><label class="gf-label" for="c-name">Name</label><input class="gf-input" id="c-name" autocomplete="name"></div>
+        <div class="gf-field"><label class="gf-label" for="c-email">Email</label><input class="gf-input" id="c-email" type="email" autocomplete="email" aria-invalid="true" aria-describedby="c-email-err"><span class="gf-help gf-help--error" id="c-email-err">enter a full email address</span></div>
+        <div class="gf-field"><label class="gf-label" for="c-topic">Topic</label><select class="gf-select" id="c-topic"><option>New role</option><option>Project</option><option>Speaking</option></select></div>
+        <div class="gf-field"><label class="gf-label" for="c-msg">Message</label><textarea class="gf-textarea" id="c-msg"></textarea><span class="gf-help">60–75 characters per line reads best.</span></div>
+        <label class="gf-check"><input type="checkbox" checked> Send me the occasional newsletter</label>
+        <button class="gf-switch" type="button" role="switch" aria-checked="false"><span class="gf-switch__track" aria-hidden="true"></span>Reply by phone instead</button>
+        <div class="gf-cluster"><button class="gf-btn gf-btn--primary" type="submit">Send message</button><button class="gf-btn gf-btn--primary" type="button" aria-busy="true">Sending</button><button class="gf-btn gf-btn--secondary" type="reset" disabled>Clear</button></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="gf-footer">
+  <div class="gf-container gf-footer__cols">
+    <div class="gf-stack"><picture><source srcset="../assets/logos/wordmark-white.svg" media="(prefers-color-scheme: dark)"><img src="../assets/logos/wordmark-black.svg" alt="geO freitas" height="24" style="width: auto"></picture><span class="gf-caption">Scroll down and let the love begin.</span></div>
+    <ul><li><a class="gf-link" href="#work">Work</a></li><li><a class="gf-link" href="#about">About</a></li><li><a class="gf-link" href="#experiments">Experiments</a></li></ul>
+    <ul><li><a class="gf-link" href="#">LinkedIn</a></li><li><a class="gf-link" href="#contact">Contact</a></li></ul>
+  </div>
+</footer>
+
+<dialog class="gf-dialog" id="contact-dialog" aria-labelledby="dlg-title">
+  <div class="gf-dialog__head">
+    <h2 class="gf-h4" id="dlg-title">Start a conversation</h2>
+    <button class="gf-icon-btn" type="button" aria-label="Close" data-gf-close><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+  </div>
+  <p class="gf-body gf-text-secondary">[Short intro to how you like to be contacted.]</p>
+  <div class="gf-dialog__actions"><button class="gf-btn gf-btn--secondary" type="button" data-gf-close>Not now</button><a class="gf-btn gf-btn--primary" href="#contact">Go to form</a></div>
+</dialog>
+</body>
+</html>
