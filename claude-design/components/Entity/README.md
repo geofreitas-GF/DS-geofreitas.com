@@ -1,0 +1,3 @@
+A row of up to two columns: descriptive content on the left, one or two controls on the right — member, integration or domain-style lists. Not for sortable tabular data (use Table) or static key/value facts on a detail page (use Description).
+
+**Provide:** `.gf-entity-list` of `.gf-entity` rows: `.gf-entity__left` (avatar or icon, then `.gf-entity__body` with `__title` and `__desc`) and `.gf-entity__right` (at most one or two controls; more go in a Dots menu). Selectable rows (`--selectable`) wrap the left column in a `<label>` holding the checkbox, so the whole left side toggles it; the right-side control stays a separate interactive element outside the label.

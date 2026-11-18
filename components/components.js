@@ -1,6 +1,7 @@
-/* DS-geofreitas.com — components.js v1.6 (optional, no dependencies)
+/* DS-geofreitas.com — components.js v1.7 (optional, no dependencies)
    Tabs: WAI-ARIA tabs with roving tabindex, ←/→/Home/End, automatic activation.
    Switch: toggles aria-checked. Nav: mobile menu toggle. Dialog: [data-gf-open="id"] opens <dialog id>.
+   v1.7: show more (expand, moves focus into the reveal), multi select (roving rows, per-row "only"), gauge (SVG ring, auto tone from value).
    v1.6: combobox (filter, arrows, Enter, Esc), theme switcher (system/light/dark, remembered, logo swap), copy, video (pause control, no autoplay under Reduce Motion), input clear.
    v1.1: menus and popovers (native [popover] + positioning + arrow keys), tooltip Esc, GF.toast(), sidebar toggle, search clear. */
 (function () {
@@ -220,6 +221,94 @@
     sync();
   }
 
+  /* ---- 1.7: show more, multi select, gauge ---- */
+  function initShowMore(sm) {
+    var trigger = sm.querySelector('.gf-showmore__trigger'), list = sm.querySelector('.gf-showmore__list'); if (!trigger || !list) return;
+    if (!list.id) list.id = 'gf-sm-' + Math.random().toString(36).slice(2, 8);
+    trigger.setAttribute('aria-controls', list.id);
+    var hidden = Math.max(0, list.children.length - 5);
+    if (hidden <= 0) { sm.hidden = true; return; }
+    var moreLabel = trigger.getAttribute('data-gf-more') || ('Show ' + hidden + ' more'), lessLabel = trigger.getAttribute('data-gf-less') || 'Show less';
+    var text = trigger.querySelector('.gf-showmore__text');
+    var sync = function () {
+      var collapsed = list.getAttribute('data-collapsed') !== 'false';
+      trigger.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      if (text) text.textContent = collapsed ? moreLabel : lessLabel;
+    };
+    list.setAttribute('data-collapsed', 'true');
+    trigger.addEventListener('click', function () {
+      var collapsed = list.getAttribute('data-collapsed') !== 'false';
+      list.setAttribute('data-collapsed', collapsed ? 'false' : 'true'); sync();
+      if (collapsed) { var row = list.children[5]; if (row) { var f = row.querySelector('a,button,[tabindex]'); if (!f) { row.setAttribute('tabindex', '-1'); f = row; } if (f.focus) f.focus(); } }
+    });
+    sync();
+  }
+
+  function initMultiSelect(ms) {
+    var trigger = ms.querySelector('.gf-multiselect__trigger'), list = ms.querySelector('.gf-multiselect__list'); if (!trigger || !list) return;
+    var rows = Array.prototype.slice.call(list.querySelectorAll('.gf-multiselect__row'));
+    var summaryEl = trigger.querySelector('.gf-multiselect__summary');
+    var allLabel = ms.getAttribute('data-gf-all-label') || 'All selected', noneLabel = ms.getAttribute('data-gf-none-label') || 'None selected';
+    var checks = function () { return rows.map(function (r) { return r.querySelector('input[type="checkbox"]'); }); };
+    var summarize = function () {
+      var cb = checks(), picked = cb.filter(function (c) { return c.checked; }), n = picked.length;
+      var txt = n === 0 ? noneLabel : n === cb.length ? allLabel : n === 1 ? picked[0].closest('.gf-multiselect__row').querySelector('.gf-multiselect__label').textContent.trim() : n + ' selected';
+      if (summaryEl) summaryEl.textContent = txt;
+      ms.dispatchEvent(new CustomEvent('gf-change', { bubbles: true, detail: { values: picked.map(function (c) { return c.value; }) } }));
+    };
+    var isOpen = function () { return ms.getAttribute('data-open') === 'true'; };
+    var open = function () { if (isOpen()) return; list.hidden = false; ms.setAttribute('data-open', 'true'); trigger.setAttribute('aria-expanded', 'true'); place(list, trigger); var first = rows[0]; if (first) first.focus(); };
+    var close = function (focusBack) { list.hidden = true; ms.setAttribute('data-open', 'false'); trigger.setAttribute('aria-expanded', 'false'); if (focusBack) trigger.focus(); };
+    trigger.addEventListener('click', function () { if (isOpen()) close(true); else open(); });
+    trigger.addEventListener('keydown', function (e) { if (!isOpen() && (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(); } });
+    var toggleRow = function (row) { var cb = row.querySelector('input[type="checkbox"]'); cb.checked = !cb.checked; row.setAttribute('aria-selected', cb.checked ? 'true' : 'false'); summarize(); };
+    rows.forEach(function (row) {
+      row.setAttribute('tabindex', '-1');
+      row.addEventListener('click', function (e) { if (e.target.closest('.gf-multiselect__action')) return; toggleRow(row); });
+      row.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleRow(row); } });
+      var action = row.querySelector('.gf-multiselect__action');
+      if (action) action.addEventListener('click', function (e) {
+        e.stopPropagation();
+        rows.forEach(function (r) { var cb = r.querySelector('input[type="checkbox"]'); cb.checked = (r === row); r.setAttribute('aria-selected', cb.checked ? 'true' : 'false'); });
+        summarize();
+      });
+    });
+    list.addEventListener('keydown', function (e) {
+      var i = rows.indexOf(document.activeElement), to = null;
+      if (e.key === 'ArrowDown') to = Math.min(rows.length - 1, i + 1);
+      else if (e.key === 'ArrowUp') to = Math.max(0, i - 1);
+      else if (e.key === 'Home') to = 0;
+      else if (e.key === 'End') to = rows.length - 1;
+      else if (e.key === 'Escape') { e.preventDefault(); close(true); return; }
+      else if (e.key === 'Tab') { close(false); return; }
+      if (to !== null) { e.preventDefault(); rows.forEach(function (r) { r.classList.remove('is-active'); }); rows[to].classList.add('is-active'); rows[to].focus(); }
+    });
+    document.addEventListener('click', function (e) { if (isOpen() && !ms.contains(e.target)) close(false); });
+    window.addEventListener('resize', function () { if (isOpen()) place(list, trigger); });
+    summarize();
+  }
+
+  /* Gauge: value drives --gauge-offset and the centred number; tone defaults from warning/danger thresholds unless data-tone is set by hand. */
+  function initGauge(g) {
+    var C = 100.53;
+    var sync = function () {
+      var valEl = g.querySelector('.gf-gauge__value'), now = g.getAttribute('aria-valuenow');
+      if (g.classList.contains('gf-gauge--indeterminate') || now === null) { g.style.removeProperty('--gauge-offset'); if (valEl) valEl.textContent = ''; return; }
+      var min = parseFloat(g.getAttribute('aria-valuemin')) || 0, max = parseFloat(g.getAttribute('aria-valuemax')) || 100;
+      var v = Math.max(min, Math.min(max, parseFloat(now))), pct = max > min ? (v - min) / (max - min) : 0;
+      g.style.setProperty('--gauge-offset', (C * (1 - pct)).toFixed(2));
+      if (valEl) valEl.textContent = Math.round(pct * 100);
+      if (!g.hasAttribute('data-tone')) {
+        var warn = parseFloat(g.getAttribute('data-gf-warning')); if (isNaN(warn)) warn = 80;
+        var danger = parseFloat(g.getAttribute('data-gf-danger')); if (isNaN(danger)) danger = 95;
+        var p100 = pct * 100;
+        g.setAttribute('data-tone', p100 >= danger ? 'danger' : p100 >= warn ? 'warning' : 'normal');
+      }
+    };
+    sync();
+    new MutationObserver(sync).observe(g, { attributes: true, attributeFilter: ['aria-valuenow'] });
+  }
+
   function init(root) {
     root = root || document;
     root.querySelectorAll('.gf-tabs[role="tablist"]').forEach(initTabs);
@@ -277,6 +366,9 @@
       c.addEventListener('click', function () { i.value = ''; i.dispatchEvent(new Event('input', { bubbles: true })); i.focus(); }); });
     root.querySelectorAll('.gf-calendar').forEach(function (cal) { cal.addEventListener('click', function (e) { var d = e.target.closest('.gf-day'); if (!d || d.disabled) return;
       cal.querySelectorAll('.gf-day[aria-selected="true"]').forEach(function (x) { x.setAttribute('aria-selected', 'false'); }); d.setAttribute('aria-selected', 'true'); }); });
+    root.querySelectorAll('.gf-showmore').forEach(initShowMore);
+    root.querySelectorAll('.gf-multiselect').forEach(initMultiSelect);
+    root.querySelectorAll('.gf-gauge').forEach(initGauge);
   }
 
   applyTheme(storedTheme());

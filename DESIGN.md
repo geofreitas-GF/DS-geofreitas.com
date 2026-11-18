@@ -1,6 +1,6 @@
 ---
 name: "DS-geofreitas.com"
-version: "1.6.0"
+version: "1.7.0"
 surface: web
 source_of_truth: tokens/tokens.json
 ---
@@ -98,6 +98,7 @@ Full specs, states, accessibility and code for each: **`docs/components.md`**. W
 | Navigation | Breadcrumb, Pagination, Pager (previous / next), Search field, Sidebar (app layout, off-canvas under 820px) |
 | Forms (1.6) | Input group (prefix, suffix, clear), Combobox (type to filter, arrows, Enter, Esc, check on the selected row), Choicebox (selectable cards, radio or checkbox) |
 | Utilities and media (1.6) | Copy button and text with copy, Theme switcher (System / Light / Dark), Video (poster, captions, pause control) |
+| Added in 1.7 | Banner (persistent project notice, not dismissable), Show more (progressive disclosure, moves focus into the reveal), Entity (two-column row, selectable), Multi select (checkable listbox, per-row "Only"), Gauge (circular progress, auto tone at 80%/95%) |
 | Selection | Filter chips, Segmented control, Slider, Calendar (date picker panel) |
 | Content | Carousel, Gallery (1 large + 4), Data table (sort, select, sticky header, selection toolbar, footer), Stat, Quote, Awards |
 | Surfaces | Sheet (bottom sheet under 820px, side panel above) |
@@ -219,6 +220,7 @@ Breakpoints 600 / 820 / 1024 / 1440. Validate at 360, 390, 430, 600, 820, 1024, 
 
 ## Changelog
 
+- **1.7.0 (2026-11-18):** Five components after a further review of Vercel Geist: Banner (persistent, non-dismissable project notice; never Raggio), Show more (progressive disclosure for one long list, focus moves into the reveal), Entity (a two-column row for member/integration/domain-style lists, selectable variant), Multi select (a trigger that opens a checkable listbox and summarises the selection; simplified to one focusable row rather than Vercel's two independent focus targets), Gauge (an SVG ring for a percentage, monochrome by default, coloured only past the 80%/95% risk thresholds). Documented two existing patterns rather than building new ones: the kebab `Menu` for a "Dots menu", and `Chips` for "Filter params". No tokens, classes or behaviour changed; nothing renamed or removed.
 - **1.6.0 (2026-11-18):** Site and case-study components, after a review of Vercel Geist: Combobox, Choicebox, Input group (prefix, suffix and clear on any input), Copy button and text with copy, Theme switcher (System / Light / Dark, remembered, swaps the logo and theme-color), Video (muted loop with poster and captions, pause control, no autoplay under Reduce Motion). New example `examples/forms.html`; sample media in `assets/media/`. Use `.gf-select` for short fixed lists and the Combobox when people need to search. Fields and selection controls refined after Geist: hover steps up one grey (`gf-field-border-hover`), focus is a one-step border (`gf-field-border-focus`) with a softer halo; checked controls are monochrome (white in dark, no Raggio); radios are a ring and dot.
 - **1.5.0 (2026-11-18):** New Pager (`.gf-pager`, previous / next) for case studies and docs, with the drawn underline on hover. Field focus is quieter: ink border plus a soft 3px halo (`gf-focus-halo`), no Raggio ring on fields; controls keep the solid ring. Tags lose their border and show status in the text colour (`gf-success-fg`, `gf-warning-fg`, `gf-error-fg`); 4px corners kept.
 - **1.4.0 (2026-11-18):** Interface details (§8e) after Vercel's Web Interface Guidelines: copy, forms, feedback and state, visual detail and site build rules. Code: 16px inputs on mobile (no iOS zoom), loading buttons keep their label, overlays contain scrolling, no tap delay or flash, balanced headings and no widows, headings clear the sticky nav.

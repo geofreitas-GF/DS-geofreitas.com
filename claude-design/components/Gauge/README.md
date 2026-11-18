@@ -1,0 +1,3 @@
+A circular SVG ring for a percentage. `role="progressbar"` with `aria-valuemin/max/now`, paired with `aria-labelledby`. Sizes `--tiny` (24px, no number), `--sm`, `--md`, `--lg`. Default tone is monochrome (`gf-control-on`) — Raggio stays out of it, matching the rule that colour is reserved for the primary CTA, the highlight and the focus ring.
+
+**States:** `components.js` reads the value and sets `data-tone="warning"` at 80% and `"danger"` at 95% (override with `data-gf-warning` / `data-gf-danger`, or set `data-tone` by hand). `--indeterminate` spins a quarter arc for an unknown value — omit `aria-valuenow` and add nearby text such as "Calculating usage…".

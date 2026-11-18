@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>DS v1.7 — dashboard</title>
+<link rel="icon" href="../assets/logos/favicon.svg">
+<link rel="stylesheet" href="../tokens/variables.css">
+<link rel="stylesheet" href="../components/components.css">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../assets/icons/phosphor/phosphor.css">
+<script>try{var t=localStorage.getItem('gf-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<script src="../components/components.js" defer></script>
+</head>
+<body style="margin: 0; background: var(--gf-bg-canvas); color: var(--gf-text-primary); font-family: var(--gf-font-body)">
+<a class="gf-skip gf-btn gf-btn--primary gf-btn--sm" href="#main">Skip to content</a>
+<header class="gf-nav">
+  <div class="gf-container gf-nav__inner">
+    <a class="gf-nav__logo" href="#"><img src="../assets/logos/wordmark-black.svg" data-gf-logo-dark="../assets/logos/wordmark-white.svg" alt="geO freitas" height="28"></a>
+    <fieldset class="gf-segmented gf-theme-switch" style="margin: 0; border: 0">
+      <legend class="gf-visually-hidden">Theme</legend>
+      <label><input type="radio" name="theme" value="system" aria-label="System theme"><i class="ph ph-desktop" aria-hidden="true"></i></label>
+      <label><input type="radio" name="theme" value="light" aria-label="Light theme"><i class="ph ph-sun" aria-hidden="true"></i></label>
+      <label><input type="radio" name="theme" value="dark" aria-label="Dark theme"><i class="ph ph-moon" aria-hidden="true"></i></label>
+    </fieldset>
+  </div>
+</header>
+
+<main id="main" class="gf-container gf-stack" style="padding-block: var(--gf-space-48); gap: var(--gf-space-32)">
+
+  <div class="gf-banner gf-banner--warning">
+    <i class="ph-bold ph-warning gf-banner__icon" aria-hidden="true"></i>
+    <span class="gf-banner__text">Your plan renews in 3 days and one invoice is still unpaid.</span>
+    <button type="button" class="gf-btn gf-btn--secondary gf-btn--sm gf-banner__cta">Review billing</button>
+  </div>
+
+  <div class="gf-stack" style="gap: var(--gf-space-8)">
+    <p class="gf-eyebrow" style="margin: 0">Overview</p>
+    <h1 class="gf-h2" style="margin: 0">[Workspace] dashboard</h1>
+  </div>
+
+  <section class="gf-grid" aria-label="Usage" style="grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gf-space-24)">
+    <div class="gf-panel gf-stack" style="align-items: center; text-align: center; gap: var(--gf-space-8); padding: var(--gf-space-24)">
+      <div class="gf-gauge gf-gauge--lg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="42" aria-labelledby="g-storage"><svg viewBox="0 0 36 36"><circle class="gf-gauge__track" cx="18" cy="18" r="16"></circle><circle class="gf-gauge__fill" cx="18" cy="18" r="16"></circle></svg><span class="gf-gauge__value"></span></div>
+      <span id="g-storage" class="gf-caption gf-text-secondary">Storage used</span>
+    </div>
+    <div class="gf-panel gf-stack" style="align-items: center; text-align: center; gap: var(--gf-space-8); padding: var(--gf-space-24)">
+      <div class="gf-gauge gf-gauge--lg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="88" aria-labelledby="g-seats"><svg viewBox="0 0 36 36"><circle class="gf-gauge__track" cx="18" cy="18" r="16"></circle><circle class="gf-gauge__fill" cx="18" cy="18" r="16"></circle></svg><span class="gf-gauge__value"></span></div>
+      <span id="g-seats" class="gf-caption gf-text-secondary">Seats filled</span>
+    </div>
+    <div class="gf-panel gf-stack" style="align-items: center; text-align: center; gap: var(--gf-space-8); padding: var(--gf-space-24)">
+      <div class="gf-gauge gf-gauge--lg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="97" aria-labelledby="g-api"><svg viewBox="0 0 36 36"><circle class="gf-gauge__track" cx="18" cy="18" r="16"></circle><circle class="gf-gauge__fill" cx="18" cy="18" r="16"></circle></svg><span class="gf-gauge__value"></span></div>
+      <span id="g-api" class="gf-caption gf-text-secondary">API quota</span>
+    </div>
+    <div class="gf-panel gf-stack" style="align-items: center; text-align: center; gap: var(--gf-space-8); padding: var(--gf-space-24)">
+      <div class="gf-gauge gf-gauge--lg gf-gauge--indeterminate" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-labelledby="g-build"><svg viewBox="0 0 36 36"><circle class="gf-gauge__track" cx="18" cy="18" r="16"></circle><circle class="gf-gauge__fill" cx="18" cy="18" r="16"></circle></svg><span class="gf-gauge__value"></span></div>
+      <span id="g-build" class="gf-caption gf-text-secondary">Build — calculating…</span>
+    </div>
+  </section>
+
+  <section class="gf-stack" style="gap: var(--gf-space-16)">
+    <div class="gf-cluster" style="justify-content: space-between">
+      <h2 class="gf-h3" style="margin: 0">Team</h2>
+      <div class="gf-multiselect" data-open="false">
+        <button type="button" class="gf-multiselect__trigger" aria-haspopup="listbox" aria-expanded="false" id="ms-roles">
+          <span class="gf-multiselect__summary"></span>
+          <i class="ph-bold ph-caret-down gf-icon" aria-hidden="true"></i>
+        </button>
+        <div class="gf-multiselect__list" role="listbox" aria-multiselectable="true" hidden aria-labelledby="ms-roles">
+          <div class="gf-multiselect__row" role="option" aria-selected="true">
+            <input type="checkbox" class="gf-multiselect__check" checked value="design" aria-hidden="true" tabindex="-1">
+            <span class="gf-multiselect__label">Design</span>
+            <button type="button" class="gf-multiselect__action">Only</button>
+          </div>
+          <div class="gf-multiselect__row" role="option" aria-selected="true">
+            <input type="checkbox" class="gf-multiselect__check" checked value="engineering" aria-hidden="true" tabindex="-1">
+            <span class="gf-multiselect__label">Engineering</span>
+            <button type="button" class="gf-multiselect__action">Only</button>
+          </div>
+          <div class="gf-multiselect__row" role="option" aria-selected="true">
+            <input type="checkbox" class="gf-multiselect__check" checked value="marketing" aria-hidden="true" tabindex="-1">
+            <span class="gf-multiselect__label">Marketing</span>
+            <button type="button" class="gf-multiselect__action">Only</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gf-entity-list">
+      <div class="gf-entity">
+        <span class="gf-entity__left">
+          <span class="gf-avatar gf-avatar--sm">A</span>
+          <span class="gf-entity__body"><span class="gf-entity__title">[Member one]</span><span class="gf-entity__desc">Design · member@geofreitas.com</span></span>
+        </span>
+        <span class="gf-entity__right"><span class="gf-tag gf-tag--success">Active</span><button type="button" class="gf-icon-btn" popovertarget="m-row1" aria-haspopup="menu" aria-expanded="false" aria-label="More actions for [Member one]"><i class="ph-bold ph-dots-three" aria-hidden="true"></i></button></span>
+      </div>
+      <div class="gf-entity gf-entity--selectable">
+        <label class="gf-entity__left">
+          <input type="checkbox" aria-label="[Member two]">
+          <span class="gf-avatar gf-avatar--sm">B</span>
+          <span class="gf-entity__body"><span class="gf-entity__title">[Member two]</span><span class="gf-entity__desc">Engineering · member2@geofreitas.com</span></span>
+        </label>
+        <span class="gf-entity__right"><span class="gf-tag gf-tag--warning">Invited</span><button type="button" class="gf-icon-btn" popovertarget="m-row2" aria-haspopup="menu" aria-expanded="false" aria-label="More actions for [Member two]"><i class="ph-bold ph-dots-three" aria-hidden="true"></i></button></span>
+      </div>
+    </div>
+    <div class="gf-menu" id="m-row1" popover role="menu">
+      <button class="gf-menu__item" role="menuitem" type="button"><i class="ph-bold ph-pencil-simple gf-icon" aria-hidden="true"></i>Edit role</button>
+      <button class="gf-menu__item gf-menu__item--danger" role="menuitem" type="button"><i class="ph-bold ph-trash gf-icon" aria-hidden="true"></i>Remove</button>
+    </div>
+    <div class="gf-menu" id="m-row2" popover role="menu">
+      <button class="gf-menu__item" role="menuitem" type="button"><i class="ph-bold ph-paper-plane-tilt gf-icon" aria-hidden="true"></i>Resend invite</button>
+      <button class="gf-menu__item gf-menu__item--danger" role="menuitem" type="button"><i class="ph-bold ph-trash gf-icon" aria-hidden="true"></i>Revoke</button>
+    </div>
+  </section>
+
+  <section class="gf-stack" style="gap: var(--gf-space-16)">
+    <h2 class="gf-h3" style="margin: 0">Recent activity</h2>
+    <div class="gf-showmore">
+      <ul class="gf-showmore__list" style="list-style: none; margin: 0; padding: 0; display: grid; gap: var(--gf-space-8)">
+        <li class="gf-ui">[Name] shipped <strong>[Project]</strong> v2.1 — 2h ago</li>
+        <li class="gf-ui">[Name] commented on <strong>[Project]</strong> — 5h ago</li>
+        <li class="gf-ui">[Name] invited <strong>[Member]</strong> to Engineering — yesterday</li>
+        <li class="gf-ui">Build <strong>#412</strong> passed — yesterday</li>
+        <li class="gf-ui">[Name] archived <strong>[Project]</strong> — 2 days ago</li>
+        <li class="gf-ui">Invoice <strong>#0098</strong> paid — 3 days ago</li>
+        <li class="gf-ui">[Name] updated billing details — 4 days ago</li>
+        <li class="gf-ui">[Name] joined the workspace — 5 days ago</li>
+      </ul>
+      <button type="button" class="gf-showmore__trigger" aria-expanded="false"><span class="gf-showmore__text"></span><i class="ph-bold ph-caret-down" aria-hidden="true"></i></button>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>

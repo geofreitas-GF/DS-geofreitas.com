@@ -341,3 +341,59 @@ A `.gf-segmented.gf-theme-switch` fieldset of three radios (`system`, `light`, `
 
 ### Video `.gf-video`
 `<figure class="gf-video">` with `<video playsinline muted loop preload="metadata" poster data-gf-autoplay aria-label>`, an MP4 `<source>`, a captions `<track>`, a `.gf-video__toggle` (`.gf-icon-btn--on-media`) and an optional `<figcaption>`. Autoplays muted only with `data-gf-autoplay` and never under Reduce Motion; the toggle pauses and plays. Ratio via the local `--ratio` property on the figure (default 16 / 9). Showreels with sound: use native `controls` instead, never autoplay.
+## Added in 1.7
+
+### Banner `.gf-banner`
+A persistent project-wide notice about a state that needs resolving — overdue billing, an active rollback, attack mitigation. Never dismissable: if a message can be dismissed without the underlying state resolving, use Alert instead. Show only one at a time. `<div class="gf-banner gf-banner--warning">` with an icon, `.gf-banner__text` and an optional `.gf-banner__cta` button. Variants: default (neutral), `--success`, `--warning`, `--error`.
+
+### Show more `.gf-showmore`
+Progressive disclosure for one long list — recent activity, branches, attached resources. Not for sibling pages of the same set (use Pagination) or an optional section (use Accordion). Shows the first 5 rows; `components.js` reveals the rest and moves focus into the first newly-shown row. Never re-collapses once opened. `<div class="gf-showmore"><ul class="gf-showmore__list">…8–10 rows…</ul><button class="gf-showmore__trigger" aria-expanded="false"><span class="gf-showmore__text"></span><i class="ph-bold ph-caret-down"></i></button></div>`. `data-gf-more` / `data-gf-less` on the trigger override the default "Show N more" / "Show less" labels. `--noborder` drops the top rule.
+
+### Entity `.gf-entity` / `.gf-entity-list`
+A row of up to two columns: descriptive content on the left (`.gf-entity__left` — avatar or icon, `.gf-entity__body` with `__title` and `__desc`), one or two controls on the right (`.gf-entity__right`). Not for sortable tabular data (use Table) or static key/value facts (use Description). Selectable rows (`--selectable`) wrap the left column in a `<label>` holding the checkbox, so the whole left side toggles it; the right-side control stays a separate interactive element outside the label.
+
+```html
+<div class="gf-entity-list">
+  <div class="gf-entity gf-entity--selectable">
+    <label class="gf-entity__left">
+      <input type="checkbox" aria-label="Acme Inc.">
+      <span class="gf-avatar gf-avatar--sm">A</span>
+      <span class="gf-entity__body"><span class="gf-entity__title">Acme Inc.</span><span class="gf-entity__desc">acme.example.com</span></span>
+    </label>
+    <span class="gf-entity__right"><button type="button" class="gf-btn gf-btn--secondary gf-btn--sm">Remove</button></span>
+  </div>
+</div>
+```
+
+### Multi select `.gf-multiselect`
+A trigger button that opens a listbox of checkable rows; the trigger summarises the selection ("None selected" / one name / "n selected" / "All selected"). Simplified from Vercel's two-axis keyboard model (checkbox and action each independently focusable): here the row itself (`role="option"`) is the one focusable, selectable unit, moved with ↑/↓/Home/End and toggled with Enter/Space/click; the checkbox is a decorative echo of `aria-selected` (`aria-hidden`, `tabindex="-1"`). Each row can carry one `.gf-multiselect__action` ("Only") that selects just that row — shown on hover/focus. Esc or an outside click closes; Tab closes and moves on. Fires `gf-change` with `detail.values`.
+
+```html
+<div class="gf-multiselect" data-open="false">
+  <button type="button" class="gf-multiselect__trigger" aria-haspopup="listbox" aria-expanded="false" id="ms-1">
+    <span class="gf-multiselect__summary"></span><i class="ph-bold ph-caret-down gf-icon" aria-hidden="true"></i>
+  </button>
+  <div class="gf-multiselect__list" role="listbox" aria-multiselectable="true" hidden aria-labelledby="ms-1">
+    <div class="gf-multiselect__row" role="option" aria-selected="true">
+      <input type="checkbox" class="gf-multiselect__check" checked value="design" aria-hidden="true" tabindex="-1">
+      <span class="gf-multiselect__label">Design</span>
+      <button type="button" class="gf-multiselect__action">Only</button>
+    </div>
+  </div>
+</div>
+```
+
+### Gauge `.gf-gauge`
+A circular SVG ring for a percentage. `role="progressbar"` with `aria-valuemin/max/now`, paired with `aria-labelledby`. Sizes `--tiny` (24px, no number), `--sm`, `--md`, `--lg`. Default tone is monochrome (`gf-control-on`) — Raggio stays out of it, matching the rule that colour is reserved for the primary CTA, the highlight and the focus ring. `components.js` reads the value and sets `data-tone="warning"` at 80% and `"danger"` at 95% (override with `data-gf-warning` / `data-gf-danger`, or set `data-tone` by hand). `--indeterminate` spins a quarter arc for an unknown value — omit `aria-valuenow` and add nearby text such as "Calculating usage…".
+
+```html
+<div class="gf-gauge gf-gauge--md" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="88" aria-labelledby="g1-label">
+  <svg viewBox="0 0 36 36"><circle class="gf-gauge__track" cx="18" cy="18" r="16"></circle><circle class="gf-gauge__fill" cx="18" cy="18" r="16"></circle></svg>
+  <span class="gf-gauge__value"></span>
+</div>
+<span id="g1-label" class="gf-visually-hidden">Storage used 88%</span>
+```
+
+### Two existing patterns, not new components
+**Dots menu:** a kebab icon trigger opening the existing `Menu` — `<button class="gf-icon-btn" popovertarget="m1" aria-haspopup="menu" aria-expanded="false" aria-label="More actions"><i class="ph-bold ph-dots-three"></i></button>` + `<div class="gf-menu" id="m1" popover role="menu">…</div>`. No new classes.
+**Filter params:** the existing `Chips` component (`.gf-chips[role=group]` of `.gf-chip[aria-pressed]`) already is Vercel's "Filter Params" pattern — toggle chips reflected in the URL or request state by your own code.

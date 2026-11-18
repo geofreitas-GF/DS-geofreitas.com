@@ -1,6 +1,6 @@
 # DS-geofreitas.com
 
-IBM Carbon structure, Apple HIG clarity and motion, Google Material token roles, Airbnb DLS patterns and Vercel Geist interface detail: one system for prototypes, products, presentations and geofreitas.com. Version 1.6.0.
+IBM Carbon structure, Apple HIG clarity and motion, Google Material token roles, Airbnb DLS patterns and Vercel Geist interface detail: one system for prototypes, products, presentations and geofreitas.com. Version 1.7.0.
 
 ## Start here
 
@@ -27,7 +27,7 @@ IBM Carbon structure, Apple HIG clarity and motion, Google Material token roles,
 | `components/components.css` | All components, type and layout classes |
 | `components/components.js` | Optional behaviour: tabs keyboard, switch, mobile nav, dialog |
 | `docs/components.md` | Per-component specs: variants, states, accessibility, dos and don'ts, code |
-| `examples/` | Reference pages using every component, light and dark: `landing` (site), `product` (app screen), `prototype` (dashboard), `case-study` (portfolio), `deck` (presentation), `forms` (contact, combobox, choicebox, copy, theme switcher, video) |
+| `examples/` | Reference pages using every component, light and dark: `landing` (site), `product` (app screen), `prototype` (dashboard), `case-study` (portfolio), `deck` (presentation), `forms` (contact, combobox, choicebox, copy, theme switcher, video), `dashboard` (banner, gauge, entity, multi select, show more) |
 | `docs/writing.md` | UX writing rules for buttons, errors, empty states, toasts |
 | `assets/icons/phosphor/` | Phosphor Icons (MIT) web fonts: regular, bold, fill, duotone |
 | `MIGRATION.md`, `tokens/legacy-compat.css` | Map from the archived legacy system; compat layer so legacy pages keep working |

@@ -1,0 +1,3 @@
+Progressive disclosure for one long list — recent activity, branches, attached resources. Shows the first 5 rows. Not for sibling pages of the same set (use Pagination) or an optional section (use Accordion). Never re-collapses once the user has opened it.
+
+**Provide:** `<div class="gf-showmore"><ul class="gf-showmore__list">…5–10 rows…</ul><button class="gf-showmore__trigger" aria-expanded="false"><span class="gf-showmore__text"></span><i class="ph-bold ph-caret-down"></i></button></div>`. `components.js` reveals the rest, flips the chevron and moves focus into the first newly-shown row; `data-gf-more` / `data-gf-less` override the default "Show N more" / "Show less" labels. `--noborder` drops the top rule.

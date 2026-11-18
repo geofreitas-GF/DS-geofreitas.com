@@ -1,4 +1,4 @@
-/* DS-geofreitas.com — variables.css v1.6.0 — GENERATED from tokens/tokens.json by scripts/build-variables.py. Do not edit by hand.
+/* DS-geofreitas.com — variables.css v1.7.0 — GENERATED from tokens/tokens.json by scripts/build-variables.py. Do not edit by hand.
    Theme: light by default; follows the OS dark setting; force with data-theme="light" | "dark" (or .dark).
    Density: data-density="compact". Contrast: follows prefers-contrast: more. */
 
@@ -122,6 +122,10 @@
   --gf-slide-h2: 48px;
   --gf-slide-body: 28px;
   --gf-slide-caption: 20px;
+  --gf-gauge-tiny: 24px;
+  --gf-gauge-sm: 32px;
+  --gf-gauge-md: 48px;
+  --gf-gauge-lg: 64px;
   --gf-type-display-size: var(--gf-fs-64);
   --gf-type-display-line: 1.05;
   --gf-type-display-track: -0.02em;

@@ -1,4 +1,4 @@
-/* DS-geofreitas.com — components.css v1.6
+/* DS-geofreitas.com — components.css v1.7
    Real classes, no !important, no attribute-selector hacks. Requires tokens/variables.css.
    Optional behaviour (tabs keyboard, dialog open/close): components/components.js.
    PROTECTED: .gf-btn--primary hover swap · .gf-link animated underline · radius tiers · Raggio avatars. */
@@ -562,7 +562,7 @@ th[aria-sort="descending"] .gf-sort__icon { transform: rotate(180deg); }
   .gf-link::after { height: 2px; }
 }
 @media (forced-colors: active) {
-  .gf-btn, .gf-icon-btn, .gf-tag, .gf-alert, .gf-card__media, .gf-panel, .gf-dialog, .gf-switch__track, .gf-avatar { border: 1px solid CanvasText; }
+  .gf-btn, .gf-icon-btn, .gf-tag, .gf-alert, .gf-card__media, .gf-panel, .gf-dialog, .gf-switch__track, .gf-avatar, .gf-banner, .gf-multiselect__trigger { border: 1px solid CanvasText; }
   .gf-btn--primary { forced-color-adjust: none; background: ButtonText; color: ButtonFace; }
   .gf-btn--primary:hover { background: Highlight; color: HighlightText; }
   .gf-link::after { background: LinkText; }
@@ -663,6 +663,92 @@ th[aria-sort="descending"] .gf-sort__icon { transform: rotate(180deg); }
 .gf-choice__desc { font-size: var(--gf-fs-12); color: var(--gf-text-secondary); }
 @media (prefers-reduced-motion: reduce) { .gf-combobox[data-open="true"] .gf-combobox__list { animation: gf-fade-in var(--gf-dur-fast) linear; } .gf-combobox__toggle .ph { transition: none; } }
 
+/* ================= 1.7 — Banner, Show more, Entity, Multi select, Gauge (after Vercel Geist) ================= */
+
+/* Banner: a persistent project-wide notice about a state that needs resolving. Never dismissable — if it can be
+   dismissed without the state resolving, use Alert instead. Show only one at a time. */
+.gf-banner { display: flex; align-items: center; gap: var(--gf-space-12); width: 100%; padding: var(--gf-space-12) var(--gf-space-16);
+  background: var(--gf-bg-layer-1); border-left: 3px solid var(--gf-border-strong); color: var(--gf-text-primary);
+  font-size: var(--gf-type-ui-size); line-height: var(--gf-type-ui-line); }
+.gf-banner__icon { flex: none; width: 20px; height: 20px; }
+.gf-banner__text { flex: 1 1 auto; }
+.gf-banner__cta { flex: none; }
+.gf-banner--success { background: var(--gf-success-bg); border-left-color: var(--gf-success-fg); }
+.gf-banner--warning { background: var(--gf-warning-bg); border-left-color: var(--gf-warning-fg); }
+.gf-banner--error   { background: var(--gf-error-bg);   border-left-color: var(--gf-error-fg); }
+
+/* Show more: progressive disclosure for one long list (5–10 rows before truncating). Not for sibling pages of the
+   same set (use Pagination) or for an optional section (use Accordion). Never re-collapses once the user has opened it. */
+.gf-showmore__list[data-collapsed="true"] > :nth-child(n+6) { display: none; }
+.gf-showmore { border-top: 1px solid var(--gf-border-subtle); margin-top: var(--gf-space-8); padding-top: var(--gf-space-8); }
+.gf-showmore--noborder { border-top: 0; margin-top: 0; padding-top: 0; }
+.gf-showmore__trigger { display: inline-flex; align-items: center; gap: var(--gf-space-8); position: relative; height: var(--gf-touch-min); margin: calc((var(--gf-touch-min) - 1.2em) / -2) 0; padding: 0; border: 0; background: none;
+  color: var(--gf-text-secondary); font: var(--gf-fw-medium) var(--gf-type-ui-size) var(--gf-font-body); cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.gf-showmore__trigger:hover { color: var(--gf-text-primary); }
+.gf-showmore__trigger:focus-visible { outline: 2px solid var(--gf-focus-ring); outline-offset: 2px; }
+.gf-showmore__trigger .ph { transition: transform var(--gf-dur-base) var(--gf-ease-out); }
+.gf-showmore__trigger[aria-expanded="true"] .ph { transform: rotate(180deg); }
+
+/* Entity: a row of up to two columns — descriptive content on the left, one or two controls on the right. Not for
+   sortable tabular data (use Table) or static key/value facts on a detail page (use Description). */
+.gf-entity-list { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; }
+.gf-entity { display: flex; align-items: center; gap: var(--gf-space-12); padding: var(--gf-space-12) var(--gf-space-4); border-bottom: 1px solid var(--gf-border-subtle); }
+.gf-entity-list > *:last-child { border-bottom: 0; }
+.gf-entity__left { display: flex; align-items: center; gap: var(--gf-space-12); flex: 1 1 auto; min-width: 0; cursor: default; }
+.gf-entity__body { display: grid; gap: 2px; min-width: 0; }
+.gf-entity__title { font-weight: var(--gf-fw-semibold); color: var(--gf-text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gf-entity__desc { font-size: var(--gf-fs-12); color: var(--gf-text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gf-entity__right { flex: none; display: flex; align-items: center; gap: var(--gf-space-8); }
+.gf-entity--selectable { border-radius: var(--gf-radius-control); transition: background var(--gf-dur-fast) var(--gf-ease-out); }
+.gf-entity--selectable:hover { background: color-mix(in srgb, var(--gf-text-primary) 5%, transparent); }
+.gf-entity--selectable .gf-entity__left { cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.gf-entity--selectable .gf-entity__left input { flex: none; }
+
+/* Multi select: a trigger button that opens a listbox of checkable rows; the trigger summarises the selection.
+   The row (role="option") is the focusable, selectable unit — the checkbox is a decorative echo of aria-selected. */
+.gf-multiselect { position: relative; display: inline-block; }
+.gf-multiselect__trigger { display: inline-flex; align-items: center; gap: var(--gf-space-8); height: var(--gf-control-h); padding: 0 var(--gf-control-px);
+  border: 1px solid var(--gf-border-control); border-radius: var(--gf-radius-control); background: var(--gf-bg-canvas); color: var(--gf-text-primary);
+  font: var(--gf-type-ui-size) var(--gf-font-body); cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+  transition: border-color var(--gf-dur-base) var(--gf-ease-out); }
+.gf-multiselect__trigger:hover { border-color: var(--gf-field-border-hover); }
+.gf-multiselect__trigger:focus-visible { outline: 2px solid var(--gf-focus-ring); outline-offset: 2px; }
+.gf-multiselect__trigger .ph { margin-left: auto; flex: none; color: var(--gf-text-tertiary); }
+.gf-multiselect__list { position: fixed; z-index: var(--gf-z-popover); margin: 0; padding: var(--gf-space-4); min-width: var(--gf-menu-w); max-height: var(--gf-listbox-max-h); overflow: auto;
+  border: 1px solid var(--gf-border-subtle); border-radius: var(--gf-radius-control); background: var(--gf-bg-elevated); box-shadow: var(--gf-shadow-float);
+  overscroll-behavior: contain; animation: gf-scale-in var(--gf-dur-spring-sm) var(--gf-spring-snappy); transform-origin: top left; }
+.gf-multiselect__row { display: flex; align-items: center; gap: var(--gf-space-12); min-height: var(--gf-control-h); padding: 0 var(--gf-space-8); border-radius: var(--gf-radius-tag); cursor: pointer;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.gf-multiselect__row:hover, .gf-multiselect__row.is-active { background: color-mix(in srgb, var(--gf-text-primary) 8%, transparent); }
+.gf-multiselect__row:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--gf-focus-ring); }
+.gf-multiselect__check { flex: none; pointer-events: none; }
+.gf-multiselect__label { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.gf-multiselect__action { flex: none; border: 0; background: none; padding: 0 var(--gf-space-4); color: var(--gf-text-secondary); font-size: var(--gf-fs-12); font-weight: var(--gf-fw-medium); cursor: pointer;
+  opacity: 0; transition: opacity var(--gf-dur-fast) var(--gf-ease-out); }
+.gf-multiselect__row:hover .gf-multiselect__action, .gf-multiselect__row:focus-within .gf-multiselect__action, .gf-multiselect__row.is-active .gf-multiselect__action { opacity: 1; }
+.gf-multiselect__action:hover { color: var(--gf-text-primary); text-decoration: underline; }
+
+/* Gauge: a circular visual for a percentage. role="progressbar" with aria-valuemin/max/now; pair it with
+   aria-labelledby. Default tone is monochrome — Raggio stays out of it; only the risk thresholds get colour. */
+.gf-gauge { position: relative; display: inline-grid; place-items: center; flex: none; }
+.gf-gauge--tiny { width: var(--gf-gauge-tiny); height: var(--gf-gauge-tiny); }
+.gf-gauge--sm { width: var(--gf-gauge-sm); height: var(--gf-gauge-sm); }
+.gf-gauge--md { width: var(--gf-gauge-md); height: var(--gf-gauge-md); }
+.gf-gauge--lg { width: var(--gf-gauge-lg); height: var(--gf-gauge-lg); }
+.gf-gauge svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.gf-gauge__track { fill: none; stroke: var(--gf-border-subtle); stroke-width: 2.5; }
+.gf-gauge__fill { fill: none; stroke: var(--gf-control-on); stroke-width: 2.5; stroke-linecap: round;
+  stroke-dasharray: 100.53; stroke-dashoffset: var(--gauge-offset, 100.53);
+  transition: stroke-dashoffset var(--gf-dur-spring-md) var(--gf-spring-smooth), stroke var(--gf-dur-base) var(--gf-ease-out); }
+.gf-gauge[data-tone="warning"] .gf-gauge__fill { stroke: var(--gf-warning-fg); }
+.gf-gauge[data-tone="danger"] .gf-gauge__fill { stroke: var(--gf-error-solid); }
+.gf-gauge--indeterminate .gf-gauge__fill { stroke-dasharray: 25 75.53; stroke-dashoffset: 0; animation: gf-spin 1s linear infinite; transform-origin: center; }
+.gf-gauge__value { position: absolute; font-weight: var(--gf-fw-semibold); color: var(--gf-text-primary); }
+.gf-gauge--sm .gf-gauge__value { font-size: var(--gf-fs-12); }
+.gf-gauge--md .gf-gauge__value { font-size: var(--gf-fs-14); }
+.gf-gauge--lg .gf-gauge__value { font-size: var(--gf-fs-18); }
+.gf-gauge--tiny .gf-gauge__value { display: none; } /* too small to carry a legible number */
+
 /* ================= Interface details (1.4, after Vercel's Web Interface Guidelines) ================= */
 /* No iOS zoom on focus: 16px input text on small screens */
 @media (max-width: 600px) { .gf-input, .gf-select, .gf-textarea { font-size: var(--gf-fs-16); } }
@@ -684,10 +770,11 @@ th[aria-sort="descending"] .gf-sort__icon { transform: rotate(180deg); }
   .gf-enter-rise, .gf-enter-scale, .gf-enter-pop, .gf-enter-fade { animation: gf-fade-in var(--gf-dur-fast) linear both; }
   .gf-exit { animation: gf-fade-out var(--gf-dur-fast) linear both; }
   .gf-btn[aria-busy="true"]::after { animation-duration: 1.6s; }
-  .gf-menu:popover-open, .gf-popover:popover-open, .gf-toast { animation: gf-fade-in var(--gf-dur-fast) linear; }
+  .gf-menu:popover-open, .gf-popover:popover-open, .gf-toast, .gf-multiselect[data-open="true"] .gf-multiselect__list { animation: gf-fade-in var(--gf-dur-fast) linear; }
   .gf-tooltip-wrap:hover .gf-tooltip, .gf-tooltip-wrap:focus-within .gf-tooltip { transform: translate(-50%, 0); transition: opacity var(--gf-dur-fast) linear 400ms; }
   .gf-skeleton, .gf-loader-mark { animation: none; }
-  .gf-progress--indeterminate .gf-progress__bar { animation-duration: 3s; }
+  .gf-progress--indeterminate .gf-progress__bar, .gf-gauge--indeterminate .gf-gauge__fill { animation-duration: 3s; }
+  .gf-gauge__fill, .gf-showmore__trigger .ph, .gf-multiselect__action, .gf-entity--selectable { transition-duration: 1ms; }
   .gf-sidebar { transition: none; }
   .gf-sheet[open] { animation: gf-fade-in var(--gf-dur-fast) linear; }
   .gf-sheet.is-leaving, .gf-dialog.is-leaving { animation: gf-fade-out var(--gf-dur-fast) linear forwards; }
