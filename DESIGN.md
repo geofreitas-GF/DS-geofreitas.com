@@ -1,6 +1,6 @@
 ---
 name: "DS-geofreitas.com"
-version: "1.3.1"
+version: "1.4.0"
 surface: web
 source_of_truth: tokens/tokens.json
 ---
@@ -149,6 +149,52 @@ Same components, token swap only. Follows the visitor's OS setting by default; f
 - **Grounds:** canvas for content, `--layer` for supporting slides, and `--accent` (`#303030`, white text) for the cover, statements and the ask, with at most one Raggio highlight per slide.
 - One idea per slide; numbers are sourced or bracketed placeholders; slide footers stay at 4.5:1 or better.
 
+## 8e. Interface details (after Vercel's Web Interface Guidelines)
+
+The small things that make a build feel finished. Built in where CSS can do it; the rest is how we build.
+
+**Built into the system**
+- Inputs use 16px text under 600px, so phones never zoom on focus.
+- A loading button keeps its label next to the spinner ("Sending…"), at the same width.
+- Dialogs, sheets, menus and the sidebar contain their own scrolling; the page behind never moves.
+- Controls drop the double-tap zoom delay and the grey tap flash on mobile.
+- H1–H4 and slide titles balance their lines; running text avoids a lone last word. Display lines are set by hand.
+- Linked headings and sections land below the sticky nav, never under it.
+
+**Copy**
+- Use the real ellipsis (…), curly quotes (‘ ’ “ ”) and a non-breaking space between a number and its unit (12 weeks, 4 MB).
+- Menu items that open a further step, and loading labels, end with an ellipsis.
+- Placeholders show an example and end with an ellipsis: `name@example.com…`.
+- Buttons say what they do ("Send message", not "Continue").
+
+**Forms**
+- Every control has a label; clicking it focuses the control.
+- Keep submit enabled until sending starts; then disable it and show the loading state.
+- Accept any typing and validate after; never block paste.
+- Show errors next to their field and move focus to the first error on submit.
+- Enter submits a single-field form; Cmd/Ctrl+Enter submits from a textarea.
+- Set `autocomplete`, `name`, `type` and `inputmode`; turn spellcheck off for emails and codes.
+- Warn before leaving a page with unsaved changes.
+
+**Feedback and state**
+- Destructive actions need a confirmation or an Undo (the toast action supports Undo).
+- Wait about 150ms before showing a spinner, and keep it up at least 300ms so it never flickers.
+- Skeletons match the final layout exactly, so nothing jumps when content arrives.
+- Design every state: empty, one item, many, error and offline.
+- Use real links (`<a href>`) so cmd-click, middle-click and right-click work.
+- Keep tabs, filters, sort and page number in the URL so refresh, Back and sharing work.
+
+**Visual detail**
+- Nested corners are never rounder than their parent, and stay concentric (inner radius = outer radius − padding).
+- Hover, pressed and focus always have more contrast than the resting state.
+- Set `<meta name="theme-color">` to the page background, per theme.
+- Prefer solid borders; semi-transparent borders only where an edge must blend with what is under it.
+
+**Building the site**
+- Preload the Poppins weights used above the fold; ship Latin subsets only (already in `assets/fonts`).
+- Give every image width and height (or an aspect ratio) so the layout never shifts; lazy-load below the fold.
+- Use a looping `<video>` with a still fallback instead of GIFs, and pause it under Reduce Motion.
+
 ## 9. Voice
 
 Human-first, curious, systems-led, craft-obsessed, confident, warm. A first-person creative leader speaking plainly. Short declarative headlines, generous body sentences, occasional playful sign-offs ("Scroll down and let the love begin.").
@@ -168,6 +214,7 @@ Breakpoints 600 / 820 / 1024 / 1440. Validate at 360, 390, 430, 600, 820, 1024, 
 
 ## Changelog
 
+- **1.4.0 (2026-11-18):** Interface details (§8e) after Vercel's Web Interface Guidelines: copy, forms, feedback and state, visual detail and site build rules. Code: 16px inputs on mobile (no iOS zoom), loading buttons keep their label, overlays contain scrolling, no tap delay or flash, balanced headings and no widows, headings clear the sticky nav.
 - **1.3.1 (2026-11-18):** Motion section completed against Apple's HIG: motion is never the only signal, brief and precise, exits reverse entrances, no motion on frequent actions, never block input, rare icon motion, pause control for anything that moves on its own. Code: dialogs and sheets now play their exit (sheet slides back out, dialog sinks), including on Esc; toasts pause while focused.
 - **1.3.0 (2026-11-18):** The brand yellow is named **Raggio** (from *raggio di sole*). New tokens `--gf-raggio`, `--gf-on-raggio` and class `.gf-tag--raggio`; the old `volt` names are removed (nothing used them). Colour unchanged. The pre-1.0 archive (`_archive/legacy/`) is removed from the repo; restore it with `git checkout v1.0.0 -- _archive`.
 - **1.2.5 (2026-11-18):** Touch targets: every `.gf-btn` size, every `.gf-link` and the nav logo now carry an invisible 44px hit area (`::before`); footer link lists space to a 44px pitch. Found in the homepage audit; nothing visual changes.

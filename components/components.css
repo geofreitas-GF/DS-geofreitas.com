@@ -1,4 +1,4 @@
-/* DS-geofreitas.com — components.css v1.3
+/* DS-geofreitas.com — components.css v1.4
    Real classes, no !important, no attribute-selector hacks. Requires tokens/variables.css.
    Optional behaviour (tabs keyboard, dialog open/close): components/components.js.
    PROTECTED: .gf-btn--primary hover swap · .gf-link animated underline · radius tiers · Raggio avatars. */
@@ -72,12 +72,11 @@ img { max-width: 100%; display: block; }
 
 .gf-btn:disabled, .gf-btn[aria-disabled="true"] { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
 
-/* Loading — keep width, hide label, show spinner; set aria-busy="true" */
-.gf-btn[aria-busy="true"] { color: transparent; pointer-events: none; }
+/* Loading — spinner before the label, label stays visible ("Sending…"); set aria-busy="true" */
+.gf-btn[aria-busy="true"] { pointer-events: none; cursor: progress; }
 .gf-btn[aria-busy="true"]::after {
-  content: ""; position: absolute; width: 16px; height: 16px; border-radius: var(--gf-radius-pill);
-  border: 2px solid var(--gf-primary-fg); border-right-color: transparent; animation: gf-spin 700ms linear infinite; }
-.gf-btn--secondary[aria-busy="true"]::after { border-color: var(--gf-secondary-fg); border-right-color: transparent; }
+  content: ""; order: -1; flex: none; width: 14px; height: 14px; border-radius: var(--gf-radius-pill);
+  border: 2px solid currentColor; border-right-color: transparent; animation: gf-spin 700ms linear infinite; }
 @keyframes gf-spin { to { transform: rotate(360deg); } }
 
 /* Icon button — circular, pill tier (Airbnb pattern). Always aria-label. */
@@ -568,6 +567,19 @@ th[aria-sort="descending"] .gf-sort__icon { transform: rotate(180deg); }
   .gf-switch[aria-checked="true"] .gf-switch__track, .gf-check input:checked { background: Highlight; }
   :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible { outline: 2px solid Highlight; }
 }
+
+/* ================= Interface details (1.4, after Vercel's Web Interface Guidelines) ================= */
+/* No iOS zoom on focus: 16px input text on small screens */
+@media (max-width: 600px) { .gf-input, .gf-select, .gf-textarea { font-size: var(--gf-fs-16); } }
+/* Scrolling inside overlays never scrolls the page behind */
+.gf-dialog, .gf-sheet, .gf-menu, .gf-popover, .gf-sidebar { overscroll-behavior: contain; }
+/* No double-tap zoom delay or grey tap flash on controls */
+.gf-btn, .gf-icon-btn, .gf-link, .gf-chip, .gf-tab, .gf-check, .gf-switch, .gf-page, .gf-day, .gf-segmented label, a.gf-card, .gf-accordion summary, .gf-sort { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+/* No widows: headings balance, running text avoids a lone last word */
+.gf-h1, .gf-h2, .gf-h3, .gf-h4, .gf-slide__title, .gf-slide__h2 { text-wrap: balance; } /* display type: line breaks are set by hand */
+.gf-body, .gf-body-lg, .gf-prose p, .gf-quote__text { text-wrap: pretty; }
+/* Linked headings and sections clear the sticky nav */
+:where(h1, h2, h3, h4, section)[id] { scroll-margin-top: calc(var(--gf-nav-h) + var(--gf-space-16)); }
 
 /* ================= Reduced motion ================= */
 @media (prefers-reduced-motion: reduce) {

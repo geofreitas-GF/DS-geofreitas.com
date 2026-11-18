@@ -1,4 +1,4 @@
-# DS-geofreitas.com — component reference (v1.3)
+# DS-geofreitas.com — component reference (v1.4)
 
 Every component lives in `components/components.css`; behaviour for tabs, switch, mobile nav and dialog lives in `components/components.js` (optional, no dependencies). Live examples of all of them: `examples/landing.html`.
 
@@ -23,7 +23,7 @@ Pill-shaped action. Use for actions; use `.gf-link` for navigation inside text.
 | H | Raggio fill, `#303030` text (180ms) | `#ffffff` fill | layer-1 fill, ink border |
 | P | `#1f1f1f`, Raggio text | `#e2e5ec` | layer-2 fill |
 | F / X | ring / 40% | ring (Raggio) / 40% | ring / 40% |
-| L | `aria-busy="true"`: label hidden, spinner, width kept | same | spinner in ink |
+| L | `aria-busy="true"`: spinner before the label, label stays ("Sending…"), width kept | same | spinner in ink |
 
 **Accessibility:** use `<button>` for actions and `<a>` for navigation. Disabled anchors take `aria-disabled="true"`. A loading button keeps its accessible name; announce the outcome elsewhere.
 

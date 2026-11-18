@@ -85,6 +85,15 @@ These five carry the brand. Never restyle them, override them with `!important`,
 - Under Reduce Motion, movement becomes a short cross-fade and shimmer and breathing loaders stop.
 - The protected timings stay as they are: the hover swap at 180ms and the underline at 260ms.
 
+### Interface details
+
+- Inputs use 16px text on small screens; loading buttons keep their label beside the spinner ("Sending…").
+- Use the real ellipsis (…), curly quotes and a non-breaking space between numbers and units. Placeholders show an example and end with an ellipsis.
+- Forms: labels on every control, submit stays enabled until sending, errors beside their field with focus on the first, never block paste.
+- Destructive actions need a confirmation or Undo. Delay spinners about 150ms and keep them at least 300ms. Skeletons match the final layout.
+- Nested corners are never rounder than their parent. Hover, pressed and focus always have more contrast than rest.
+- Use real links, and keep tabs, filters and pages in the URL.
+
 ### Depth, layers and density
 
 - Use `gf-shadow-raised` for menus, popovers, tooltips and toasts; `gf-shadow-float` for the sticky panel; and `gf-shadow-overlay` for dialogs and sheets.
