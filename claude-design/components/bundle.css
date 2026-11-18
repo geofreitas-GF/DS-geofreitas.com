@@ -201,11 +201,13 @@ img { max-width: 100%; display: block; }
 .gf-card { display: grid; gap: var(--gf-space-12); color: inherit; text-decoration: none; border-radius: var(--gf-radius-card); }
 .gf-card__media { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; border-radius: var(--gf-radius-card); background: var(--gf-bg-layer-2); transition: opacity var(--gf-dur-base) var(--gf-ease-out); }
 .gf-card__meta { display: grid; gap: var(--gf-space-4); } /* the one sanctioned 4px stack */
-.gf-card__title { font-size: var(--gf-fs-16); font-weight: var(--gf-fw-semibold); }
+.gf-card__title { position: relative; width: fit-content; padding-bottom: 2px; font-size: var(--gf-fs-16); font-weight: var(--gf-fw-semibold); }
+/* Card hover uses the protected editorial line: draws L→R under the title, retracts R→L */
+a.gf-card .gf-card__title::after { content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: var(--gf-link-underline); pointer-events: none; transition: width var(--gf-dur-draw) var(--gf-ease-draw); }
 .gf-card__sub { font-size: var(--gf-fs-14); color: var(--gf-text-secondary); }
 .gf-card__detail { font-size: var(--gf-fs-12); color: var(--gf-text-tertiary); }
 a.gf-card:hover .gf-card__media { opacity: 0.92; }
-a.gf-card:hover .gf-card__title, a.gf-card:focus-visible .gf-card__title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a.gf-card:hover .gf-card__title::after, a.gf-card:focus-visible .gf-card__title::after { width: 100%; }
 a.gf-card:focus-visible { outline: 2px solid var(--gf-focus-ring); outline-offset: 4px; }
 .gf-hero-media { aspect-ratio: 16 / 9; width: 100%; object-fit: cover; border-radius: var(--gf-radius-panel); }
 .gf-figure { margin: 0; display: grid; gap: var(--gf-space-8); }
@@ -581,7 +583,7 @@ th[aria-sort="descending"] .gf-sort__icon { transform: rotate(180deg); }
 
 /* ================= Reduced motion ================= */
 @media (prefers-reduced-motion: reduce) {
-  .gf-link::after { transition: none; }
+  .gf-link::after, a.gf-card .gf-card__title::after { transition: none; }
   .gf-btn, .gf-icon-btn, .gf-input, .gf-select, .gf-textarea, .gf-tab, .gf-switch__track, .gf-switch__track::after, .gf-card__media { transition-duration: 1ms; }
   .gf-dialog[open] { animation: gf-fade-in var(--gf-dur-fast) linear; }
   .gf-enter-rise, .gf-enter-scale, .gf-enter-pop, .gf-enter-fade { animation: gf-fade-in var(--gf-dur-fast) linear both; }

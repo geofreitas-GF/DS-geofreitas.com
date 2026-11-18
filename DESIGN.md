@@ -1,6 +1,6 @@
 ---
 name: "DS-geofreitas.com"
-version: "1.2.0"
+version: "1.2.1"
 surface: web
 source_of_truth: tokens/tokens.json
 ---
@@ -23,7 +23,7 @@ Carbon structure, Apple clarity, Material token roles, Airbnb patterns. One rule
 ## 2. Protected decisions (do not change without a version bump)
 
 1. **Primary button hover swap.** Light: `#303030` fill + `#fefa54` text → hover `#fefa54` fill + `#303030` text. Dark: `#fefa54` fill + `#161616` text → hover `#ffffff` fill. 180ms ease-out on background and colour.
-2. **Editorial link underline.** 1px underline in the link colour, draws left-to-right on hover and retracts right-to-left on exit, 260ms `cubic-bezier(0.22, 1, 0.36, 1)`. `#161616` on light, `#ffffff` on dark.
+2. **Editorial link underline.** 1px underline in the link colour, draws left-to-right on hover and retracts right-to-left on exit, 260ms `cubic-bezier(0.22, 1, 0.36, 1)`. `#161616` on light, `#ffffff` on dark. Linked cards use the same line under the card title.
 3. **Three-tier radius.** 9999px pill for buttons, icon buttons and avatars; 8px for inputs, selects and cards; 4px for tags. 12px for large panels and hero media only.
 4. **Poppins** 400/500/600/700, self-hosted in `assets/fonts/`.
 5. **Volt letter avatars.** `#fefa54` circle, `#161616` 600 initials, no border.
@@ -159,6 +159,7 @@ Breakpoints 600 / 820 / 1024 / 1440. Validate at 360, 390, 430, 600, 820, 1024, 
 
 ## Changelog
 
+- **1.2.1 (2026-11-18):** Linked cards (`a.gf-card`) now hover with the protected editorial line under the title (draws L→R, retracts R→L, 260ms), replacing the static underline. Every text hover in the system is now that line.
 - **1.2.0 (2026-11-18):** Added filter chips, segmented control, slider, calendar, sheet, carousel, gallery, full data table (sort, row selection, sticky header, selection toolbar), stat, quote and awards, data-visualisation colours and chart classes, and the presentation layer (16:9 slides). New examples: prototype dashboard, case study, deck. Nothing renamed or removed.
 
 - **1.1.0 (2026-11-18):** Scope widened to products, prototypes and presentations. Added Phosphor icons with Apple's weight-follows-text rule and three icon sizes; Apple-style spring motion with exit and Reduce Motion rules; rem type; raised and overlay elevation; stacking tokens; compact density; high-contrast and forced-colours support; UX writing rules. New components: menu, popover, tooltip, toast, progress, loader, skeleton, empty state, breadcrumb, pagination, search field, sidebar. `tokens/variables.css` is now generated from `tokens.json` (`scripts/build-variables.py`). Dialogs now enter with a spring. Nothing renamed or removed.

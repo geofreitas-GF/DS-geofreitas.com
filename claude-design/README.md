@@ -15,7 +15,7 @@ geO freitas's personal design system: Carbon structure, Apple clarity, Material 
 These five carry the brand. Never restyle them, override them with `!important`, or replace them with a generic library's states.
 
 1. **Primary hover swap.** In light, `.gf-btn--primary` is `gf-primary-bg` (charcoal) with `gf-primary-fg` (volt) text, and on hover the two swap. In dark, it is a volt fill with `#161616` text that turns white on hover. The swap takes 180ms (`gf-dur-base`, ease-out).
-2. **Editorial link underline.** `.gf-link` draws a 1px `gf-link-underline` left to right on hover and retracts it right to left over 260ms (`gf-dur-draw`, `gf-ease-draw`). Links never get lighter on hover.
+2. **Editorial link underline.** `.gf-link` draws a 1px `gf-link-underline` left to right on hover and retracts it right to left over 260ms (`gf-dur-draw`, `gf-ease-draw`). Links never get lighter on hover. Linked cards (`a.gf-card`) use the same drawn line under `.gf-card__title`; every text hover in the system is this line, never a static underline.
 3. **Three-tier radius.** `gf-radius-pill` for buttons, icon buttons and avatars; `gf-radius-control` (8px) for inputs and cards; `gf-radius-tag` (4px) for tags. `gf-radius-panel` (12px) for panels and hero media only.
 4. **Poppins** at 400, 500, 600 and 700 for everything: one family, and weight does the work.
 5. **Volt letter avatars.** `.gf-avatar` is a `gf-volt` circle with `gf-on-volt` initials at 600.
