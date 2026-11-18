@@ -75,9 +75,14 @@ These five carry the brand. Never restyle them, override them with `!important`,
 
 - Every interactive element has hover, pressed, focus-visible (a 2px `gf-focus-ring`, offset 2px) and disabled (40%) states.
 - Touch targets are at least 44px (`gf-touch-min`); smaller visuals get an extended hit area.
-- Motion explains a change: where something came from, or what changed. It never decorates.
-- Springs move things, using `gf-spring-snappy` by default, `gf-spring-smooth` for no bounce, and `gf-spring-bouncy` only for celebrations, at `gf-dur-spring-sm`, `-md` or `-lg`. Colour and state changes take 150–180ms ease-out.
-- Exits are quieter: `gf-dur-exit` with `gf-ease-exit`, and no bounce. Under Reduce Motion, movement becomes a cross-fade.
+- Motion explains a change: where something came from, or what changed. It never decorates, and it is never the only signal: the end state also shows the change in text, style, focus or a count.
+- Springs move things, using `gf-spring-snappy` by default, `gf-spring-smooth` for no bounce, and `gf-spring-bouncy` only for celebrations, at `gf-dur-spring-sm`, `-md` or `-lg`. Colour and state changes take 150–180ms ease-out. Keep feedback brief and tied to the action.
+- Exits reverse entrances and are quieter: a sheet slides back out the way it came, a dialog sinks back, at `gf-dur-exit` with `gf-ease-exit` and no bounce. Menus, popovers and tooltips may close instantly.
+- No motion on frequent actions: tabs, filters, chips, sorting and list refreshes change state without an entrance animation.
+- Never make people wait: animations never block clicks, scrolling, typing or Esc.
+- Icon motion is rare: only to confirm one action, under 300ms, never under Reduce Motion.
+- Nothing flashes more than three times a second, and anything that moves on its own for more than five seconds has a pause control. Carousels do not auto-advance.
+- Under Reduce Motion, movement becomes a short cross-fade and shimmer and breathing loaders stop.
 - The protected timings stay as they are: the hover swap at 180ms and the underline at 260ms.
 
 ### Depth, layers and density

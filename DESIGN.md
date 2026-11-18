@@ -1,6 +1,6 @@
 ---
 name: "DS-geofreitas.com"
-version: "1.3.0"
+version: "1.3.1"
 surface: web
 source_of_truth: tokens/tokens.json
 ---
@@ -108,11 +108,18 @@ Same components, token swap only. Follows the visitor's OS setting by default; f
 ## 8. Motion (Apple-style)
 
 - **Motion explains a change**: where something came from, what changed, what to look at. Never decorate.
+- **Motion is never the only signal.** Every change it shows is also visible in the end state: text, a selected style, focus or a count. With motion off, nothing is lost.
 - **Springs move things; durations recolour them.** Movement (menus, toasts, sheets, dialogs, page transitions) uses the spring tokens `gf-spring-smooth` (no bounce), `gf-spring-snappy` (a hint of overshoot, the default) and `gf-spring-bouncy` (celebratory moments only), at `gf-dur-spring-sm` 350ms (small surfaces), `-md` 500ms (dialogs, sheets) or `-lg` 700ms (page-level). Colour and state changes use 150–180ms ease-out.
-- **Exits are quieter:** `gf-dur-exit` 150ms with `gf-ease-exit` (ease-in), no bounce.
-- **Reduce Motion** replaces movement with a short cross-fade; nothing jumps.
+- **Brief and precise.** Feedback motion is short and tied to the action that caused it. If people notice the animation more than the result, it is too much.
+- **Exits reverse entrances.** Something that slides in from the right leaves to the right; a bottom sheet goes back down; a dialog sinks back. Exits are quieter: `gf-dur-exit` 150ms with `gf-ease-exit` (ease-in), no bounce. Small surfaces (menus, popovers, tooltips) may close instantly.
+- **No motion on frequent actions.** Tabs, filters, chips, sorting and list refreshes change state without an entrance animation. Keep entrances for things that appear rarely.
+- **Never make people wait.** Animations never block input: people can click, scroll, type or press Esc mid-animation. Nothing waits for an animation to finish before it responds.
+- **Icon motion is rare.** Animate an icon only to confirm one action (a check, a save), under 300ms, never on a loop beyond loaders, and never under Reduce Motion.
+- **Moving content can be paused.** Nothing flashes more than three times a second. Anything that moves on its own for more than five seconds (an auto-advancing carousel, autoplay video, a looping background) has a visible pause control. Carousels do not auto-advance by default.
+- **Reduce Motion** replaces movement with a short cross-fade (`gf-dur-fast`); skeleton shimmer and the loader breathe stop; nothing jumps.
 - **Protected timings stay:** primary hover swap 180ms ease-out, link underline 260ms `gf-ease-draw`.
-- Classes: `.gf-enter-rise`, `.gf-enter-scale`, `.gf-enter-pop`, `.gf-enter-fade`, `.gf-exit`.
+- Classes: `.gf-enter-rise`, `.gf-enter-scale`, `.gf-enter-pop`, `.gf-enter-fade`, `.gf-exit`. Dialogs and sheets play their exit through `components.js` (close buttons and Esc).
+- Source: Apple Human Interface Guidelines, Motion (updated September 2025) and Accessibility.
 
 ## 8a. Icons (Phosphor, Apple's weight system)
 
@@ -161,6 +168,7 @@ Breakpoints 600 / 820 / 1024 / 1440. Validate at 360, 390, 430, 600, 820, 1024, 
 
 ## Changelog
 
+- **1.3.1 (2026-11-18):** Motion section completed against Apple's HIG: motion is never the only signal, brief and precise, exits reverse entrances, no motion on frequent actions, never block input, rare icon motion, pause control for anything that moves on its own. Code: dialogs and sheets now play their exit (sheet slides back out, dialog sinks), including on Esc; toasts pause while focused.
 - **1.3.0 (2026-11-18):** The brand yellow is named **Raggio** (from *raggio di sole*). New tokens `--gf-raggio`, `--gf-on-raggio` and class `.gf-tag--raggio`; the old `volt` names are removed (nothing used them). Colour unchanged. The pre-1.0 archive (`_archive/legacy/`) is removed from the repo; restore it with `git checkout v1.0.0 -- _archive`.
 - **1.2.5 (2026-11-18):** Touch targets: every `.gf-btn` size, every `.gf-link` and the nav logo now carry an invisible 44px hit area (`::before`); footer link lists space to a 44px pitch. Found in the homepage audit; nothing visual changes.
 - **1.2.4 (2026-11-18):** Mobile nav: the link underline now sits 2px under the words, not at the bottom of the 44px touch box. Rows stay 44px; the hit area is an invisible `::before`.

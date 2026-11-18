@@ -460,10 +460,16 @@ a.gf-card:focus-visible { outline: 2px solid var(--gf-focus-ring); outline-offse
 .gf-sheet__head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--gf-space-16); margin-bottom: var(--gf-space-16); }
 @keyframes gf-slide-in-right { from { transform: translateX(100%); } }
 @keyframes gf-slide-in-up { from { transform: translateY(100%); } }
+/* Exits reverse entrances: a sheet leaves the way it came, a dialog sinks back. Exit = gf-dur-exit, ease-in. */
+@keyframes gf-slide-out-right { to { transform: translateX(100%); } }
+@keyframes gf-slide-out-down { to { transform: translateY(100%); } }
+.gf-sheet.is-leaving { animation: gf-slide-out-right var(--gf-dur-exit) var(--gf-ease-exit) forwards; }
+.gf-dialog.is-leaving { animation: gf-sink var(--gf-dur-exit) var(--gf-ease-exit) forwards; }
 @media (max-width: 820px) {
   .gf-sheet { inset: auto 0 0 0; width: 100vw; height: auto; max-height: 90vh; border-left: 0; border-top: 1px solid var(--gf-border-subtle); border-radius: var(--gf-radius-panel) var(--gf-radius-panel) 0 0; }
   .gf-sheet[open] { animation-name: gf-slide-in-up; }
   .gf-sheet__handle { display: block; }
+  .gf-sheet.is-leaving { animation-name: gf-slide-out-down; }
 }
 
 /* ================= Carousel & gallery (Airbnb pattern) ================= */
@@ -600,6 +606,7 @@ th[aria-sort="descending"] .gf-sort__icon { transform: rotate(180deg); }
   .gf-progress--indeterminate .gf-progress__bar { animation-duration: 3s; }
   .gf-sidebar { transition: none; }
   .gf-sheet[open] { animation: gf-fade-in var(--gf-dur-fast) linear; }
+  .gf-sheet.is-leaving, .gf-dialog.is-leaving { animation: gf-fade-out var(--gf-dur-fast) linear forwards; }
   .gf-carousel__track { scroll-behavior: auto; }
   .gf-segmented label, .gf-chip, .gf-carousel__dot, .gf-sort .gf-sort__icon { transition-duration: 1ms; }
 }

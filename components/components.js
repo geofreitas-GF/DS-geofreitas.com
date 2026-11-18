@@ -1,4 +1,4 @@
-/* DS-geofreitas.com — components.js v1.2 (optional, no dependencies)
+/* DS-geofreitas.com — components.js v1.3 (optional, no dependencies)
    Tabs: WAI-ARIA tabs with roving tabindex, ←/→/Home/End, automatic activation.
    Switch: toggles aria-checked. Nav: mobile menu toggle. Dialog: [data-gf-open="id"] opens <dialog id>.
    v1.1: menus and popovers (native [popover] + positioning + arrow keys), tooltip Esc, GF.toast(), sidebar toggle, search clear. */
@@ -69,6 +69,7 @@
       b.addEventListener('click', function () { if (opts.onAction) opts.onAction(); close(); }); t.appendChild(b); }
     region().appendChild(t); var ms = opts.timeout || (opts.action ? 6000 : 4000); var timer = setTimeout(close, ms);
     t.addEventListener('mouseenter', function () { clearTimeout(timer); }); t.addEventListener('mouseleave', function () { timer = setTimeout(close, 2000); });
+    t.addEventListener('focusin', function () { clearTimeout(timer); }); t.addEventListener('focusout', function () { timer = setTimeout(close, 2000); });
     return close;
   }
 
@@ -124,8 +125,18 @@
     root.querySelectorAll('[data-gf-open]').forEach(function (b) {
       b.addEventListener('click', function () { var d = document.getElementById(b.getAttribute('data-gf-open')); if (d && d.showModal) d.showModal(); });
     });
+    /* Exits reverse entrances: play the exit, then close. Never blocks: a fallback closes after 250ms. */
+    var gfClose = function (d) {
+      if (!d.open || d.classList.contains('is-leaving')) return;
+      d.classList.add('is-leaving');
+      var done = false, fin = function () { if (done) return; done = true; d.classList.remove('is-leaving'); d.close(); };
+      d.addEventListener('animationend', fin, { once: true }); setTimeout(fin, 250);
+    };
+    root.querySelectorAll('dialog.gf-dialog, dialog.gf-sheet').forEach(function (d) {
+      d.addEventListener('cancel', function (e) { e.preventDefault(); gfClose(d); });
+    });
     root.querySelectorAll('[data-gf-close]').forEach(function (b) {
-      b.addEventListener('click', function () { var d = b.closest('dialog'); if (d) d.close(); });
+      b.addEventListener('click', function () { var d = b.closest('dialog'); if (d) gfClose(d); });
     });
 
     root.querySelectorAll('.gf-menu[popover], .gf-popover[popover]').forEach(initPopover);

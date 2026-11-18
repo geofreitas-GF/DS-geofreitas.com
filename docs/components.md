@@ -155,7 +155,7 @@ Layer-1 ground in 3 columns (one column under 820px). Footer links keep a 24px m
 
 ## Dialog `.gf-dialog`
 
-Native `<dialog>` opened with `showModal()`, so focus trapping, Esc and the backdrop come free. Max width 520px, 12px corners, float shadow, `--gf-scrim` backdrop, 300ms entrance (none under reduced motion). `[data-gf-open="id"]` opens it and `[data-gf-close]` closes it. Label it with `aria-labelledby` and put actions at the end: secondary, then primary.
+Native `<dialog>` opened with `showModal()`, so focus trapping, Esc and the backdrop come free. Max width 520px, 12px corners, float shadow, `--gf-scrim` backdrop, spring entrance at `gf-dur-spring-md`; on close (`[data-gf-close]` or Esc) it sinks back in 150ms, a short fade under Reduce Motion. `[data-gf-open="id"]` opens it. Label it with `aria-labelledby` and put actions at the end: secondary, then primary.
 
 ## Type classes
 
@@ -268,7 +268,7 @@ The visual date panel for prototypes: a header with month navigation, a 7-column
 
 ## Sheet `.gf-sheet`
 
-A native `<dialog>` opened with `showModal()` (`data-gf-open`). Under 820px it's a bottom sheet with a handle and 12px top corners; above that it's a 480px side panel on the right. It enters on `gf-spring-snappy` at the medium spring duration. Use it for details, filters and secondary flows that keep the page in view.
+A native `<dialog>` opened with `showModal()` (`data-gf-open`). Under 820px it's a bottom sheet with a handle and 12px top corners; above that it's a 480px side panel on the right. It enters on `gf-spring-snappy` at the medium spring duration and leaves the way it came (back to the right, or down on mobile) in 150ms when closed or on Esc. Use it for details, filters and secondary flows that keep the page in view.
 
 ## Carousel `.gf-carousel` and gallery `.gf-gallery`
 
