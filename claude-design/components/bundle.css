@@ -50,7 +50,9 @@ img { max-width: 100%; display: block; }
 .gf-eyebrow { font-size: var(--gf-type-eyebrow-size); line-height: var(--gf-type-eyebrow-line); letter-spacing: var(--gf-type-eyebrow-track); font-weight: var(--gf-type-eyebrow-weight); color: var(--gf-text-secondary); text-transform: uppercase; }
 .gf-text-secondary { color: var(--gf-text-secondary); }
 .gf-text-tertiary { color: var(--gf-text-tertiary); }
-.gf-highlight { background: var(--gf-volt); color: var(--gf-on-volt); padding: 0 0.15em; } /* the one static volt moment */
+/* the one static volt moment. A band from just above the letters to just below the descenders (tuned to Poppins metrics),
+   so it never rises into the line above. Wraps cleanly across lines. */
+.gf-highlight { background: linear-gradient(transparent 20%, var(--gf-volt) 20%, var(--gf-volt) 96%, transparent 96%); color: var(--gf-on-volt); padding: 0 0.12em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .gf-code { font-family: var(--gf-font-code); font-size: 0.9em; }
 
 /* ================= Layout ================= */
@@ -541,7 +543,7 @@ th[aria-sort="descending"] .gf-sort__icon { transform: rotate(180deg); }
 .gf-slide__muted { color: var(--gf-text-secondary); }
 .gf-slide__kicker { margin: 0; font-size: calc(20 / 19.2 * 1cqw); letter-spacing: 0.08em; text-transform: uppercase; font-weight: var(--gf-fw-semibold); }
 .gf-slide__foot { position: absolute; left: calc(96 / 19.2 * 1cqw); right: calc(96 / 19.2 * 1cqw); bottom: calc(48 / 19.2 * 1cqw); display: flex; justify-content: space-between; font-size: calc(18 / 19.2 * 1cqw); opacity: 0.8; }
-.gf-slide .gf-highlight { padding: 0 0.1em; }
+.gf-slide .gf-highlight { padding: 0 0.08em; }
 @media print { .gf-deck { gap: 0; } .gf-slide { break-after: page; } }
 
 /* ================= Icons — Phosphor (weight follows text weight) ================= */
