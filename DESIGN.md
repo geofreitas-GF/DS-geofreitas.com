@@ -218,6 +218,21 @@ Editorial project covers and crisp product showcases, balanced with personal art
 
 Breakpoints 600 / 820 / 1024 / 1440. Validate at 360, 390, 430, 600, 820, 1024, 1366, 1440 and 1920 widths. Card grids reflow 4 → 3 → 2 → 1 at 1024 / 820 / 600; grid spans go full width under 820; nav collapses to a menu button under 820. Touch targets 44px minimum.
 
+## 12. Release process
+
+The repo (`components/components.css`, `tokens/tokens.json` → `tokens/variables.css`) is the only source of truth. The Claude Design System artifact, the Showcase canvas and the Homepage canvas are three independent, hand-maintained mirrors — nothing links them to the repo or to each other, and nothing regenerates them automatically. Each one carries its own copy of `tokens.css` (full custom-property definitions, not an import) plus its own copy of `bundle.css` (built from `components.css`).
+
+Every release that touches `components.css` or `tokens.json` must re-sync all three mirrors in the same pass, not just republish `bundle.css`:
+
+1. Republish `bundle.css` (from `components.css`) to the DS artifact, the Showcase canvas and the Homepage canvas.
+2. Diff the full set of `--gf-*` custom properties `components.css` references (`grep -oP 'var\(--\K[a-zA-Z0-9-]+' components/components.css`) against what each mirror's `tokens.css` actually defines. Any name used but not defined is a gap — it silently falls back to the browser default (serif fonts, collapsed widths, no colour) rather than erroring, so it won't show up until someone looks at the rendered page.
+3. Add whatever the diff finds to all three `tokens.css` mirrors, not just the one that was reported broken.
+4. Bump `designSystems[0].version` in both canvases' `canvas.json` to the DS artifact's new version.
+
+A mirror fix (missing token, stale value) is not a release on its own and does not get a version bump or a git commit — the repo was never wrong. Only a real change to `components.css`/`tokens.json` is a release.
+
+This exact failure mode — a mirror's `tokens.css` missing a variable the current `components.css` expects — has caused every "it was fixed, why isn't it showing" report so far: the missing Phosphor import, the stale dark-theme and light-theme field-focus colours, native (unstyled) checkboxes on Multi select and Entity, the missing `--gf-font-display`/`--gf-font-body` aliases, and the missing Gauge size and media-button hover/press tokens. Treat step 2 as mandatory, not something to do only after a bug report.
+
 ## Changelog
 
 ### 1.7.2
