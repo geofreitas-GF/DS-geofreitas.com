@@ -341,6 +341,14 @@ A `.gf-segmented.gf-theme-switch` fieldset of three radios (`system`, `light`, `
 
 ### Video `.gf-video`
 `<figure class="gf-video">` with `<video playsinline muted loop preload="metadata" poster data-gf-autoplay aria-label>`, an MP4 `<source>`, a captions `<track>`, a `.gf-video__toggle` (`.gf-icon-btn--on-media`) and an optional `<figcaption>`. Autoplays muted only with `data-gf-autoplay` and never under Reduce Motion; the toggle pauses and plays. Ratio via the local `--ratio` property on the figure (default 16 / 9). Showreels with sound: use native `controls` instead, never autoplay.
+## Fixed in 1.7.1
+
+The Video component's overlay toggle (`.gf-icon-btn--on-media`) no longer shows a
+fixed white ring at rest; it now changes to light grey on hover/press instead
+(`--gf-media-btn-bg-hover` / `--gf-media-btn-bg-pressed`), and its keyboard focus
+outline always uses the button's own ink colour rather than the page's focus-ring
+token, so Raggio never appears on it in dark theme.
+
 ## Added in 1.7
 
 ### Banner `.gf-banner`

@@ -90,7 +90,10 @@ img { max-width: 100%; display: block; }
 .gf-icon-btn:hover { border-color: var(--gf-secondary-border-hover); }
 .gf-icon-btn:active { background: var(--gf-secondary-bg-pressed); }
 .gf-icon-btn:disabled, .gf-icon-btn[aria-disabled="true"] { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
-.gf-icon-btn--on-media { border-color: transparent; background: var(--gf-media-btn-bg); color: var(--gf-media-btn-fg); box-shadow: 0 0 0 4px var(--gf-media-ring); }
+.gf-icon-btn--on-media { border-color: transparent; background: var(--gf-media-btn-bg); color: var(--gf-media-btn-fg); }
+.gf-icon-btn--on-media:hover { border-color: transparent; background: var(--gf-media-btn-bg-hover); }
+.gf-icon-btn--on-media:active { border-color: transparent; background: var(--gf-media-btn-bg-pressed); }
+.gf-icon-btn--on-media:focus-visible { outline-color: var(--gf-media-btn-fg); } /* never Raggio on media overlays */
 
 /* ================= Link — PROTECTED animated underline (in L→R, out R→L) ================= */
 .gf-link {

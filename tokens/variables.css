@@ -1,4 +1,4 @@
-/* DS-geofreitas.com — variables.css v1.7.0 — GENERATED from tokens/tokens.json by scripts/build-variables.py. Do not edit by hand.
+/* DS-geofreitas.com — variables.css v1.7.1 — GENERATED from tokens/tokens.json by scripts/build-variables.py. Do not edit by hand.
    Theme: light by default; follows the OS dark setting; force with data-theme="light" | "dark" (or .dark).
    Density: data-density="compact". Contrast: follows prefers-contrast: more. */
 
@@ -9,8 +9,9 @@
   --gf-raggio: #fefa54;
   --gf-on-raggio: #161616;
   --gf-media-btn-bg: #ffffff;
+  --gf-media-btn-bg-hover: #ebebeb;
+  --gf-media-btn-bg-pressed: #d8d8d8;
   --gf-media-btn-fg: #161616;
-  --gf-media-ring: rgba(255,255,255,0.9);
   --gf-switch-knob: #ffffff;
   --gf-font-display: Poppins, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --gf-font-body: Poppins, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;

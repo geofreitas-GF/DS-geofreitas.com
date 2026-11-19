@@ -1,6 +1,6 @@
 # DS-geofreitas.com
 
-IBM Carbon structure, Apple HIG clarity and motion, Google Material token roles, Airbnb DLS patterns and Vercel Geist interface detail: one system for prototypes, products, presentations and geofreitas.com. Version 1.7.0.
+IBM Carbon structure, Apple HIG clarity and motion, Google Material token roles, Airbnb DLS patterns and Vercel Geist interface detail: one system for prototypes, products, presentations and geofreitas.com. Version 1.7.1.
 
 ## Start here
 

@@ -1,6 +1,6 @@
 ---
 name: "DS-geofreitas.com"
-version: "1.7.0"
+version: "1.7.1"
 surface: web
 source_of_truth: tokens/tokens.json
 ---
@@ -219,6 +219,17 @@ Editorial project covers and crisp product showcases, balanced with personal art
 Breakpoints 600 / 820 / 1024 / 1440. Validate at 360, 390, 430, 600, 820, 1024, 1366, 1440 and 1920 widths. Card grids reflow 4 → 3 → 2 → 1 at 1024 / 820 / 600; grid spans go full width under 820; nav collapses to a menu button under 820. Touch targets 44px minimum.
 
 ## Changelog
+
+### 1.7.1
+Fixed the Video component's media-overlay toggle (`.gf-icon-btn--on-media`): dropped the
+fixed white box-shadow ring (no stroke at rest — a plain overlay circle on the frame),
+added a dedicated light-grey hover/pressed state (`media-btn-bg-hover`/`-pressed`, both
+static tokens, not theme-reactive) so it no longer flips to the themed secondary-button
+colours it was inheriting, and pinned its focus-visible outline to the button's own
+ink colour instead of the global focus ring — Raggio (`#fefa54`) no longer appears on
+this control in dark theme. No markup change; existing `.gf-video` usages pick this up
+automatically.
+
 
 - **1.7.0 (2026-11-18):** Five components after a further review of Vercel Geist: Banner (persistent, non-dismissable project notice; never Raggio), Show more (progressive disclosure for one long list, focus moves into the reveal), Entity (a two-column row for member/integration/domain-style lists, selectable variant), Multi select (a trigger that opens a checkable listbox and summarises the selection; simplified to one focusable row rather than Vercel's two independent focus targets), Gauge (an SVG ring for a percentage, monochrome by default, coloured only past the 80%/95% risk thresholds). Documented two existing patterns rather than building new ones: the kebab `Menu` for a "Dots menu", and `Chips` for "Filter params". No tokens, classes or behaviour changed; nothing renamed or removed.
 - **1.6.0 (2026-11-18):** Site and case-study components, after a review of Vercel Geist: Combobox, Choicebox, Input group (prefix, suffix and clear on any input), Copy button and text with copy, Theme switcher (System / Light / Dark, remembered, swaps the logo and theme-color), Video (muted loop with poster and captions, pause control, no autoplay under Reduce Motion). New example `examples/forms.html`; sample media in `assets/media/`. Use `.gf-select` for short fixed lists and the Combobox when people need to search. Fields and selection controls refined after Geist: hover steps up one grey (`gf-field-border-hover`), focus is a one-step border (`gf-field-border-focus`) with a softer halo; checked controls are monochrome (white in dark, no Raggio); radios are a ring and dot.
