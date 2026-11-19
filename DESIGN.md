@@ -1,6 +1,6 @@
 ---
 name: "DS-geofreitas.com"
-version: "1.7.1"
+version: "1.7.2"
 surface: web
 source_of_truth: tokens/tokens.json
 ---
@@ -219,6 +219,10 @@ Editorial project covers and crisp product showcases, balanced with personal art
 Breakpoints 600 / 820 / 1024 / 1440. Validate at 360, 390, 430, 600, 820, 1024, 1366, 1440 and 1920 widths. Card grids reflow 4 → 3 → 2 → 1 at 1024 / 820 / 600; grid spans go full width under 820; nav collapses to a menu button under 820. Touch targets 44px minimum.
 
 ## Changelog
+
+### 1.7.2
+
+Fixed two checkboxes left as bare native `<input type="checkbox">` with no `appearance: none`: Multi select's row checkbox (`.gf-multiselect__check`) and Entity's selectable-row checkbox (`.gf-entity--selectable .gf-entity__left input`). Both fell back to the browser's default checked rendering (blue on Chrome) instead of the system's ink checked state. Both now share the same custom-checkbox treatment as Selection (`.gf-check`): a 20px ink square, white tick, no native chrome showing through.
 
 ### 1.7.1
 Fixed the Video component's media-overlay toggle (`.gf-icon-btn--on-media`): dropped the

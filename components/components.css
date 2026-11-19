@@ -705,7 +705,13 @@ th[aria-sort="descending"] .gf-sort__icon { transform: rotate(180deg); }
 .gf-entity--selectable { border-radius: var(--gf-radius-control); transition: background var(--gf-dur-fast) var(--gf-ease-out); }
 .gf-entity--selectable:hover { background: color-mix(in srgb, var(--gf-text-primary) 5%, transparent); }
 .gf-entity--selectable .gf-entity__left { cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
-.gf-entity--selectable .gf-entity__left input { flex: none; }
+.gf-entity--selectable .gf-entity__left input { appearance: none; margin: 0; flex: none; width: var(--gf-check); height: var(--gf-check); display: grid; place-items: center;
+  border: 1.5px solid var(--gf-control-off); border-radius: var(--gf-radius-tag); background: var(--gf-bg-canvas); cursor: pointer;
+  transition: background var(--gf-dur-fast) var(--gf-ease-out), border-color var(--gf-dur-fast) var(--gf-ease-out); }
+.gf-entity--selectable .gf-entity__left input::after { content: ""; width: 10px; height: 6px; border-left: 2px solid var(--gf-control-mark); border-bottom: 2px solid var(--gf-control-mark); transform: translateY(-1px) rotate(-45deg); opacity: 0; }
+.gf-entity--selectable .gf-entity__left input:checked { background: var(--gf-control-on); border-color: var(--gf-control-on); }
+.gf-entity--selectable .gf-entity__left input:checked::after { opacity: 1; }
+.gf-entity--selectable .gf-entity__left input:hover { border-color: var(--gf-field-border-hover); }
 
 /* Multi select: a trigger button that opens a listbox of checkable rows; the trigger summarises the selection.
    The row (role="option") is the focusable, selectable unit — the checkbox is a decorative echo of aria-selected. */
@@ -724,7 +730,11 @@ th[aria-sort="descending"] .gf-sort__icon { transform: rotate(180deg); }
   touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 .gf-multiselect__row:hover, .gf-multiselect__row.is-active { background: color-mix(in srgb, var(--gf-text-primary) 8%, transparent); }
 .gf-multiselect__row:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--gf-focus-ring); }
-.gf-multiselect__check { flex: none; pointer-events: none; }
+.gf-multiselect__check { appearance: none; margin: 0; flex: none; pointer-events: none; width: var(--gf-check); height: var(--gf-check); display: grid; place-items: center;
+  border: 1.5px solid var(--gf-control-off); border-radius: var(--gf-radius-tag); background: var(--gf-bg-canvas); }
+.gf-multiselect__check::after { content: ""; width: 10px; height: 6px; border-left: 2px solid var(--gf-control-mark); border-bottom: 2px solid var(--gf-control-mark); transform: translateY(-1px) rotate(-45deg); opacity: 0; }
+.gf-multiselect__check:checked { background: var(--gf-control-on); border-color: var(--gf-control-on); }
+.gf-multiselect__check:checked::after { opacity: 1; }
 .gf-multiselect__label { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .gf-multiselect__action { flex: none; border: 0; background: none; padding: 0 var(--gf-space-4); color: var(--gf-text-secondary); font-size: var(--gf-fs-12); font-weight: var(--gf-fw-medium); cursor: pointer;
   opacity: 0; transition: opacity var(--gf-dur-fast) var(--gf-ease-out); }
